@@ -25,7 +25,7 @@ tags:
 
 为了表示方便，我们使用如下的形式表示假设函数，为了方便  ${h_{\theta}(x)}$   也可以记作  $h(x)$。
 
-$$h_\theta(x) = \theta_0 + \theta_1x$$
+$$h_\theta(x) = \theta\_0 + \theta\_1x$$
 
 
 
@@ -82,6 +82,54 @@ repeat until  convergence {
 
 
 
+> j = 0
+
+$$\frac{\partial}{\partial{\theta\_0}} {J(\theta\_0,\theta\_1)} =  \frac {1} {m} \sum\_{i = 1} ^ {m}{(h\_\theta(x^{(i)}) - y^{(i)})} $$
+
+
+
+> j = 1
+
+$$\frac{\partial}{\partial{\theta\_1}} {J(\theta\_0,\theta\_1)} =  \frac {1} {m} \sum\_{i = 1} ^ {m}{(h\_\theta(x^{(i)}) - y^{(i)})} x^{(i)} $$
+
+
+
+  $$\theta\_0 := \theta\_0 - \alpha \frac {1} {m} \sum\_{i = 1} ^ {m}{(h\_\theta(x^{(i)}) - y^{(i)})} $$
+
+  $$\theta\_1 := \theta\_1 - \alpha \frac {1} {m} \sum\_{i = 1} ^ {m}{(h\_\theta(x^{(i)}) - y^{(i)})}  x^{(i)} $$
+
+----
+
+
+
+> Linear Regression with Mulitiple Variables
+
+
+
+$$h_\theta(x) = \theta\_0 + \theta\_1x$$
+
+$$h_\theta(x) = \theta\_0 + \theta\_1 x\_1+ \theta\_2 x\_2+ \cdots+\theta\_n x\_n$$
+
+
+
+> 差列向量的公式
+
+
+
+$$ h\_\theta(x) = \theta\_0 x\_0 +  \theta\_1 x\_1 + \theta\_2 x\_2 +\cdots+ \theta\_n x\_n  =  \theta^T x$$
+
+
+
+
+
+
+
+
+
+----
+
+
+
 接下来介绍下`广义线性回归`，也很简单，我们不在只用线性函数来模拟数据，而是在外层添加了一个单调可微函数$g(z)$，即$f(x_i) = g(wx_i+b) $ ，如果 $ g=ln(x) $，则这个`广义线性回归`就变成了`对数线性回归`，其本质就是给原来线性变换加上了一个非线性变换，使得模拟的函数有非线性的属性。但本质上的参数还是线性的，主体是内部线性的调参。
 
 `对数几率回归（Logistic Regression）`不是解决回归问题的，而是解决分类问题的。目的是要构造出一个分类器（Classifier）。`对数几率回归（Logistic Regression）`的关键并不在于回归，而在于对数几率函数。
@@ -91,6 +139,50 @@ repeat until  convergence {
 > //补周志华 单位阶跃函数与对数几率函数的图
 
 于是我们构造一个`sigmoid`函数 $$y=\frac{1}{1+ \mathrm{e}^{-z} } $$，
+
+
+
+$$h\_\theta (x) = g (\theta^T x)$$
+
+$$g(z) = \frac {1}{1 + \mathrm{e}^{-z}}$$
+
+$$h\_\theta (x) = \frac {1}{1 + \mathrm{e}^{-\theta^T x}}$$
+
+
+
+
+
+
+
+$$ J(\theta) = \frac{1}{2m}  \sum\_{i=0}^{m} {(h\_\theta(x^{(i)}) - y^{(i)})}^2 $$ 
+
+
+
+$$ Cost (h\_\theta{x^(i)},y^(i)) = \frac{1}{2} (h\_\theta(x^{(i)}) - y^{(i)})}^2 $$
+
+
+
+
+
+$$Cost(h\_\theta(x),y) = \frac{1}{2}(h\_\theta - y) ^ 2$$
+
+$$Cost(h\_\theta,y) = -y\log(h\_\theta(x)) - (1-y) \log(1-h\_\theta(x))$$
+
+
+
+> cost function
+
+
+
+$${J(\theta)=-\frac{1}{m}\left[\sum\_{i=1}^my^{(i)}log(h\_\theta(x^{(i)}))+(1-y^{(i)})log(1-h_\theta(x^{(i)}))\right]}$$
+
+
+
+
+
+
+
+
 
 
 
