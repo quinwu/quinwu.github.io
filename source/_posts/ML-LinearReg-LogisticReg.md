@@ -1,14 +1,10 @@
+---
 title: 小记 Linear Regression 与 Logistic Regression
-
-data: 2017-5-3 20:55:50
-
+date: 2017-5-3 20:55:50
 categories: 技术向
-
-tags:  
-
-- Machine Learning
-- 小记系列
-
+tags:
+  - Machine Learning
+  - 小记系列
 ---
 
 > Linear Regression 线性回归
@@ -16,6 +12,8 @@ tags:
 > Logistic Regression 对数几率回归
 
 回归的本身是一种基于数据的建模，一般而言，`线性回归（Linear Regression）`相对比较简单，而`对数几率回归（Logistic Regression）`的内容要丰富很多。
+
+<!--more-->
 
 线性回归很简单，给定一个样本集合  $D=(x_1,y_1),(x_2,y_2),\cdots,(x_m,y_m)$  这里的$x_i,y_i$都可以是高维向量，可以找到一个线性模拟$f(x_i)=wx_i+b$，只要确定了$w$跟$b$，这个线性模型就确定了，如何评估样本$y$与你的$f(x)$之间的差别，最常用的方法是最小二乘法。
 
@@ -69,8 +67,8 @@ want  ${\mathop{min}\_{\theta\_0,\theta\_1}} {J(\theta\_0,\theta\_1) } $
 
 Outline:
 
-* Start with some $\theta\_0,\theta\_1$
-* keep changing  $\theta\_0,\theta\_1$ to reduce  ${J(\theta\_0,\theta\_1) }$ until we hopefully end up at ${\mathop{min}\_{\theta\_0,\theta\_1}} {J(\theta\_0,\theta\_1) } $
+- Start with some $\theta\_0,\theta\_1$
+- keep changing  $\theta\_0,\theta\_1$ to reduce  ${J(\theta\_0,\theta\_1) }$ until we hopefully end up at ${\mathop{min}\_{\theta\_0,\theta\_1}} {J(\theta\_0,\theta\_1) } $
 
 > Gradient descent algorithm
 
@@ -98,7 +96,7 @@ $$\frac{\partial}{\partial{\theta\_1}} {J(\theta\_0,\theta\_1)} =  \frac {1} {m}
 
   $$\theta\_1 := \theta\_1 - \alpha \frac {1} {m} \sum\_{i = 1} ^ {m}{(h\_\theta(x^{(i)}) - y^{(i)})}  x^{(i)} $$
 
-----
+------
 
 
 
@@ -126,7 +124,7 @@ $$ h\_\theta(x) = \theta\_0 x\_0 +  \theta\_1 x\_1 + \theta\_2 x\_2 +\cdots+ \th
 
 
 
-----
+------
 
 
 
@@ -175,14 +173,4 @@ $$Cost(h\_\theta,y) = -y\log(h\_\theta(x)) - (1-y) \log(1-h\_\theta(x))$$
 
 
 $${J(\theta)=-\frac{1}{m}\left[\sum\_{i=1}^my^{(i)}log(h\_\theta(x^{(i)}))+(1-y^{(i)})log(1-h_\theta(x^{(i)}))\right]}$$
-
-
-
-
-
-
-
-
-
-
 

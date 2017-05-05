@@ -136,6 +136,9 @@ font:
 # Sidebar Settings
 # ---------------------------------------------------------------
 
+reward_comment: 你愿意请我喝瓶可乐吗?
+wechatpay: /images/wechatpay.jpg
+alipay: /images/alipay.jpg
 
 # Social Links
 # Key is the link label showing to end users.
