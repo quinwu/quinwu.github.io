@@ -95,17 +95,17 @@
 
 
 
-<meta name="description" content="Linear Regression 线性回归 Logistic Regression 对数几率回归  回归的本身是一种基于数据的建模，一般而言，线性回归（Linear Regression）相对比较简单，而对数几率回归（Logistic Regression）的内容要丰富很多。 线性回归很简单，给定一个样本集合  $D=(x_1,y_1),(x_2,y_2),\cdots,(x_m,y_m)$">
+<meta name="description" content="Linear Regression 线性回归 Logistic Regression 对数几率回归  回归的本身是一种基于数据的建模，一般而言，线性回归（Linear Regression）相对比较简单，而对数几率回归（Logistic Regression）的内容要丰富很多。">
 <meta name="keywords" content="Machine Learning,小记系列">
 <meta property="og:type" content="article">
 <meta property="og:title" content="小记 Linear Regression 与 Logistic Regression">
 <meta property="og:url" content="http://yoursite.com/2017/05/06/LinearReg-LogisticReg/index.html">
 <meta property="og:site_name" content="Quin Wu Blog">
-<meta property="og:description" content="Linear Regression 线性回归 Logistic Regression 对数几率回归  回归的本身是一种基于数据的建模，一般而言，线性回归（Linear Regression）相对比较简单，而对数几率回归（Logistic Regression）的内容要丰富很多。 线性回归很简单，给定一个样本集合  $D=(x_1,y_1),(x_2,y_2),\cdots,(x_m,y_m)$">
-<meta property="og:updated_time" content="2017-05-05T17:48:11.000Z">
+<meta property="og:description" content="Linear Regression 线性回归 Logistic Regression 对数几率回归  回归的本身是一种基于数据的建模，一般而言，线性回归（Linear Regression）相对比较简单，而对数几率回归（Logistic Regression）的内容要丰富很多。">
+<meta property="og:updated_time" content="2017-05-05T18:07:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小记 Linear Regression 与 Logistic Regression">
-<meta name="twitter:description" content="Linear Regression 线性回归 Logistic Regression 对数几率回归  回归的本身是一种基于数据的建模，一般而言，线性回归（Linear Regression）相对比较简单，而对数几率回归（Logistic Regression）的内容要丰富很多。 线性回归很简单，给定一个样本集合  $D=(x_1,y_1),(x_2,y_2),\cdots,(x_m,y_m)$">
+<meta name="twitter:description" content="Linear Regression 线性回归 Logistic Regression 对数几率回归  回归的本身是一种基于数据的建模，一般而言，线性回归（Linear Regression）相对比较简单，而对数几率回归（Logistic Regression）的内容要丰富很多。">
 
 
 
@@ -380,6 +380,7 @@
 <p>Logistic Regression 对数几率回归</p>
 </blockquote>
 <p>回归的本身是一种基于数据的建模，一般而言，<code>线性回归（Linear Regression）</code>相对比较简单，而<code>对数几率回归（Logistic Regression）</code>的内容要丰富很多。</p>
+<a id="more"></a>
 <p>线性回归很简单，给定一个样本集合  $D=(x_1,y_1),(x_2,y_2),\cdots,(x_m,y_m)$  这里的$x_i,y_i$都可以是高维向量，可以找到一个线性模拟$f(x_i)=wx_i+b$，只要确定了$w$跟$b$，这个线性模型就确定了，如何评估样本$y$与你的$f(x)$之间的差别，最常用的方法是最小二乘法。</p>
 <p>也就是说，我们用一条直线去模拟当前的样本，同时预测未来的数据，即我们给定某一个$x$值，根据模型可以返回给我们一个$y$值，这就是线性回归。</p>
 <p>对于<code>线性回归（Liner Regression）</code>而言，我们的任务是要确定出参数$w$跟$b$，使得线性函数$f(x_i)=wx_i+b$对于数据的拟合度足够高。这里我们用最小二乘法来评估样本$y$与估计值$f(x_i)$的拟合程度</p>
