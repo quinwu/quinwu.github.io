@@ -79,7 +79,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Machine Learning,小记系列," />
 
 
 
@@ -95,12 +95,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Quin Wu Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="Linear Regression 线性回归 Logistic Regression 对数几率回归  回归的本身是一种基于数据的建模，一般而言，线性回归（Linear Regression）相对比较简单，而对数几率回归（Logistic Regression）的内容要丰富很多。">
+<meta name="keywords" content="Machine Learning,小记系列">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小记 Linear Regression 与 Logistic Regression">
+<meta property="og:url" content="http://yoursite.com/2017/05/03/ML-LinearReg-LogisticReg/index.html">
 <meta property="og:site_name" content="Quin Wu Blog">
+<meta property="og:description" content="Linear Regression 线性回归 Logistic Regression 对数几率回归  回归的本身是一种基于数据的建模，一般而言，线性回归（Linear Regression）相对比较简单，而对数几率回归（Logistic Regression）的内容要丰富很多。">
+<meta property="og:updated_time" content="2017-05-05T18:20:34.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Quin Wu Blog">
+<meta name="twitter:title" content="小记 Linear Regression 与 Logistic Regression">
+<meta name="twitter:description" content="Linear Regression 线性回归 Logistic Regression 对数几率回归  回归的本身是一种基于数据的建模，一般而言，线性回归（Linear Regression）相对比较简单，而对数几率回归（Logistic Regression）的内容要丰富很多。">
 
 
 
@@ -128,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/05/03/ML-LinearReg-LogisticReg/"/>
 
 
 
 
 
-  <title>Quin Wu Blog</title>
+  <title>小记 Linear Regression 与 Logistic Regression | Quin Wu Blog</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -159,9 +164,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -264,131 +267,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/06/ML-overfitting-underfitting/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Quin WU">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/my_avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Quin Wu Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/06/ML-overfitting-underfitting/" itemprop="url">小记 overfitting 与 underfitting</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-06T02:14:03+08:00">
-                2017-05-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/05/06/ML-overfitting-underfitting/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/05/06/ML-overfitting-underfitting/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
 
   
 
@@ -414,9 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/03/ML-LinearReg-LogisticReg/" itemprop="url">小记 Linear Regression 与 Logistic Regression</a></h1>
+          <h1 class="post-title" itemprop="name headline">小记 Linear Regression 与 Logistic Regression</h1>
         
 
         <div class="post-meta">
@@ -474,163 +353,180 @@
       
 
       
-        
-          <blockquote>
+        <blockquote>
 <p>Linear Regression 线性回归</p>
 <p>Logistic Regression 对数几率回归</p>
 </blockquote>
 <p>回归的本身是一种基于数据的建模，一般而言，<code>线性回归（Linear Regression）</code>相对比较简单，而<code>对数几率回归（Logistic Regression）</code>的内容要丰富很多。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/05/03/ML-LinearReg-LogisticReg/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+<a id="more"></a>
+<p>线性回归很简单，给定一个样本集合  $D=(x_1,y_1),(x_2,y_2),\cdots,(x_m,y_m)$  这里的$x_i,y_i$都可以是高维向量，可以找到一个线性模拟$f(x_i)=wx_i+b$，只要确定了$w$跟$b$，这个线性模型就确定了，如何评估样本$y$与你的$f(x)$之间的差别，最常用的方法是最小二乘法。</p>
+<p>也就是说，我们用一条直线去模拟当前的样本，同时预测未来的数据，即我们给定某一个$x$值，根据模型可以返回给我们一个$y$值，这就是线性回归。</p>
+<p>对于<code>线性回归（Liner Regression）</code>而言，我们的任务是要确定出参数$w$跟$b$，使得线性函数$f(x_i)=wx_i+b$对于数据的拟合度足够高。这里我们用最小二乘法来评估样本$y$与估计值$f(x_i)$的拟合程度</p>
+<p>为了表示方便，我们使用如下的形式表示假设函数，为了方便  ${h_{\theta}(x)}$   也可以记作  $h(x)$。</p>
+<p>$$h_\theta(x) = \theta_0 + \theta_1x$$</p>
+<blockquote>
+<p>代价函数 （cost function）</p>
+</blockquote>
+<p>$${\mathop{min}_{\theta_0,\theta_1}}   \frac{1}{2m}  \sum_{i=0}^{m} {(h_\theta(x^{(i)}) - y^{(i)})}^2 $$</p>
+<p>$${\mathop{min}_{\theta_0,\theta_1}}  {J(\theta_0,\theta_1) } $$</p>
+<p>$$ {J(\theta_0,\theta_1) } $$</p>
+<p>$$ \frac{1}{2m}\sum_{i=0}^{m} $$</p>
+<p>$ {(h_\theta(x^{(i)} )  - y^{(i)}) }^2 $</p>
+<p>$${\mathop{min} _{\theta_0,\theta_1}}  \frac{1}{2m}\sum_{i=0}^{m}  {(h_\theta(x^{(i)} )  - y^{(i)}) }^2 $$</p>
+<blockquote>
+<p>J</p>
+</blockquote>
+<p>$${J(\theta_0,\theta_1) } = \frac{1}{2m}\sum_{i=0}^{m}{(h_\theta(x^{(i)} )  - y^{(i)}) }^2$$</p>
+<p>$${\mathop{min}_{\theta_0,\theta_1}} {J(\theta_0,\theta_1) } $$</p>
+<blockquote>
+<p>梯度下降</p>
+</blockquote>
+<p>Have some function  ${J(\theta_0,\theta_1) }$</p>
+<p>want  ${\mathop{min}_{\theta_0,\theta_1}} {J(\theta_0,\theta_1) } $</p>
+<p>Outline:</p>
+<ul>
+<li>Start with some $\theta_0,\theta_1$</li>
+<li>keep changing  $\theta_0,\theta_1$ to reduce  ${J(\theta_0,\theta_1) }$ until we hopefully end up at ${\mathop{min}_{\theta_0,\theta_1}} {J(\theta_0,\theta_1) } $</li>
+</ul>
+<blockquote>
+<p>Gradient descent algorithm</p>
+</blockquote>
+<p>repeat until  convergence {</p>
+<p>​    $\theta_j$ := $\theta_j - \alpha \frac{\partial}{\partial{\theta_j}} {J(\theta_0,\theta_1) }$  <em>for j=0  and  j=1</em></p>
+<p>}</p>
+<blockquote>
+<p>j = 0</p>
+</blockquote>
+<p>$$\frac{\partial}{\partial{\theta_0}} {J(\theta_0,\theta_1)} =  \frac {1} {m} \sum_{i = 1} ^ {m}{(h_\theta(x^{(i)}) - y^{(i)})} $$</p>
+<blockquote>
+<p>j = 1</p>
+</blockquote>
+<p>$$\frac{\partial}{\partial{\theta_1}} {J(\theta_0,\theta_1)} =  \frac {1} {m} \sum_{i = 1} ^ {m}{(h_\theta(x^{(i)}) - y^{(i)})} x^{(i)} $$</p>
+<p>  $$\theta_0 := \theta_0 - \alpha \frac {1} {m} \sum_{i = 1} ^ {m}{(h_\theta(x^{(i)}) - y^{(i)})} $$</p>
+<p>  $$\theta_1 := \theta_1 - \alpha \frac {1} {m} \sum_{i = 1} ^ {m}{(h_\theta(x^{(i)}) - y^{(i)})}  x^{(i)} $$</p>
+<hr>
+<blockquote>
+<p>Linear Regression with Mulitiple Variables</p>
+</blockquote>
+<p>$$h_\theta(x) = \theta_0 + \theta_1x$$</p>
+<p>$$h_\theta(x) = \theta_0 + \theta_1 x_1+ \theta_2 x_2+ \cdots+\theta_n x_n$$</p>
+<blockquote>
+<p>差列向量的公式</p>
+</blockquote>
+<p>$$ h_\theta(x) = \theta_0 x_0 +  \theta_1 x_1 + \theta_2 x_2 +\cdots+ \theta_n x_n  =  \theta^T x$$</p>
+<hr>
+<p>接下来介绍下<code>广义线性回归</code>，也很简单，我们不在只用线性函数来模拟数据，而是在外层添加了一个单调可微函数$g(z)$，即$f(x_i) = g(wx_i+b) $ ，如果 $ g=ln(x) $，则这个<code>广义线性回归</code>就变成了<code>对数线性回归</code>，其本质就是给原来线性变换加上了一个非线性变换，使得模拟的函数有非线性的属性。但本质上的参数还是线性的，主体是内部线性的调参。</p>
+<p><code>对数几率回归（Logistic Regression）</code>不是解决回归问题的，而是解决分类问题的。目的是要构造出一个分类器（Classifier）。<code>对数几率回归（Logistic Regression）</code>的关键并不在于回归，而在于对数几率函数。</p>
+<p>对一个简单的二分类问题，实际上是样本点或者预测点到一个值域为 $[0,1]$的函数，函数值表示这个点分在<code>正类（postive）</code>或者<code>反类（negtive）</code>的概率，如果非常可能是<code>正类（postive）</code>，那么其概率值就逼近与1，如果非常可能是<code>反类（negtive）</code>其概率值就逼近与0。</p>
+<blockquote>
+<p>//补周志华 单位阶跃函数与对数几率函数的图</p>
+</blockquote>
+<p>于是我们构造一个<code>sigmoid</code>函数 $$y=\frac{1}{1+ \mathrm{e}^{-z} } $$，</p>
+<p>$$h_\theta (x) = g (\theta^T x)$$</p>
+<p>$$g(z) = \frac {1}{1 + \mathrm{e}^{-z}}$$</p>
+<p>$$h_\theta (x) = \frac {1}{1 + \mathrm{e}^{-\theta^T x}}$$</p>
+<p>$$ J(\theta) = \frac{1}{2m}  \sum_{i=0}^{m} {(h_\theta(x^{(i)}) - y^{(i)})}^2 $$ </p>
+<p>$$ Cost (h_\theta{x^(i)},y^(i)) = \frac{1}{2} (h_\theta(x^{(i)}) - y^{(i)})}^2 $$</p>
+<p>$$Cost(h_\theta(x),y) = \frac{1}{2}(h_\theta - y) ^ 2$$</p>
+<p>$$Cost(h_\theta,y) = -y\log(h_\theta(x)) - (1-y) \log(1-h_\theta(x))$$</p>
+<blockquote>
+<p>cost function</p>
+</blockquote>
+<p>$${J(\theta)=-\frac{1}{m}\left[\sum_{i=1}^my^{(i)}log(h_\theta(x^{(i)}))+(1-y^{(i)})log(1-h_\theta(x^{(i)}))\right]}$$</p>
+
       
     </div>
 
     <div>
       
+        
+
+      
     </div>
 
     <div>
       
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/ML-directory/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Quin WU">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/my_avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Quin Wu Blog">
-    </span>
-
-    
-      <header class="post-header">
-
         
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/01/ML-directory/" itemprop="url">machine-learning-directory</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-01T02:13:49+08:00">
-                2017-05-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>你愿意请我喝瓶可乐吗?</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Quin WU WeChat Pay"/>
+          <p>微信打赏</p>
         </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
       
       
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="Quin WU Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
 
+
+      
+    </div>
+
+    <div>
       
         
-          
-            
-          
-        
-      
-    </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+          
+            <a href="/tags/小记系列/" rel="tag"># 小记系列</a>
+          
+        </div>
       
 
       
+        
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/01/ML-directory/" rel="next" title="machine-learning-directory">
+                <i class="fa fa-chevron-left"></i> machine-learning-directory
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/06/ML-overfitting-underfitting/" rel="prev" title="小记 overfitting 与 underfitting">
+                小记 overfitting 与 underfitting <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -638,6 +534,17 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -853,6 +760,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
 
   
 
@@ -870,6 +781,18 @@
       <script id="dsq-count-scr" src="https://quinwu.disqus.com/count.js" async></script>
     
 
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/03/ML-LinearReg-LogisticReg/';
+          this.page.identifier = '2017/05/03/ML-LinearReg-LogisticReg/';
+          this.page.title = '小记 Linear Regression 与 Logistic Regression';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://quinwu.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
     
 
   
