@@ -1,0 +1,868 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <script type="text/javascript">
+  var host = "quinwu.org";
+  if((host == window.location.host)&&(window.location.protocol != "https:"))
+	  window.location.protocol = "https";
+  </script>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Machine Learning,小记系列," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Linear Regression 线性回归 Logistic Regression 对数几率回归  回归的本身是一种基于数据的建模，一般而言，线性回归（Linear Regression）相对比较简单，而对数几率回归（Logistic Regression）的内容要丰富很多。 线性回归很简单，给定一个样本集合  $D=(x_1,y_1),(x_2,y_2),\cdots,(x_m,y_m)$">
+<meta name="keywords" content="Machine Learning,小记系列">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小记 Linear Regression 与 Logistic Regression">
+<meta property="og:url" content="http://yoursite.com/2017/05/06/LinearReg-LogisticReg/index.html">
+<meta property="og:site_name" content="Quin Wu Blog">
+<meta property="og:description" content="Linear Regression 线性回归 Logistic Regression 对数几率回归  回归的本身是一种基于数据的建模，一般而言，线性回归（Linear Regression）相对比较简单，而对数几率回归（Logistic Regression）的内容要丰富很多。 线性回归很简单，给定一个样本集合  $D=(x_1,y_1),(x_2,y_2),\cdots,(x_m,y_m)$">
+<meta property="og:updated_time" content="2017-05-05T17:48:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="小记 Linear Regression 与 Logistic Regression">
+<meta name="twitter:description" content="Linear Regression 线性回归 Logistic Regression 对数几率回归  回归的本身是一种基于数据的建模，一般而言，线性回归（Linear Regression）相对比较简单，而对数几率回归（Logistic Regression）的内容要丰富很多。 线性回归很简单，给定一个样本集合  $D=(x_1,y_1),(x_2,y_2),\cdots,(x_m,y_m)$">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/06/LinearReg-LogisticReg/"/>
+
+
+
+
+
+  <title>小记 Linear Regression 与 Logistic Regression | Quin Wu Blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Quin Wu Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/06/LinearReg-LogisticReg/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Quin WU">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/my_avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Quin Wu Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">小记 Linear Regression 与 Logistic Regression</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-06T01:48:11+08:00">
+                2017-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术向/" itemprop="url" rel="index">
+                    <span itemprop="name">技术向</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/06/LinearReg-LogisticReg/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/06/LinearReg-LogisticReg/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>Linear Regression 线性回归</p>
+<p>Logistic Regression 对数几率回归</p>
+</blockquote>
+<p>回归的本身是一种基于数据的建模，一般而言，<code>线性回归（Linear Regression）</code>相对比较简单，而<code>对数几率回归（Logistic Regression）</code>的内容要丰富很多。</p>
+<p>线性回归很简单，给定一个样本集合  $D=(x_1,y_1),(x_2,y_2),\cdots,(x_m,y_m)$  这里的$x_i,y_i$都可以是高维向量，可以找到一个线性模拟$f(x_i)=wx_i+b$，只要确定了$w$跟$b$，这个线性模型就确定了，如何评估样本$y$与你的$f(x)$之间的差别，最常用的方法是最小二乘法。</p>
+<p>也就是说，我们用一条直线去模拟当前的样本，同时预测未来的数据，即我们给定某一个$x$值，根据模型可以返回给我们一个$y$值，这就是线性回归。</p>
+<p>对于<code>线性回归（Liner Regression）</code>而言，我们的任务是要确定出参数$w$跟$b$，使得线性函数$f(x_i)=wx_i+b$对于数据的拟合度足够高。这里我们用最小二乘法来评估样本$y$与估计值$f(x_i)$的拟合程度</p>
+<p>为了表示方便，我们使用如下的形式表示假设函数，为了方便  ${h_{\theta}(x)}$   也可以记作  $h(x)$。</p>
+<p>$$h_\theta(x) = \theta_0 + \theta_1x$$</p>
+<blockquote>
+<p>代价函数 （cost function）</p>
+</blockquote>
+<p>$${\mathop{min}_{\theta_0,\theta_1}}   \frac{1}{2m}  \sum_{i=0}^{m} {(h_\theta(x^{(i)}) - y^{(i)})}^2 $$</p>
+<p>$${\mathop{min}_{\theta_0,\theta_1}}  {J(\theta_0,\theta_1) } $$</p>
+<p>$$ {J(\theta_0,\theta_1) } $$</p>
+<p>$$ \frac{1}{2m}\sum_{i=0}^{m} $$</p>
+<p>$ {(h_\theta(x^{(i)} )  - y^{(i)}) }^2 $</p>
+<p>$${\mathop{min} _{\theta_0,\theta_1}}  \frac{1}{2m}\sum_{i=0}^{m}  {(h_\theta(x^{(i)} )  - y^{(i)}) }^2 $$</p>
+<blockquote>
+<p>J</p>
+</blockquote>
+<p>$${J(\theta_0,\theta_1) } = \frac{1}{2m}\sum_{i=0}^{m}{(h_\theta(x^{(i)} )  - y^{(i)}) }^2$$</p>
+<p>$${\mathop{min}_{\theta_0,\theta_1}} {J(\theta_0,\theta_1) } $$</p>
+<blockquote>
+<p>梯度下降</p>
+</blockquote>
+<p>Have some function  ${J(\theta_0,\theta_1) }$</p>
+<p>want  ${\mathop{min}_{\theta_0,\theta_1}} {J(\theta_0,\theta_1) } $</p>
+<p>Outline:</p>
+<ul>
+<li>Start with some $\theta_0,\theta_1$</li>
+<li>keep changing  $\theta_0,\theta_1$ to reduce  ${J(\theta_0,\theta_1) }$ until we hopefully end up at ${\mathop{min}_{\theta_0,\theta_1}} {J(\theta_0,\theta_1) } $</li>
+</ul>
+<blockquote>
+<p>Gradient descent algorithm</p>
+</blockquote>
+<p>repeat until  convergence {</p>
+<p>​    $\theta_j$ := $\theta_j - \alpha \frac{\partial}{\partial{\theta_j}} {J(\theta_0,\theta_1) }$  <em>for j=0  and  j=1</em></p>
+<p>}</p>
+<blockquote>
+<p>j = 0</p>
+</blockquote>
+<p>$$\frac{\partial}{\partial{\theta_0}} {J(\theta_0,\theta_1)} =  \frac {1} {m} \sum_{i = 1} ^ {m}{(h_\theta(x^{(i)}) - y^{(i)})} $$</p>
+<blockquote>
+<p>j = 1</p>
+</blockquote>
+<p>$$\frac{\partial}{\partial{\theta_1}} {J(\theta_0,\theta_1)} =  \frac {1} {m} \sum_{i = 1} ^ {m}{(h_\theta(x^{(i)}) - y^{(i)})} x^{(i)} $$</p>
+<p>  $$\theta_0 := \theta_0 - \alpha \frac {1} {m} \sum_{i = 1} ^ {m}{(h_\theta(x^{(i)}) - y^{(i)})} $$</p>
+<p>  $$\theta_1 := \theta_1 - \alpha \frac {1} {m} \sum_{i = 1} ^ {m}{(h_\theta(x^{(i)}) - y^{(i)})}  x^{(i)} $$</p>
+<hr>
+<blockquote>
+<p>Linear Regression with Mulitiple Variables</p>
+</blockquote>
+<p>$$h_\theta(x) = \theta_0 + \theta_1x$$</p>
+<p>$$h_\theta(x) = \theta_0 + \theta_1 x_1+ \theta_2 x_2+ \cdots+\theta_n x_n$$</p>
+<blockquote>
+<p>差列向量的公式</p>
+</blockquote>
+<p>$$ h_\theta(x) = \theta_0 x_0 +  \theta_1 x_1 + \theta_2 x_2 +\cdots+ \theta_n x_n  =  \theta^T x$$</p>
+<hr>
+<p>接下来介绍下<code>广义线性回归</code>，也很简单，我们不在只用线性函数来模拟数据，而是在外层添加了一个单调可微函数$g(z)$，即$f(x_i) = g(wx_i+b) $ ，如果 $ g=ln(x) $，则这个<code>广义线性回归</code>就变成了<code>对数线性回归</code>，其本质就是给原来线性变换加上了一个非线性变换，使得模拟的函数有非线性的属性。但本质上的参数还是线性的，主体是内部线性的调参。</p>
+<p><code>对数几率回归（Logistic Regression）</code>不是解决回归问题的，而是解决分类问题的。目的是要构造出一个分类器（Classifier）。<code>对数几率回归（Logistic Regression）</code>的关键并不在于回归，而在于对数几率函数。</p>
+<p>对一个简单的二分类问题，实际上是样本点或者预测点到一个值域为 $[0,1]$的函数，函数值表示这个点分在<code>正类（postive）</code>或者<code>反类（negtive）</code>的概率，如果非常可能是<code>正类（postive）</code>，那么其概率值就逼近与1，如果非常可能是<code>反类（negtive）</code>其概率值就逼近与0。</p>
+<blockquote>
+<p>//补周志华 单位阶跃函数与对数几率函数的图</p>
+</blockquote>
+<p>于是我们构造一个<code>sigmoid</code>函数 $$y=\frac{1}{1+ \mathrm{e}^{-z} } $$，</p>
+<p>$$h_\theta (x) = g (\theta^T x)$$</p>
+<p>$$g(z) = \frac {1}{1 + \mathrm{e}^{-z}}$$</p>
+<p>$$h_\theta (x) = \frac {1}{1 + \mathrm{e}^{-\theta^T x}}$$</p>
+<p>$$ J(\theta) = \frac{1}{2m}  \sum_{i=0}^{m} {(h_\theta(x^{(i)}) - y^{(i)})}^2 $$ </p>
+<p>$$ Cost (h_\theta{x^(i)},y^(i)) = \frac{1}{2} (h_\theta(x^{(i)}) - y^{(i)})}^2 $$</p>
+<p>$$Cost(h_\theta(x),y) = \frac{1}{2}(h_\theta - y) ^ 2$$</p>
+<p>$$Cost(h_\theta,y) = -y\log(h_\theta(x)) - (1-y) \log(1-h_\theta(x))$$</p>
+<blockquote>
+<p>cost function</p>
+</blockquote>
+<p>$${J(\theta)=-\frac{1}{m}\left[\sum_{i=1}^my^{(i)}log(h_\theta(x^{(i)}))+(1-y^{(i)})log(1-h_\theta(x^{(i)}))\right]}$$</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+          
+            <a href="/tags/小记系列/" rel="tag"># 小记系列</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/06/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/my_avatar.jpg"
+               alt="Quin WU" />
+          <p class="site-author-name" itemprop="name">Quin WU</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/quinwu" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/Aemonwk" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/aemonwk" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Quin WU</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://quinwu.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/06/LinearReg-LogisticReg/';
+          this.page.identifier = '2017/05/06/LinearReg-LogisticReg/';
+          this.page.title = '小记 Linear Regression 与 Logistic Regression';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://quinwu.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
