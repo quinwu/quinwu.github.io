@@ -1,4 +1,4 @@
-# quinwu.github.io
+# 部署信息
 
 ```shell
 #hexo Markdown file
