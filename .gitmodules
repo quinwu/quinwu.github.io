@@ -1,0 +1,3 @@
+[submodule "themes/nextclear"]
+	path = themes/nextclear
+	url = git@github.com:quinwu/hexo-theme-next.git
