@@ -78,7 +78,11 @@ Outline:
 
 repeat until  convergence {
 
-​	$\theta_j$ := $\theta_j - \alpha \frac{\partial}{\partial{\theta_j}} {J(\theta_0,\theta_1) }$   *for j=0  and  j=1*
+​	$\theta_j$ := $\theta_j - \alpha \frac{\partial}{\partial{\theta_j}} {J(\theta_0,\theta_1) }$   
+
+```cpp
+for j=0 and j=1
+```
 
 }
 
