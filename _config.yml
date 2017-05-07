@@ -69,5 +69,7 @@ theme: nextclear
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
  type: git
- repo: git@github.com:quinwu/quinwu.github.io.git
+ repository:
+	github: git@github.com:quinwu/quinwu.github.io.git
+	coding: git@git.coding.net:quinwu/quinwu.coding.me.git
  branch: master

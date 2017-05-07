@@ -15,6 +15,8 @@ tags:
 
 <!--more-->
 
+
+
 线性回归很简单，给定一个样本集合  $D=(x_1,y_1),(x_2,y_2),\cdots,(x_m,y_m)$  这里的$x_i,y_i$都可以是高维向量，可以找到一个线性模拟$f(x_i)=wx_i+b$，只要确定了$w$跟$b$，这个线性模型就确定了，如何评估样本$y$与你的$f(x)$之间的差别，最常用的方法是最小二乘法。
 
 也就是说，我们用一条直线去模拟当前的样本，同时预测未来的数据，即我们给定某一个$x$值，根据模型可以返回给我们一个$y$值，这就是线性回归。
@@ -23,7 +25,9 @@ tags:
 
 为了表示方便，我们使用如下的形式表示假设函数，为了方便  ${h_{\theta}(x)}$   也可以记作  $h(x)$。
 
-$$h_\theta(x) = \theta\_0 + \theta\_1x$$
+
+
+$$ h_\theta(x) = \theta_0 + \theta_1x$$ 
 
 
 
@@ -31,29 +35,29 @@ $$h_\theta(x) = \theta\_0 + \theta\_1x$$
 
 
 
-$${\mathop{min}\_{\theta\_0,\theta\_1}}   \frac{1}{2m}  \sum\_{i=0}^{m} {(h\_\theta(x^{(i)}) - y^{(i)})}^2 $$
+$${\mathop{min}_{\theta_0,\theta_1}}   \frac{1}{2m}  \sum_{i=0}^{m} {(h_\theta(x^{(i)}) - y^{(i)})}^2 $$
 
-$${\mathop{min}\_{\theta\_0,\theta\_1}}  {J(\theta\_0,\theta\_1) } $$
+$${\mathop{min}_{\theta_0,\theta_1}}  {J(\theta_0,\theta_1) } $$
 
-$$ {J(\theta\_0,\theta\_1) } $$
+$$ {J(\theta_0,\theta_1) } $$
 
-$$ \frac{1}{2m}\sum\_{i=0}^{m} $$
+$$ \frac{1}{2m}\sum_{i=0}^{m} $$
 
-$ {(h\_\theta(x^{(i)} )  - y^{(i)}) }^2 $
+$ {(h_\theta(x^{(i)} )  - y^{(i)}) }^2 $
 
 
 
-$${\mathop{min} \_{\theta\_0,\theta\_1}}  \frac{1}{2m}\sum\_{i=0}^{m}  {(h\_\theta(x^{(i)} )  - y^{(i)}) }^2 $$
+$${\mathop{min} _{\theta_0,\theta_1}}  \frac{1}{2m}\sum_{i=0}^{m}  {(h_\theta(x^{(i)} )  - y^{(i)}) }^2 $$
 
 
 
 > J
 
-$${J(\theta\_0,\theta\_1) } = \frac{1}{2m}\sum\_{i=0}^{m}{(h_\theta(x^{(i)} )  - y^{(i)}) }^2$$
+$${J(\theta_0,\theta_1) } = \frac{1}{2m}\sum_{i=0}^{m}{(h_\theta(x^{(i)} )  - y^{(i)}) }^2$$
 
 
 
-$${\mathop{min}\_{\theta\_0,\theta\_1}} {J(\theta\_0,\theta\_1) } $$
+$${\mathop{min}_{\theta_0,\theta_1}} {J(\theta_0,\theta_1) } $$
 
 
 
@@ -63,18 +67,18 @@ $${\mathop{min}\_{\theta\_0,\theta\_1}} {J(\theta\_0,\theta\_1) } $$
 
 Have some function  ${J(\theta_0,\theta_1) }$
 
-want  ${\mathop{min}\_{\theta\_0,\theta\_1}} {J(\theta\_0,\theta\_1) } $
+want  ${\mathop{min}_{\theta_0,\theta_1}} {J(\theta_0,\theta_1) } $
 
 Outline:
 
-- Start with some $\theta\_0,\theta\_1$
-- keep changing  $\theta\_0,\theta\_1$ to reduce  ${J(\theta\_0,\theta\_1) }$ until we hopefully end up at ${\mathop{min}\_{\theta\_0,\theta\_1}} {J(\theta\_0,\theta\_1) } $
+- Start with some $\theta_0,\theta_1$
+- keep changing  $\theta_0,\theta_1$ to reduce  ${J(\theta_0,\theta_1) }$ until we hopefully end up at ${\mathop{min}_{\theta_0,\theta_1}} {J(\theta_0,\theta_1) } $
 
 > Gradient descent algorithm
 
 repeat until  convergence {
 
-​	$\theta\_j$ := $\theta\_j - \alpha \frac{\partial}{\partial{\theta\_j}} {J(\theta\_0,\theta\_1) }$  *for j=0  and  j=1*
+​	$\theta_j$ := $\theta_j - \alpha \frac{\partial}{\partial{\theta_j}} {J(\theta_0,\theta_1) }$   *for j=0  and  j=1*
 
 }
 
@@ -82,19 +86,19 @@ repeat until  convergence {
 
 > j = 0
 
-$$\frac{\partial}{\partial{\theta\_0}} {J(\theta\_0,\theta\_1)} =  \frac {1} {m} \sum\_{i = 1} ^ {m}{(h\_\theta(x^{(i)}) - y^{(i)})} $$
+$$\frac{\partial}{\partial{\theta_0}} {J(\theta_0,\theta_1)} =  \frac {1} {m} \sum_{i = 1} ^ {m}{(h_\theta(x^{(i)}) - y^{(i)})} $$
 
 
 
 > j = 1
 
-$$\frac{\partial}{\partial{\theta\_1}} {J(\theta\_0,\theta\_1)} =  \frac {1} {m} \sum\_{i = 1} ^ {m}{(h\_\theta(x^{(i)}) - y^{(i)})} x^{(i)} $$
+$$\frac{\partial}{\partial{\theta_1}} {J(\theta_0,\theta_1)} =  \frac {1} {m} \sum_{i = 1} ^ {m}{(h_\theta(x^{(i)}) - y^{(i)})} x^{(i)} $$
 
 
 
-  $$\theta\_0 := \theta\_0 - \alpha \frac {1} {m} \sum\_{i = 1} ^ {m}{(h\_\theta(x^{(i)}) - y^{(i)})} $$
+  $$\theta_0 := \theta_0 - \alpha \frac {1} {m} \sum_{i = 1} ^ {m}{(h_\theta(x^{(i)}) - y^{(i)})} $$
 
-  $$\theta\_1 := \theta\_1 - \alpha \frac {1} {m} \sum\_{i = 1} ^ {m}{(h\_\theta(x^{(i)}) - y^{(i)})}  x^{(i)} $$
+  $$\theta_1 := \theta_1 - \alpha \frac {1} {m} \sum_{i = 1} ^ {m}{(h_\theta(x^{(i)}) - y^{(i)})}  x^{(i)} $$
 
 ------
 
@@ -104,9 +108,9 @@ $$\frac{\partial}{\partial{\theta\_1}} {J(\theta\_0,\theta\_1)} =  \frac {1} {m}
 
 
 
-$$h_\theta(x) = \theta\_0 + \theta\_1x$$
+$$h_\theta(x) = \theta_0 + \theta_1x$$
 
-$$h_\theta(x) = \theta\_0 + \theta\_1 x\_1+ \theta\_2 x\_2+ \cdots+\theta\_n x\_n$$
+$$h_\theta(x) = \theta_0 + \theta_1 x_1+ \theta_2 x_2+ \cdots+\theta_n x_n$$
 
 
 
@@ -114,7 +118,7 @@ $$h_\theta(x) = \theta\_0 + \theta\_1 x\_1+ \theta\_2 x\_2+ \cdots+\theta\_n x\_
 
 
 
-$$ h\_\theta(x) = \theta\_0 x\_0 +  \theta\_1 x\_1 + \theta\_2 x\_2 +\cdots+ \theta\_n x\_n  =  \theta^T x$$
+$$ h_\theta(x) = \theta_0 x_0 +  \theta_1 x_1 + \theta_2 x_2 +\cdots+ \theta_n x_n  =  \theta^T x$$
 
 
 
@@ -140,31 +144,29 @@ $$ h\_\theta(x) = \theta\_0 x\_0 +  \theta\_1 x\_1 + \theta\_2 x\_2 +\cdots+ \th
 
 
 
-$$h\_\theta (x) = g (\theta^T x)$$
+$$h_\theta (x) = g (\theta^T x)$$
 
 $$g(z) = \frac {1}{1 + \mathrm{e}^{-z}}$$
 
-$$h\_\theta (x) = \frac {1}{1 + \mathrm{e}^{-\theta^T x}}$$
+$$h_\theta (x) = \frac {1}{1 + \mathrm{e}^{-\theta^T x}}$$
+
+
+
+$$ J(\theta) = \frac{1}{2m}  \sum_{i=0}^{m} {(h_\theta(x^{(i)}) - y^{(i)})}^2 $$ 
+
+
+
+$$ Cost (h_\theta(x^{(i)},y^{(i)}))= \frac{1}{2} (h_\theta(x^{(i)}) - y^{(i)})^2 $$
+
+
+
+$$Cost(h_\theta(x),y) = \frac{1}{2}(h_\theta - y) ^ 2$$
+
+$$Cost(h_\theta,y) = -y\log(h_\theta(x)) - (1-y) \log(1-h_\theta(x))$$
 
 
 
 
-
-
-
-$$ J(\theta) = \frac{1}{2m}  \sum\_{i=0}^{m} {(h\_\theta(x^{(i)}) - y^{(i)})}^2 $$ 
-
-
-
-$$ Cost (h\_\theta{x^(i)},y^(i)) = \frac{1}{2} (h\_\theta(x^{(i)}) - y^{(i)})}^2 $$
-
-
-
-
-
-$$Cost(h\_\theta(x),y) = \frac{1}{2}(h\_\theta - y) ^ 2$$
-
-$$Cost(h\_\theta,y) = -y\log(h\_\theta(x)) - (1-y) \log(1-h\_\theta(x))$$
 
 
 
@@ -172,5 +174,7 @@ $$Cost(h\_\theta,y) = -y\log(h\_\theta(x)) - (1-y) \log(1-h\_\theta(x))$$
 
 
 
-$${J(\theta)=-\frac{1}{m}\left[\sum\_{i=1}^my^{(i)}log(h\_\theta(x^{(i)}))+(1-y^{(i)})log(1-h_\theta(x^{(i)}))\right]}$$
+$${J(\theta)=-\frac{1}{m}\left[\sum_{i=1}^my^{(i)}log(h_\theta(x^{(i)}))+(1-y^{(i)})log(1-h_\theta(x^{(i)}))\right]}$$
+
+
 
