@@ -30,9 +30,17 @@ git clone git@github.com:quinwu/hexo-theme-next.git nextclear
 
 ---
 
+# 快速脚本
+
+`local.sh`本地调试
+
+`deploy.sh`部署到github/gitcafe
+
+---
+
 # 相关配置的备份
 
-`backup_config`文件 
+### `backup_config`目录下
 
 #### clone theme next
 
