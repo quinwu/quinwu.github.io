@@ -52,7 +52,7 @@ cp backup_config/_layout.swig      /themes/next/layout/_layout.swig
 `my_avatat.jpg`    头像
 
 ```shell
-cp my_avatar.jpg    ....../next/source/images/
+cp my_avatar.jpg    ../themes/next/source/images/
 ```
 
 #### alipay.jpg  wechatpay.jpg
