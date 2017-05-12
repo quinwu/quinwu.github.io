@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Quin Wu Blog">
 <meta property="og:description" content="Linear Regression 线性回归 Logistic Regression 对数几率回归  回归的本身是一种基于数据的建模，一般而言，线性回归（Linear Regression）相对比较简单，而对数几率回归（Logistic Regression）的内容要丰富很多。">
 <meta property="og:image" content="http://yoursite.com/2017/05/03/ML-LinearReg-LogisticReg/LinerRegg.png">
-<meta property="og:updated_time" content="2017-05-12T17:46:29.000Z">
+<meta property="og:updated_time" content="2017-05-12T17:53:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小记 Linear Regression 与 Logistic Regression">
 <meta name="twitter:description" content="Linear Regression 线性回归 Logistic Regression 对数几率回归  回归的本身是一种基于数据的建模，一般而言，线性回归（Linear Regression）相对比较简单，而对数几率回归（Logistic Regression）的内容要丰富很多。">
@@ -449,7 +449,7 @@
 <blockquote>
 <p>//补周志华 单位阶跃函数与对数几率函数的图</p>
 </blockquote>
-<p>于是我们构造一个<code>sigmoid</code>函数 $$y=\frac{1}{1+ \mathrm{e}^{-z} } $$。</p>
+<p>于是我们构造一个<code>sigmoid</code>函数 $y=\frac{1}{1+ \mathrm{e}^{-z} } $。</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">y =  <span class="number">1</span> ./  ( <span class="number">1</span> + <span class="built_in">exp</span>(-z) );</div></pre></td></tr></table></figure>
 <p>在<code>对数几率回归（Logistic Regression）</code>，假设函数为$h_\theta (x) = g (\theta^T x)$，其中$g(z)=\frac{1}{1+ \mathrm{e}^{-z} } $就是我们上面构造的<code>sigmoid</code>函数。即，</p>
 <p>$$<br>h_\theta (x) = \frac {1}{1 + \mathrm{e}^{-\theta^T x}}<br>$$<br>我们可以将对率函数的输出理解为，当输入为$x​$的时候，$y=1​$的概率，可以用$h_\theta(x) = P(y = 1 | x;\theta)​$ 表达。对于sigmoid函数，当$z &gt; 0​$时 ，$g(z) \geq 0.5​$ 既预测 $y = 1​$，当$z &lt; 0​$时，$g(z) &lt; 0.5​$ 即预测$ y = 0​$。</p>
