@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Quin Wu Blog">
 <meta property="og:description" content="Linear Regression 线性回归 Logistic Regression 对数几率回归  回归的本身是一种基于数据的建模，一般而言，线性回归（Linear Regression）相对比较简单，而对数几率回归（Logistic Regression）的内容要丰富很多。">
 <meta property="og:image" content="http://yoursite.com/2017/05/03/ML-LinearReg-LogisticReg/LinerRegg.png">
-<meta property="og:updated_time" content="2017-05-12T17:53:21.000Z">
+<meta property="og:updated_time" content="2017-05-13T12:00:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小记 Linear Regression 与 Logistic Regression">
 <meta name="twitter:description" content="Linear Regression 线性回归 Logistic Regression 对数几率回归  回归的本身是一种基于数据的建模，一般而言，线性回归（Linear Regression）相对比较简单，而对数几率回归（Logistic Regression）的内容要丰富很多。">
@@ -458,7 +458,9 @@
 <p>代价函数 cost function</p>
 </blockquote>
 <p>跟线性回归中的代价函数相比，<br>$$<br>J(\theta) = \frac{1}{2m}  \sum_{i=0}^{m} {(h_\theta(x^{(i)}) - y^{(i)})}^2<br>$$<br>线性回归之所以可以使用梯度下降法来下降到最优解是因为代价函数$J(\theta)$是一个凸函数。对于对率回归而言，假设函数$h_\theta (x) = \frac {1}{1 + \mathrm{e}^{-\theta^T x}}$ 是一个非线性的复杂模型，代价函数就不是一个凸函数(non-convex)。这样使用梯度下降法就只能得到局部最优解而非全局最优解，所以我们需要构造一个合理的并且是凸函数的代价函数。</p>
-<p>如下：<br>$$<br>Cost(h_\theta,y) = -y\log(h_\theta(x)) - (1-y) \log(1-h_\theta(x))<br>$$<br>因此得到代价函数$J(\theta)$<br>$$<br>{J(\theta)=-\frac{1}{m}\left[\sum_{i=1}^my^{(i)}log(h_\theta(x^{(i)}))+(1-y^{(i)})log(1-h_\theta(x^{(i)}))\right]}<br>$$<br>后面的步骤就跟线性回归很相似了，可以直接用梯度下降法。<br>$$<br>\frac{\partial J(\theta)}{\partial \theta_j} = \frac {1}{m} \sum _{i=1} ^m{(h_\theta(x^{(i)}) - y^{(i)})} x^{(i)}_j<br>$$</p>
+<p>对于$h_\theta (x) = \frac {1}{1 + \mathrm{e}^{-\theta^T x}}$ 可以变化为$\ln\frac{y}{1-y} = \theta^Tx$，若将$y$视为样本$x$作为正例的可能性，则$1-y$是其反例的可能性，两者的比值$\frac{y}{1-y}$成为<code>几率（odds）</code>，反映了$x$作为正例的相对可能性，对几率取对数则得到了<code>对数几率（log odds ，亦称logit）</code>$\ln\frac{y}{1-y}$。<br>$$<br>\ln\frac{p(y=1 | x)}{p(y = 0| x)} = \theta^Tx<br>$$<br>显然有<br>$$<br>p(y = 1|x) = \frac{e^{\theta^Tx}}{1+e^{\theta^Tx}}<br>$$</p>
+<p>$$<br>p(y = 0|x) = \frac{1}{1+e^{\theta^Tx}}<br>$$</p>
+<p>于是我们可以通过<code>极大似然法（maximum likehood method）</code>来估计$\theta$，对率回归模型最大化<code>对数似然（log-likehood）</code><br>$$<br>\ell(\theta) = \sum_{i=1}^m\ln p(y_i|x_i;\theta)<br>$$<br>即令每个样本属于其真实标记的概率越大越好。为了方便讨论，我们令$p_1(x;\theta) = p(y = 1|x;\theta) $，$p_0(x;\theta) = p( y = 0 | x;\theta)$，则上式子中的似然项可以重写为<br>$$<br>p(y_i|x_i;\theta) = y_ip_1(x_i;\theta) + (1 - y_i)p_0(x_i;\theta)<br>$$<br>如下：<br>$$<br>Cost(h_\theta,y) = -y\log(h_\theta(x)) - (1-y) \log(1-h_\theta(x))<br>$$<br>因此得到代价函数$J(\theta)$<br>$$<br>{J(\theta)=-\frac{1}{m}\left[\sum_{i=1}^my^{(i)}log(h_\theta(x^{(i)}))+(1-y^{(i)})log(1-h_\theta(x^{(i)}))\right]}<br>$$<br>后面的步骤就跟线性回归很相似了，可以直接用梯度下降法。<br>$$<br>\frac{\partial J(\theta)}{\partial \theta_j} = \frac {1}{m} \sum _{i=1} ^m{(h_\theta(x^{(i)}) - y^{(i)})} x^{(i)}_j<br>$$</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">%calculation J</span></div><div class="line">z = X*theta;</div><div class="line">t = -y' * <span class="built_in">log</span>(sigmoid(z)) - (<span class="number">1</span> - y') *  <span class="built_in">log</span> (<span class="number">1</span> - sigmoid(z));</div><div class="line">J = t / m;</div><div class="line"> </div><div class="line"><span class="comment">%calculation grad</span></div><div class="line">grad_t = (sigmoid(z) - y);</div><div class="line">grad =( X' * grad_t )/ m;</div></pre></td></tr></table></figure>
 
       
