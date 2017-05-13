@@ -21,47 +21,44 @@ tags:
 
 也就是说，我们用一条直线去模拟当前的样本，同时预测未来的数据，即我们给定某一个$x$值，根据模型可以返回给我们一个$y$值，这就是线性回归。
 
-对于`线性回归（Liner Regression）`而言，我们的任务是要确定出参数$w$跟$b$，使得线性函数$f(x_i)=wx_i+b$对于数据的拟合度足够高。这里我们用最小二乘法来评估样本$y$与估计值$f(x_i)$的拟合程度
-
 为了表示方便，我们使用如下的形式表示假设函数，为了方便  ${h_{\theta}(x)}$   也可以记作  $h(x)$。
 
-$$ h_\theta(x) = \theta_0 + \theta_1x$$ 
+$$
+h_\theta(x) = \theta_0 + \theta_1x
+$$
+现在的问题是我们如何选择$\theta_0$跟$\theta_1$ ，使得对于训练样本$(x,y)$，$h(x)$最『接近』$y$。$h(x)$与$y$越是接近，说明假设函数越是准确。这里我们选择均方误差作为衡量标准，即每个样本的估计值与实际值之间的差的平方的均值最小。
 
+用公式表达为
+$$
+{\mathop{min}_{\theta_0,\theta_1}}   \frac{1}{2m}  \sum_{i=0}^{m} {(h_\theta(x^{(i)}) - y^{(i)})}^2 
+$$
+$\frac{1}{2m}$是为了后续求导的计算方便，不影响最小化均方误差。
 
+下面引入`代价函数（cost function）`。
 
 > 代价函数 （cost function）
 
+$$
+J(\theta_0,\theta_1) =   \frac{1}{2m}  \sum_{i=0}^{m} {(h_\theta(x^{(i)}) - y^{(i)})}^2
+$$
 
+```matlab
+X = [ones(m,1),data(:,1)]; %Add a column of ones to x
+Z = (X*theta - y).^2; 
+J = sum(Z(:,1)) / (2*m);
+```
 
-$${\mathop{min}_{\theta_0,\theta_1}}   \frac{1}{2m}  \sum_{i=0}^{m} {(h_\theta(x^{(i)}) - y^{(i)})}^2 $$
+也就是我们的优化目标，使得代价函数$J(\theta_0,\theta_1)$最小，即${\mathop{min}_{\theta_0,\theta_1}}  {J(\theta_0,\theta_1) }$
 
-$${\mathop{min}_{\theta_0,\theta_1}}  {J(\theta_0,\theta_1) } $$
+对应于不同的$\theta_0$ $\theta_1$ ，函数$h_\theta(x) = \theta_0 + \theta_1x$表示不同的直线。如下图，是我们最理想的情况。
 
-$$ {J(\theta_0,\theta_1) } $$
+![LinerReg](LinerRegg.png)
 
-$$ \frac{1}{2m}\sum_{i=0}^{m} $$
+我们需要不断的尝试不同的$\theta_0$$\theta_1$直到找到一个最佳的$h_\theta(x)$。是否有特定的算法，来帮助我们自动的找到最佳的$h_\theta(x)$呢？下面我们介绍梯度下降法。
 
-$ {(h_\theta(x^{(i)} )  - y^{(i)}) }^2 $
+> 梯度下降（Gradient descent）
 
-
-
-$${\mathop{min} _{\theta_0,\theta_1}}  \frac{1}{2m}\sum_{i=0}^{m}  {(h_\theta(x^{(i)} )  - y^{(i)}) }^2 $$
-
-
-
-> J
-
-$${J(\theta_0,\theta_1) } = \frac{1}{2m}\sum_{i=0}^{m}{(h_\theta(x^{(i)} )  - y^{(i)}) }^2$$
-
-
-
-$${\mathop{min}_{\theta_0,\theta_1}} {J(\theta_0,\theta_1) } $$
-
-
-
-> 梯度下降
-
-
+梯度下降法是一种优化方法，它可以帮助我们快速的找到一个函数的局部极小值点，也就是$\mathop{min}J(\theta_0,\theta_1)$。它的基本思想是：我们先随机一个初始的$\theta_0$$\theta_1$，通过不断的改变它们的值，使得$J(\theta)$变小，最终找到$J(\theta)$的最小值点。	
 
 Have some function  ${J(\theta_0,\theta_1) }$
 
@@ -72,35 +69,39 @@ Outline:
 - Start with some $\theta_0,\theta_1$
 - keep changing  $\theta_0,\theta_1$ to reduce  ${J(\theta_0,\theta_1) }$ until we hopefully end up at ${\mathop{min}_{\theta_0,\theta_1}} {J(\theta_0,\theta_1) } $
 
+下面看看算法的具体过程，如下所示，其中$\alpha$叫做`学习率（learn rate）`用来控制梯度下降的幅度，$ \frac{\partial}{\partial{\theta_j}} {J(\theta_0,\theta_1) }$叫做梯度（代价函数对每个$\theta$的偏导）。这里要注意的是每次必须同时的改变$\theta_0$和$\theta_1$的值。
+
 > Gradient descent algorithm
 
 repeat until  convergence {
 
-​	$\theta_j$ := $\theta_j - \alpha \frac{\partial}{\partial{\theta_j}} {J(\theta_0,\theta_1) }$   
-
-```cpp
-for j=0 and j=1
-```
+$$
+\theta_j := \theta_j - \alpha \frac{\partial}{\partial{\theta_j}} {J(\theta_0,\theta_1) }
+$$
+(simultaneously update $\theta_j$ for $j = 0$ and $j = 1$)
 
 }
 
+当$j=0$时，
 
+$\frac{\partial}{\partial{\theta_0}} {J(\theta_0,\theta_1)} =  \frac {1} {m} \sum_{i = 1} ^ {m}{(h_\theta(x^{(i)}) - y^{(i)})} $   
 
-> j = 0
+$\theta_0 := \theta_0 - \alpha \frac {1} {m} \sum_{i = 1} ^ {m}{(h_\theta(x^{(i)}) - y^{(i)})} $
 
-$$\frac{\partial}{\partial{\theta_0}} {J(\theta_0,\theta_1)} =  \frac {1} {m} \sum_{i = 1} ^ {m}{(h_\theta(x^{(i)}) - y^{(i)})} $$
+当$j=1$时，
 
+$\frac{\partial}{\partial{\theta_1}} {J(\theta_0,\theta_1)} =  \frac {1} {m} \sum_{i = 1} ^ {m}{(h_\theta(x^{(i)}) - y^{(i)})} x^{(i)} $  
 
+$\theta_1 := \theta_1 - \alpha \frac {1} {m} \sum_{i = 1} ^ {m}{(h_\theta(x^{(i)}) - y^{(i)})}  x^{(i)} $
 
-> j = 1
+```matlab
+Z = X' * (X * theta - y) * alpha / m;
+theta = theta - Z;
+```
 
-$$\frac{\partial}{\partial{\theta_1}} {J(\theta_0,\theta_1)} =  \frac {1} {m} \sum_{i = 1} ^ {m}{(h_\theta(x^{(i)}) - y^{(i)})} x^{(i)} $$
+学习率$\alpha$会影响梯度下降的幅度，如果$\alpha$太小，$\theta$的每次变化幅度会很小，梯度下降的速度就会很慢，如果$\alpha$过大，则$\theta$每次的变化幅度就会很大，有可能使得$J(\theta)$越过最低点，永远无法收敛到最小值。随着$J(\theta)$越来越接近最低点，对应的梯度值$ \frac{\partial}{\partial{\theta_j}} {J(\theta_0,\theta_1) }$也会越来越小，每次下降的程度也会越来越慢，因此我们并不需要刻意的去减少$\alpha$的值。
 
-
-
-  $$\theta_0 := \theta_0 - \alpha \frac {1} {m} \sum_{i = 1} ^ {m}{(h_\theta(x^{(i)}) - y^{(i)})} $$
-
-  $$\theta_1 := \theta_1 - \alpha \frac {1} {m} \sum_{i = 1} ^ {m}{(h_\theta(x^{(i)}) - y^{(i)})}  x^{(i)} $$
+事实上，由于线性回归的代价函数总是一个凸函数（Convex Function）这样的函数没有局部最优解，只有一个全局最优解，因此我们在使用梯度下降的时候，总会找到一个全局的最优解。
 
 ------
 
@@ -108,27 +109,54 @@ $$\frac{\partial}{\partial{\theta_1}} {J(\theta_0,\theta_1)} =  \frac {1} {m} \s
 
 > Linear Regression with Mulitiple Variables
 
+在实际问题中，输入的数据会有很多的特征值，而不仅仅只有一个。这里我们约定，用$n$来表示特征的数量，$m$表示训练样本的数量。$x^{(i)}$表示第$i$个训练样本，$x^{(i)}_j$表示第$i$个训练样本的第$j$个特征值。
+
+单元线性回归中的假设函数为
+$$
+h_\theta(x) = \theta_0 + \theta_1x
+$$
+同理类比得，在多元线性回归中的假设函数为
 
 
-$$h_\theta(x) = \theta_0 + \theta_1x$$
+$$
+h_\theta(x) = \theta_0 + \theta_1 x_1+ \theta_2 x_2+ \cdots+\theta_n x_n
+$$
 
-$$h_\theta(x) = \theta_0 + \theta_1 x_1+ \theta_2 x_2+ \cdots+\theta_n x_n$$
+$$
+h_\theta(x) = \theta_0 x_0 +  \theta_1 x_1 + \theta_2 x_2 +\cdots+ \theta_n x_n  =  \theta^T x
+$$
 
+> 梯度下降（Gradient descent）
 
+repeat until  convergence {
 
-> 差列向量的公式
+$$
+\theta_j := \theta_j - \alpha \frac{\partial}{\partial{\theta_j}} {J(\theta_0,\theta_1) } 
+$$
+(simultaneously update $\theta_j$ for $j = 0 ,\cdots ,n$  )
 
+}
+$$
+\frac{\partial}{\partial{\theta_j}} {J(\theta)} =  \frac {1} {m} \sum_{i = 1} ^ {m}{(h_\theta(x^{(i)}) - y^{(i)})} x^{(i)}_j
+$$
 
+$$
+\theta_0 := \theta_0 - \alpha \frac {1} {m} \sum_{i = 1} ^ {m}{(h_\theta(x^{(i)}) - y^{(i)})} x^{(i)}_0
+$$
 
-$$ h_\theta(x) = \theta_0 x_0 +  \theta_1 x_1 + \theta_2 x_2 +\cdots+ \theta_n x_n  =  \theta^T x$$
+$$
+\theta_1 := \theta_1 - \alpha \frac {1} {m} \sum_{i = 1} ^ {m}{(h_\theta(x^{(i)}) - y^{(i)})} x^{(i)}_1
+$$
 
+$$
+\theta_2 := \theta_2 - \alpha \frac {1} {m} \sum_{i = 1} ^ {m}{(h_\theta(x^{(i)}) - y^{(i)})} x^{(i)}_2
+$$
 
+​                                                              ($x^{(i)}_0$ =1)
 
+> 特征放缩
 
-
-
-
-
+>正规方程
 
 ------
 
@@ -142,41 +170,52 @@ $$ h_\theta(x) = \theta_0 x_0 +  \theta_1 x_1 + \theta_2 x_2 +\cdots+ \theta_n x
 
 > //补周志华 单位阶跃函数与对数几率函数的图
 
-于是我们构造一个`sigmoid`函数 $$y=\frac{1}{1+ \mathrm{e}^{-z} } $$，
+于是我们构造一个`sigmoid`函数 $y=\frac{1}{1+ \mathrm{e}^{-z} } $。
 
+```matlab
+y =  1 ./  ( 1 + exp(-z) );
+```
 
+在`对数几率回归（Logistic Regression）`，假设函数为$h_\theta (x) = g (\theta^T x)$，其中$g(z)=\frac{1}{1+ \mathrm{e}^{-z} } $就是我们上面构造的`sigmoid`函数。即，
 
-$$h_\theta (x) = g (\theta^T x)$$
+$$
+h_\theta (x) = \frac {1}{1 + \mathrm{e}^{-\theta^T x}}
+$$
+我们可以将对率函数的输出理解为，当输入为$x​$的时候，$y=1​$的概率，可以用$h_\theta(x) = P(y = 1 | x;\theta)​$ 表达。对于sigmoid函数，当$z > 0​$时 ，$g(z) \geq 0.5​$ 既预测 $y = 1​$，当$z < 0​$时，$g(z) < 0.5​$ 即预测$ y = 0​$。
 
-$$g(z) = \frac {1}{1 + \mathrm{e}^{-z}}$$
+> 补sigmoid函数的图
 
-$$h_\theta (x) = \frac {1}{1 + \mathrm{e}^{-\theta^T x}}$$
+> 代价函数 cost function
 
+跟线性回归中的代价函数相比，
+$$
+J(\theta) = \frac{1}{2m}  \sum_{i=0}^{m} {(h_\theta(x^{(i)}) - y^{(i)})}^2
+$$
+线性回归之所以可以使用梯度下降法来下降到最优解是因为代价函数$J(\theta)$是一个凸函数。对于对率回归而言，假设函数$h_\theta (x) = \frac {1}{1 + \mathrm{e}^{-\theta^T x}}$ 是一个非线性的复杂模型，代价函数就不是一个凸函数(non-convex)。这样使用梯度下降法就只能得到局部最优解而非全局最优解，所以我们需要构造一个合理的并且是凸函数的代价函数。
 
+如下：
+$$
+Cost(h_\theta,y) = -y\log(h_\theta(x)) - (1-y) \log(1-h_\theta(x))
+$$
+因此得到代价函数$J(\theta)$
+$$
+{J(\theta)=-\frac{1}{m}\left[\sum_{i=1}^my^{(i)}log(h_\theta(x^{(i)}))+(1-y^{(i)})log(1-h_\theta(x^{(i)}))\right]}
+$$
+后面的步骤就跟线性回归很相似了，可以直接用梯度下降法。
+$$
+\frac{\partial J(\theta)}{\partial \theta_j} = \frac {1}{m} \sum _{i=1} ^m{(h_\theta(x^{(i)}) - y^{(i)})} x^{(i)}_j
+$$
 
-$$ J(\theta) = \frac{1}{2m}  \sum_{i=0}^{m} {(h_\theta(x^{(i)}) - y^{(i)})}^2 $$ 
-
-
-
-$$ Cost (h_\theta(x^{(i)},y^{(i)}))= \frac{1}{2} (h_\theta(x^{(i)}) - y^{(i)})^2 $$
-
-
-
-$$Cost(h_\theta(x),y) = \frac{1}{2}(h_\theta - y) ^ 2$$
-
-$$Cost(h_\theta,y) = -y\log(h_\theta(x)) - (1-y) \log(1-h_\theta(x))$$
-
-
-
-
-
-
-
-> cost function
-
-
-
-$${J(\theta)=-\frac{1}{m}\left[\sum_{i=1}^my^{(i)}log(h_\theta(x^{(i)}))+(1-y^{(i)})log(1-h_\theta(x^{(i)}))\right]}$$
+```matlab
+%calculation J
+z = X*theta;
+t = -y' * log(sigmoid(z)) - (1 - y') *  log (1 - sigmoid(z));
+J = t / m;
+ 
+%calculation grad
+grad_t = (sigmoid(z) - y);
+grad =( X' * grad_t )/ m;
+```
 
 
 
