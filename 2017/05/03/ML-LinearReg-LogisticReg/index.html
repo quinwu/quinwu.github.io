@@ -102,7 +102,7 @@
 <meta property="og:image" content="http://yoursite.com/2017/05/03/ML-LinearReg-LogisticReg/grad.png">
 <meta property="og:image" content="http://yoursite.com/2017/05/03/ML-LinearReg-LogisticReg/sigmoid.png">
 <meta property="og:image" content="http://yoursite.com/2017/05/03/ML-LinearReg-LogisticReg/sigmoid2.png">
-<meta property="og:updated_time" content="2017-05-14T08:38:43.000Z">
+<meta property="og:updated_time" content="2017-05-14T08:58:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小记 Linear Regression 与 Logistic Regression">
 <meta name="twitter:description" content="Linear Regression 线性回归 Logistic Regression 对数几率回归  Linear Regression 线性回归回归的本身是一种基于数据的建模，一般而言，线性回归（Linear Regression）相对比较简单，而对数几率回归（Logistic Regression）的内容要丰富很多。">
@@ -494,9 +494,9 @@
 <ul>
 <li>统计学习方法 李航著</li>
 <li>Couresera Machine Learning Andrew-Ng </li>
+<li><a href="http://vividfree.github.io/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/2015/12/13/understanding-logistic-regression-using-odds" target="_blank" rel="external">understanding-logistic-regression-using-odds</a></li>
 </ul>
 <ul>
-<li><a href="http://vividfree.github.io/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/2015/12/13/understanding-logistic-regression-using-odds" target="_blank" rel="external">understanding-logistic-regression-using-odds</a></li>
 <li><a href="http://daniellaah.github.io/2016/Machine-Learning-Andrew-Ng-My-Notes-Week-1-Linear-Regression-with-One-Variable.html" target="_blank" rel="external">Machine-Learning-Andrew-Ng-My-Notes</a></li>
 <li><a href="http://beader.me/2014/05/03/logistic-regression/" target="_blank" rel="external">logistic-regression</a></li>
 <li><a href="http://nooverfit.com/wp/8-%E7%BB%88%E4%BA%8E%E6%90%9E%E6%B8%85%E6%A5%9A%E4%BB%80%E4%B9%88%E6%98%AF%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92-%E5%AF%B9%E6%95%B0%E5%87%A0%E7%8E%87%E5%9B%9E%E5%BD%92-logistic-regression/" target="_blank" rel="external">终于搞清楚什么是逻辑回归-对数几率回归</a></li>
@@ -632,17 +632,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/my_avatar.jpg"
@@ -733,22 +724,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linear-Regression-线性回归"><span class="nav-number">1.</span> <span class="nav-text">Linear Regression 线性回归</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Linear-Regression-cost-function"><span class="nav-number">1.0.1.</span> <span class="nav-text">Linear Regression cost function</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#梯度下降（Gradient-descent）"><span class="nav-number">1.0.2.</span> <span class="nav-text">梯度下降（Gradient descent）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Gradient-descent-algorithm"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">Gradient descent algorithm</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linear-Regression-with-Mulitiple-Variables"><span class="nav-number">2.</span> <span class="nav-text">Linear Regression with Mulitiple Variables</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#梯度下降（Gradient-descent）-1"><span class="nav-number">2.0.1.</span> <span class="nav-text">梯度下降（Gradient descent）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#特征放缩"><span class="nav-number">2.0.2.</span> <span class="nav-text">特征放缩</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#正规方程"><span class="nav-number">2.0.3.</span> <span class="nav-text">正规方程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Logistic-Regression-对数几率回归"><span class="nav-number">3.</span> <span class="nav-text">Logistic Regression 对数几率回归</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Logistic-Regression-cost-function"><span class="nav-number">3.0.1.</span> <span class="nav-text">Logistic Regression cost function</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
