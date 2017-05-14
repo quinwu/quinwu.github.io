@@ -130,12 +130,19 @@ $$
 h_\theta(x) = \theta_0 x_0 +  \theta_1 x_1 + \theta_2 x_2 +\cdots+ \theta_n x_n  =  \theta^T x
 $$
 
+##### cost function
+
+多元线性回归的代价函数跟一元线性回归的代价函数相同。只是$x$由Scale Value变为了Vector Value。
+$$
+J(\theta) =   \frac{1}{2m}  \sum_{i=0}^{m} {(h_\theta(x^{(i)}) - y^{(i)})}^2
+$$
+
 ##### 梯度下降（Gradient descent）
 
 repeat until  convergence {
 
 $$
-\theta_j := \theta_j - \alpha \frac{\partial}{\partial{\theta_j}} {J(\theta_0,\theta_1) } 
+\theta_j := \theta_j - \alpha \frac{\partial}{\partial{\theta_j}} {J(\theta) }
 $$
 (simultaneously update $\theta_j$ for $j = 0 ,\cdots ,n$  )
 
@@ -160,11 +167,40 @@ $$
 
 ##### 特征放缩
 
-todo
+对于多元线性回归，如果每个特征值的相差范围很大，梯度下降的速度会很慢，这时候就需要对特征值数据做缩放处理（Feature Scaling），从而将所有特征的数据数量级都放缩在一个很小的范围内，以加快梯度下降的速度。
+
+常用的特征处理的方法就是均值归一化（Mean Normalization）
+$$
+x_i = \frac{x_i - \mu_i}{\max-\min}
+$$
+或者
+$$
+x_i = \frac{x_i - \mu_i}{\sigma_i}
+$$
 
 ##### 正规方程
 
-todo
+当我们使用梯度下降法去求未知参数$\theta$的最优值时，需要通过很多次的迭代才能得到全局最优解，有的时候梯度下降的速度会很慢。有没有其他更好的方法呢？假设代价函数$J(\theta) = a\theta^2+b\theta+c$，$\theta$是一个实数，求$\theta$的最优解，只需要令它的导数为零。
+
+事实上的$\theta$是一个$n+1$维向量，需要我们对每个$\theta_i$求偏导，令偏导为零，就可以求出每个$\theta_i$的值。
+
+首先, 在数据集前加上一列$x_0$, 值都为1；然后将所有的变量都放入矩阵$X$中(包括加上的$x_0$)；再将输出值放入向量$y$中，最后通过公式$\theta = (X^TX)^{-1}X^Ty$, 就可以算出$\theta$的值。这个公式就叫做正规方程，正规方程不需要进行特征放缩。
+
+对于正规方程中$X^TX$不可逆的情况，可能是我们使用了冗余的特征，特征的数量超过了样本的数量，我们可以通过删掉一些不必要的特征或者使用正则化来解决。
+
+MATLAB代码为
+
+```matlab
+theta = pinv(X'*x)*x'*y;
+```
+
+##### Gradient Descent VS Normal Equation
+
+|         Gradient Descent         |             Normal Equation              |
+| :------------------------------: | :--------------------------------------: |
+|     Need to choose $\alpha$.     |       No need to choose $\alpha$.        |
+|      Need many iterations.       |           No need to iterate.            |
+| Works well even when n is large. | need to compute $(X^TX)^{-1}$,slow if n is very large. |
 
 ### Logistic Regression 对数几率回归
 
@@ -190,7 +226,7 @@ y =  1 ./  ( 1 + exp(-z) );
 $$
 h_\theta (x) = \frac {1}{1 + \mathrm{e}^{-\theta^T x}}
 $$
-我们可以将对率函数的输出理解为，当输入为$x$的时候，$y=1$的概率，可以用$h_\theta(x) = P(y = 1 | x;\theta)$ 表达。对于sigmoid函数，当$z > 0$时 ，$g(z) \geq 0.5$ 既预测 $y = 1$，当$z < 0$时，$g(z) < 0.5$ 即预测$ y = 0$。
+我们可以将对率函数的输出理解为，当输入为$x$的时候，$y=1$的概率，可以用$h_\theta(x) = P(y = 1 | x;\theta)$ 表达。对于sigmoid函数，当$z > 0$时 ，$g(z) \geq 0.5$ 即预测 $y = 1$，当$z < 0$时，$g(z) < 0.5$ 即预测$ y = 0$。
 
 
 
@@ -292,7 +328,18 @@ grad_t = (sigmoid(z) - y);
 grad =( X' * grad_t )/ m;
 ```
 
+##### Multi-nominal logistic regression model
 
+Logistic Regression只能用于二分类系统，对于一个多分类系统（K分类），我们假设离散变量$Y$的取值集合是{${1,2,3,\dots,K}$}，那么多项逻辑斯蒂回归模型是
+$$
+\begin {split}p(Y = k &| x) = \frac{e^{\theta_{k}^{T}x}}{1+\sum_{k=1}^{K-1}e^{\theta_{k}^{T}x}}\\
+&k = 1 ,2,3\dots,k-1
+\end{split}
+$$
+
+$$
+p(Y = K| x) = \frac{1}{1+\sum_{k=1}^{K-1}e^{\theta_{k}^{T}x}}
+$$
 
 
 
