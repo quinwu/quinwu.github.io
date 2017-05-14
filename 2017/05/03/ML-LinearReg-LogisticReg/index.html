@@ -102,7 +102,7 @@
 <meta property="og:image" content="http://yoursite.com/2017/05/03/ML-LinearReg-LogisticReg/grad.png">
 <meta property="og:image" content="http://yoursite.com/2017/05/03/ML-LinearReg-LogisticReg/sigmoid.png">
 <meta property="og:image" content="http://yoursite.com/2017/05/03/ML-LinearReg-LogisticReg/sigmoid2.png">
-<meta property="og:updated_time" content="2017-05-14T08:58:02.000Z">
+<meta property="og:updated_time" content="2017-05-14T12:55:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小记 Linear Regression 与 Logistic Regression">
 <meta name="twitter:description" content="Linear Regression 线性回归 Logistic Regression 对数几率回归  Linear Regression 线性回归回归的本身是一种基于数据的建模，一般而言，线性回归（Linear Regression）相对比较简单，而对数几率回归（Logistic Regression）的内容要丰富很多。">
@@ -457,15 +457,44 @@
 <p>单元线性回归中的假设函数为<br>$$<br>h_\theta(x) = \theta_0 + \theta_1x<br>$$<br>同理类比得，在多元线性回归中的假设函数为</p>
 <p>$$<br>h_\theta(x) = \theta_0 + \theta_1 x_1+ \theta_2 x_2+ \cdots+\theta_n x_n<br>$$</p>
 <p>$$<br>h_\theta(x) = \theta_0 x_0 +  \theta_1 x_1 + \theta_2 x_2 +\cdots+ \theta_n x_n  =  \theta^T x<br>$$</p>
+<h5 id="cost-function"><a href="#cost-function" class="headerlink" title="cost function"></a>cost function</h5><p>多元线性回归的代价函数跟一元线性回归的代价函数相同。只是$x$由Scale Value变为了Vector Value。<br>$$<br>J(\theta) =   \frac{1}{2m}  \sum_{i=0}^{m} {(h_\theta(x^{(i)}) - y^{(i)})}^2<br>$$</p>
 <h5 id="梯度下降（Gradient-descent）-1"><a href="#梯度下降（Gradient-descent）-1" class="headerlink" title="梯度下降（Gradient descent）"></a>梯度下降（Gradient descent）</h5><p>repeat until  convergence {</p>
-<p>$$<br>\theta_j := \theta_j - \alpha \frac{\partial}{\partial{\theta_j}} {J(\theta_0,\theta_1) }<br>$$<br>(simultaneously update $\theta_j$ for $j = 0 ,\cdots ,n$  )</p>
+<p>$$<br>\theta_j := \theta_j - \alpha \frac{\partial}{\partial{\theta_j}} {J(\theta) }<br>$$<br>(simultaneously update $\theta_j$ for $j = 0 ,\cdots ,n$  )</p>
 <p>}<br>$$<br>\frac{\partial}{\partial{\theta_j}} {J(\theta)} =  \frac {1} {m} \sum_{i = 1} ^ {m}{(h_\theta(x^{(i)}) - y^{(i)})} x^{(i)}_j<br>$$</p>
 <p>$$<br>\theta_0 := \theta_0 - \alpha \frac {1} {m} \sum_{i = 1} ^ {m}{(h_\theta(x^{(i)}) - y^{(i)})} x^{(i)}_0<br>$$</p>
 <p>$$<br>\theta_1 := \theta_1 - \alpha \frac {1} {m} \sum_{i = 1} ^ {m}{(h_\theta(x^{(i)}) - y^{(i)})} x^{(i)}_1<br>$$</p>
 <p>$$<br>\theta_2 := \theta_2 - \alpha \frac {1} {m} \sum_{i = 1} ^ {m}{(h_\theta(x^{(i)}) - y^{(i)})} x^{(i)}_2<br>$$</p>
 <p>​                                                              ($x^{(i)}_0$ =1)</p>
-<h5 id="特征放缩"><a href="#特征放缩" class="headerlink" title="特征放缩"></a>特征放缩</h5><p>todo</p>
-<h5 id="正规方程"><a href="#正规方程" class="headerlink" title="正规方程"></a>正规方程</h5><p>todo</p>
+<h5 id="特征放缩"><a href="#特征放缩" class="headerlink" title="特征放缩"></a>特征放缩</h5><p>对于多元线性回归，如果每个特征值的相差范围很大，梯度下降的速度会很慢，这时候就需要对特征值数据做缩放处理（Feature Scaling），从而将所有特征的数据数量级都放缩在一个很小的范围内，以加快梯度下降的速度。</p>
+<p>常用的特征处理的方法就是均值归一化（Mean Normalization）<br>$$<br>x_i = \frac{x_i - \mu_i}{\max-\min}<br>$$<br>或者<br>$$<br>x_i = \frac{x_i - \mu_i}{\sigma_i}<br>$$</p>
+<h5 id="正规方程"><a href="#正规方程" class="headerlink" title="正规方程"></a>正规方程</h5><p>当我们使用梯度下降法去求未知参数$\theta$的最优值时，需要通过很多次的迭代才能得到全局最优解，有的时候梯度下降的速度会很慢。有没有其他更好的方法呢？假设代价函数$J(\theta) = a\theta^2+b\theta+c$，$\theta$是一个实数，求$\theta$的最优解，只需要令它的导数为零。</p>
+<p>事实上的$\theta$是一个$n+1$维向量，需要我们对每个$\theta_i$求偏导，令偏导为零，就可以求出每个$\theta_i$的值。</p>
+<p>首先, 在数据集前加上一列$x_0$, 值都为1；然后将所有的变量都放入矩阵$X$中(包括加上的$x_0$)；再将输出值放入向量$y$中，最后通过公式$\theta = (X^TX)^{-1}X^Ty$, 就可以算出$\theta$的值。这个公式就叫做正规方程，正规方程不需要进行特征放缩。</p>
+<p>对于正规方程中$X^TX$不可逆的情况，可能是我们使用了冗余的特征，特征的数量超过了样本的数量，我们可以通过删掉一些不必要的特征或者使用正则化来解决。</p>
+<p>MATLAB代码为</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">theta = pinv(X'*x)*x'*y;</div></pre></td></tr></table></figure>
+<h5 id="Gradient-Descent-VS-Normal-Equation"><a href="#Gradient-Descent-VS-Normal-Equation" class="headerlink" title="Gradient Descent VS Normal Equation"></a>Gradient Descent VS Normal Equation</h5><table>
+<thead>
+<tr>
+<th style="text-align:center">Gradient Descent</th>
+<th style="text-align:center">Normal Equation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Need to choose $\alpha$.</td>
+<td style="text-align:center">No need to choose $\alpha$.</td>
+</tr>
+<tr>
+<td style="text-align:center">Need many iterations.</td>
+<td style="text-align:center">No need to iterate.</td>
+</tr>
+<tr>
+<td style="text-align:center">Works well even when n is large.</td>
+<td style="text-align:center">need to compute $(X^TX)^{-1}$,slow if n is very large.</td>
+</tr>
+</tbody>
+</table>
 <h3 id="Logistic-Regression-对数几率回归"><a href="#Logistic-Regression-对数几率回归" class="headerlink" title="Logistic Regression 对数几率回归"></a>Logistic Regression 对数几率回归</h3><p>接下来介绍下<code>广义线性回归</code>，也很简单，我们不再只用线性函数来模拟数据，而是在外层添加了一个单调可微函数$g(z)$，即$f(x_i) = g(wx_i+b) $ ，如果 $ g=ln(x) $，则这个<code>广义线性回归</code>就变成了<code>对数线性回归</code>，其本质就是给原来线性变换加上了一个非线性变换，使得模拟的函数有非线性的属性。但本质上的参数还是线性的，主体是内部线性的调参。</p>
 <p><img src="sigmoid.png" alt="sigmoid"></p>
 <p>如果我们觉得模型应该是指数变化的时候，我们可以简单粗暴的把线性模型映射到指数变化上，如上图中的红线映射到黑色的指数线，这就是广义线性模型的思想</p>
@@ -474,7 +503,7 @@
 <p>构造一个<code>sigmoid</code>函数 $y=\frac{1}{1+ \mathrm{e}^{-z} } $。</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">y =  <span class="number">1</span> ./  ( <span class="number">1</span> + <span class="built_in">exp</span>(-z) );</div></pre></td></tr></table></figure>
 <p><img src="sigmoid2.png" alt="sigmoid"></p>
-<p>在<code>对数几率回归（Logistic Regression）</code>，假设函数为$h_\theta (x) = g (\theta^T x)$，其中$g(z)=\frac{1}{1+ \mathrm{e}^{-z} } $就是我们上面构造的<code>sigmoid</code>函数。即，<br>$$<br>h_\theta (x) = \frac {1}{1 + \mathrm{e}^{-\theta^T x}}<br>$$<br>我们可以将对率函数的输出理解为，当输入为$x$的时候，$y=1$的概率，可以用$h_\theta(x) = P(y = 1 | x;\theta)$ 表达。对于sigmoid函数，当$z &gt; 0$时 ，$g(z) \geq 0.5$ 既预测 $y = 1$，当$z &lt; 0$时，$g(z) &lt; 0.5$ 即预测$ y = 0$。</p>
+<p>在<code>对数几率回归（Logistic Regression）</code>，假设函数为$h_\theta (x) = g (\theta^T x)$，其中$g(z)=\frac{1}{1+ \mathrm{e}^{-z} } $就是我们上面构造的<code>sigmoid</code>函数。即，<br>$$<br>h_\theta (x) = \frac {1}{1 + \mathrm{e}^{-\theta^T x}}<br>$$<br>我们可以将对率函数的输出理解为，当输入为$x$的时候，$y=1$的概率，可以用$h_\theta(x) = P(y = 1 | x;\theta)$ 表达。对于sigmoid函数，当$z &gt; 0$时 ，$g(z) \geq 0.5$ 即预测 $y = 1$，当$z &lt; 0$时，$g(z) &lt; 0.5$ 即预测$ y = 0$。</p>
 <h5 id="Logistic-Regression-cost-function"><a href="#Logistic-Regression-cost-function" class="headerlink" title="Logistic Regression cost function"></a>Logistic Regression cost function</h5><p>跟线性回归中的代价函数相比，<br>$$<br>J(\theta) = \frac{1}{2m}  \sum_{i=0}^{m} {(h_\theta(x^{(i)}) - y^{(i)})}^2<br>$$<br>线性回归之所以可以使用梯度下降法来下降到最优解是因为代价函数$J(\theta)$是一个凸函数。对于对率回归而言，假设函数$h_\theta (x) = \frac {1}{1 + \mathrm{e}^{-\theta^T x}}$ 是一个非线性的复杂模型，代价函数就不是一个凸函数(non-convex)。这样使用梯度下降法就只能得到局部最优解而非全局最优解，所以我们需要构造一个合理的并且是凸函数的代价函数。</p>
 <p>对于$h_\theta (x) = \frac {1}{1 + \mathrm{e}^{-\theta^T x}}$ 可以变化为$\ln\frac{y}{1-y} = \theta^Tx$，若将$y$视为样本$x$作为正例的可能性，则$1-y$是其反例的可能性，两者的比值$\frac{y}{1-y}$成为<code>几率（odds）</code>，反映了$x$作为正例的相对可能性，对几率取对数则得到了<code>对数几率（log odds ，亦称logit）</code>$\ln\frac{y}{1-y}$。<br>$$<br>\ln\frac{p(y=1 | x)}{p(y = 0| x)} = \theta^Tx<br>$$<br>显然有<br>$$<br>p(y = 1|x) = \frac{e^{\theta^Tx}}{1+e^{\theta^Tx}} = \frac{1}{1+e^{-\theta^Tx}}<br>$$</p>
 <p>$$<br>p(y = 0|x) = \frac{1}{1+e^{\theta^Tx}}<br>$$</p>
@@ -488,6 +517,8 @@
 <p>即求上式的最大值。</p>
 <p>因此，我们可以将代价函数用如下的式子来表示，（目的是要通过代价函数的最小值来估计出相应的参数）<br>$$<br>Cost(h_\theta,y) = -y\log(h_\theta(x)) - (1-y) \log(1-h_\theta(x))<br>$$<br>因此得到代价函数$J(\theta)$<br>$$<br>{J(\theta)=-\frac{1}{m}\left[\sum_{i=1}^my^{(i)}log(h_\theta(x^{(i)}))+(1-y^{(i)})log(1-h_\theta(x^{(i)}))\right]}<br>$$<br>后面的步骤就跟线性回归很相似了，可以直接用梯度下降法。<br>$$<br>\frac{\partial J(\theta)}{\partial \theta_j} = \frac {1}{m} \sum _{i=1} ^m{(h_\theta(x^{(i)}) - y^{(i)})} x^{(i)}_j<br>$$</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">%calculation J</span></div><div class="line">z = X*theta;</div><div class="line">t = -y' * <span class="built_in">log</span>(sigmoid(z)) - (<span class="number">1</span> - y') *  <span class="built_in">log</span> (<span class="number">1</span> - sigmoid(z));</div><div class="line">J = t / m;</div><div class="line"> </div><div class="line"><span class="comment">%calculation grad</span></div><div class="line">grad_t = (sigmoid(z) - y);</div><div class="line">grad =( X' * grad_t )/ m;</div></pre></td></tr></table></figure>
+<h5 id="Multi-nominal-logistic-regression-model"><a href="#Multi-nominal-logistic-regression-model" class="headerlink" title="Multi-nominal logistic regression model"></a>Multi-nominal logistic regression model</h5><p>Logistic Regression只能用于二分类系统，对于一个多分类系统（K分类），我们假设离散变量$Y$的取值集合是{${1,2,3,\dots,K}$}，那么多项逻辑斯蒂回归模型是<br>$$<br>\begin {split}p(Y = k &amp;| x) = \frac{e^{\theta_{k}^{T}x}}{1+\sum_{k=1}^{K-1}e^{\theta_{k}^{T}x}}\\<br>&amp;k = 1 ,2,3\dots,k-1<br>\end{split}<br>$$</p>
+<p>$$<br>p(Y = K| x) = \frac{1}{1+\sum_{k=1}^{K-1}e^{\theta_{k}^{T}x}}<br>$$</p>
 <h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
 <li>机器学习 周志华著</li>
 </ul>
