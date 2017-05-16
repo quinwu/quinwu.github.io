@@ -90,14 +90,20 @@
 
 
 
+<meta name="description" content="logistic regression cost function$$J(\theta) = -\frac{1}{m} \sum_{i=1}^m y^{(i)}\log(h_\theta(x^{(i)}) ) +(1-y^{(i)})\log(1-h_\theta(x^{(i)}))$$ neural network$$J(\Theta) = -\frac{1}{m}\Bigg[\sum_{i=1">
 <meta name="keywords" content="Machine Learning,小记系列">
 <meta property="og:type" content="article">
-<meta property="og:title" content="小记 overfitting 与 underfitting">
-<meta property="og:url" content="http://yoursite.com/2017/05/06/ML-overfitting-underfitting/index.html">
+<meta property="og:title" content="小记 Neural Network">
+<meta property="og:url" content="http://yoursite.com/2017/05/16/ML-Neural-Network/index.html">
 <meta property="og:site_name" content="Quin Wu Blog">
-<meta property="og:updated_time" content="2017-05-05T19:01:29.000Z">
+<meta property="og:description" content="logistic regression cost function$$J(\theta) = -\frac{1}{m} \sum_{i=1}^m y^{(i)}\log(h_\theta(x^{(i)}) ) +(1-y^{(i)})\log(1-h_\theta(x^{(i)}))$$ neural network$$J(\Theta) = -\frac{1}{m}\Bigg[\sum_{i=1">
+<meta property="og:image" content="http://yoursite.com/2017/05/16/ML-Neural-Network/feedforward.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/16/ML-Neural-Network/backpropagation.png">
+<meta property="og:updated_time" content="2017-05-16T16:39:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小记 overfitting 与 underfitting">
+<meta name="twitter:title" content="小记 Neural Network">
+<meta name="twitter:description" content="logistic regression cost function$$J(\theta) = -\frac{1}{m} \sum_{i=1}^m y^{(i)}\log(h_\theta(x^{(i)}) ) +(1-y^{(i)})\log(1-h_\theta(x^{(i)}))$$ neural network$$J(\Theta) = -\frac{1}{m}\Bigg[\sum_{i=1">
+<meta name="twitter:image" content="http://yoursite.com/2017/05/16/ML-Neural-Network/feedforward.png">
 
 
 
@@ -125,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/06/ML-overfitting-underfitting/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/05/16/ML-Neural-Network/"/>
 
 
 
 
 
-  <title>小记 overfitting 与 underfitting | Quin Wu Blog</title>
+  <title>小记 Neural Network | Quin Wu Blog</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -304,7 +310,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/06/ML-overfitting-underfitting/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/16/ML-Neural-Network/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Quin WU">
@@ -321,7 +327,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">小记 overfitting 与 underfitting</h1>
+          <h1 class="post-title" itemprop="name headline">小记 Neural Network</h1>
         
 
         <div class="post-meta">
@@ -333,8 +339,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-06T02:14:03+08:00">
-                2017-05-06
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-16T20:34:50+08:00">
+                2017-05-16
               </time>
             
 
@@ -374,9 +380,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/05/06/ML-overfitting-underfitting/#comments" itemprop="discussionUrl">
+                <a href="/2017/05/16/ML-Neural-Network/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/05/06/ML-overfitting-underfitting/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/05/16/ML-Neural-Network/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -401,7 +407,67 @@
       
 
       
-        
+        <h4 id="logistic-regression-cost-function"><a href="#logistic-regression-cost-function" class="headerlink" title="logistic regression cost function"></a>logistic regression cost function</h4><p>$$<br>J(\theta) = -\frac{1}{m} \sum_{i=1}^m y^{(i)}\log(h_\theta(x^{(i)}) ) +(1-y^{(i)})\log(1-h_\theta(x^{(i)}))<br>$$</p>
+<h4 id="neural-network"><a href="#neural-network" class="headerlink" title="neural network"></a>neural network</h4><p>$$<br>J(\Theta) = -\frac{1}{m}\Bigg[\sum_{i=1}^m\sum_{k=1}^Ky_k^{(i)} \log(h_\Theta(x^{(i)}))_k + (1- y_k^{(i)})\log(1-(h_\Theta(x^{(i)}))_k) \Bigg]<br>$$</p>
+<h4 id="logistic-regression-cost-function-regularization"><a href="#logistic-regression-cost-function-regularization" class="headerlink" title="logistic regression cost function regularization"></a>logistic regression cost function regularization</h4><p>$$<br>J(\theta) = -\frac{1}{m} \sum_{i=1}^m y^{(i)}\log(h_\theta(x^{(i)}) ) +(1-y^{(i)})\log(1-h_\theta(x^{(i)})) + \frac{\lambda}{2m} \sum_{j=1}^n \theta_j^2<br>$$</p>
+<h4 id="neural-network-regularization"><a href="#neural-network-regularization" class="headerlink" title="neural network regularization"></a>neural network regularization</h4><p>$$<br>J(\Theta) = -\frac{1}{m}\Bigg[\sum_{i=1}^m\sum_{k=1}^Ky_k^{(i)} \log(h_\Theta(x^{(i)}))_k + (1- y_k^{(i)})\log(1-(h_\Theta(x^{(i)}))_k)\Bigg] + \frac{\lambda}{2m} \sum_{l=1}^{L-1}\sum_{i=1}^{s_l}\sum_{j=1}^{s_{l+1}}(\Theta_{ji}^{(l)})^2<br>$$</p>
+<h4 id="代价函数与反向传播-Back-propagation"><a href="#代价函数与反向传播-Back-propagation" class="headerlink" title="代价函数与反向传播 Back propagation"></a>代价函数与反向传播 Back propagation</h4><p>一些标记:</p>
+<ul>
+<li>L 表示神经网络的总层数</li>
+<li>$S_4$表示第四层神经网络，不包括偏差单元<code>bias unit</code></li>
+<li>k表示第几个输出单元</li>
+</ul>
+<h4 id="Feed-forward-computation-h-theta-x-i"><a href="#Feed-forward-computation-h-theta-x-i" class="headerlink" title="Feed forward computation  $h_\theta(x^{(i)})$"></a>Feed forward computation  $h_\theta(x^{(i)})$</h4><p><img src="feedforward.png" alt="Neural network model)"></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">% computation h(x)</span></div><div class="line"><span class="comment">% input layerx</span></div><div class="line">a1 = [ones(m,<span class="number">1</span>) X];</div><div class="line"><span class="comment">% hidden layer</span></div><div class="line">Z2 = a1*Theta1';</div><div class="line">a2 = sigmoid(Z2);</div><div class="line">a2 = [ones(size(a2,<span class="number">1</span>),<span class="number">1</span>) a2];</div><div class="line"><span class="comment">% output layer</span></div><div class="line">Z3 = a2*Theta2';</div><div class="line">a3 = sigmoid(Z3);</div><div class="line">h = a3;</div></pre></td></tr></table></figure>
+<p>$$<br>J(\Theta) = -\frac{1}{m}\Bigg[\sum_{i=1}^m\sum_{k=1}^Ky_k^{(i)} \log(h_\Theta(x^{(i)}))_k + (1- y_k^{(i)})\log(1-(h_\Theta(x^{(i)}))_k) \Bigg]<br>$$</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">%case 1</span></div><div class="line">J = <span class="number">0</span>;</div><div class="line">Y = <span class="built_in">zeros</span>(m,num_labels);</div><div class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span> : m</div><div class="line">	Y(<span class="built_in">i</span>,y(<span class="built_in">i</span>)) = <span class="number">1</span>;</div><div class="line"><span class="keyword">end</span></div><div class="line">J = <span class="number">-1</span>/m * (Y * <span class="built_in">log</span>(h)' + (<span class="number">1</span> - Y) * <span class="built_in">log</span>(<span class="number">1</span> - h)');</div><div class="line">J = trace(J);</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">%case 2</span></div><div class="line">J = <span class="number">0</span>;</div><div class="line">Y = <span class="built_in">zeros</span>(m,num_labels);</div><div class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span> : m</div><div class="line">	Y(<span class="built_in">i</span>,y(<span class="built_in">i</span>)) = <span class="number">1</span>;</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span> : m</div><div class="line">	J = J + <span class="number">-1</span>*m *(Y(<span class="built_in">i</span>,:) * <span class="built_in">log</span>(h(<span class="built_in">i</span>,:))' + (<span class="number">1</span> - Y(<span class="built_in">i</span>,:)* <span class="built_in">log</span>(<span class="number">1</span> - h(<span class="built_in">i</span>,:))');</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<h4 id="back-propagation"><a href="#back-propagation" class="headerlink" title="back propagation"></a>back propagation</h4><p>我们知道代价函数cost function后，下一步就是按照梯度下降法来计算$\theta$求解cost function的最优解。使用梯度下降法首先要求出梯度，即偏导项$\frac{\partial}{\partial \Theta^{(l)} _{ij}} J(\Theta)$，计算偏导项的过程我们称为back propagation。</p>
+<p>根据上面的feed forward computation 我们已经计算得到了 $a^{(1)}$ ，$a^{(2)}$， $a^{(3)}$  ，$Z^{(2)}$，$Z^{(3)}$。</p>
+<p>在back propagation中，我们定义每层的误差<br>$$<br>\delta^{(l)} = \frac {\partial}{ \partial z^{(l)}} J(\Theta)<br>$$<br>$\delta^{(l)}_j$ 表示第$l$层第$j$个节点的误差。为了求出偏导项$\frac{\partial}{\partial \Theta^{(l)} _{ij}} J(\Theta)$，我们首先要求出每一层的$\delta$（不包括第一层，第一层是输入层，不存在误差），对于输出层第三层<br>$$<br>\begin{align}<br>\delta_i^{(4)} &amp; = \frac{\partial}{\partial z_i^{(4)}}J(\Theta) \\<br> \\&amp; = \frac{\partial J(\Theta)}{\partial a_i^{(4)}}\frac{\partial a_i^{(4)}}{\partial z_i^{(4)}} \\<br> \\&amp; = -\frac{\partial}{\partial a_i^{(4)}}\sum_{k=1}^K\left[y_kloga_k^{(4)}+(1-y_k)log(1-a_k^{(4)})\right]g’(z_i^{(4)})  \\<br> \\&amp; = -\frac{\partial}{\partial a_i^{(4)}}\left[y_iloga_i^{(4)}+(1-y_i)log(1-a_i^{(4)})\right]g(z_i^{(4)})(1-g(z_i^{(4)}))  \\<br>\\ &amp; = \left(\frac{1-y_i}{1-a_i^{(4)}}-\frac{y_i}{a_i^{(4)}}\right)a_i^{(4)}(1-a_i^{(4)}) \\<br>\\ &amp; = (1-y_i)a_i^{(4)} - y_i(1-a_i^{(4)}) \\<br>\\ &amp; = a_i^{(4)} - y_i \\<br>\end{align}<br>$$</p>
+<p>$$<br>\begin{split}<br>\delta_i^{(l)} &amp; = \frac{\partial}{\partial z_i^{(l)}}J(\Theta) \\<br>\\ &amp; = \sum_{j=1}^{S_j}\frac{\partial J(\Theta)}{\partial z_j^{(l+1)}}\cdot\frac{\partial z_j^{(l+1)}}{\partial a_i^{(l)}}\cdot\frac{\partial a_i^{(l)}}{\partial z_i^{(l)}} \\ \\ &amp; = \sum_{j=1}^{S_j}\delta_j^{(l+1)}\cdot\Theta_{ij}^{(l)}\cdot g’(z_i^{(l)}) \\<br>\\ &amp; = g’(z_i^{(l)})\sum_{j=1}^{S_j}\delta_j^{(l+1)}\cdot\Theta_{ij}^{(l)}<br>\end{split}<br>$$</p>
+<p>$$<br>\begin{split}<br>\frac{\partial g(z)}{\partial z} &amp; = -\left( \frac{1}{1 + e^{-z}} \right)^2\frac{\partial{}}{\partial{z}} \left(1 + e^{-z} \right) \\<br>\\ &amp; = -\left( \frac{1}{1 + e^{-z}} \right)^2e^{-z}\left(-1\right) \\<br>\\ &amp; = \left( \frac{1}{1 + e^{-z}} \right) \left( \frac{1}{1 + e^{-z}} \right)\left(e^{-z}\right) \\<br>\\ &amp; = \left( \frac{1}{1 + e^{-z}} \right) \left( \frac{e^{-z}}{1 + e^{-z}} \right) \\<br>\\ &amp; = \left( \frac{1}{1+e^{-z}}\right)\left( \frac{1+e^{-z}}{1+e^{-z}}-\frac{1}{1+e^{-z}}\right) \\<br>\\ &amp; = g(z) \left( 1 - g(z)\right) \\<br>\\ \end{split}<br>$$</p>
+<p>$\Theta^{(l)}_{i,j}$ 第$l$层到第$l+1$层的权值矩阵的第$i$行第$j$列的分量</p>
+<p>$Z^{(j)}_i$ 第$j$层第$i$个神经元的输入值</p>
+<p>$a^{(j)}_i$第$j$层第$i$个神经元的输出值</p>
+<p>$a^{(j)} = g(Z^{(j)})$</p>
+<h6 id="hidden-layer-to-output-layer"><a href="#hidden-layer-to-output-layer" class="headerlink" title="hidden layer to output layer"></a>hidden layer to output layer</h6><p>$$<br>h_\Theta(x) = a^{(L)} = g(z^{(L)})<br>$$</p>
+<p>$$<br>z^{(l)} = \Theta^{(l-1)}a^{(l-1)}<br>$$</p>
+<p>$$<br>\frac{\partial}{\partial \Theta^{(L-1)}_{i,j}}J(\Theta) = \frac {\partial J(\Theta)}{\partial h_\theta(x)_i} \frac{\partial h_\theta(x)_i}{\partial z^{(L)}_i} \frac{\partial z^{(L)}_i}{\partial \Theta^{(L-1)}_{i,j}} = \frac {\partial J(\Theta)}{\partial a^{(L)}_i}\frac{\partial a^{(L)}_i}{\partial z^{(L)}_i} \frac{\partial z^{(L)}_i}{\partial \Theta^{(L-1)}_{i,j}}<br>$$</p>
+<p>$$<br>cost(\Theta) =- y^{(i)}\log(h_\Theta(x^{(i)}) ) -(1-y^{(i)})\log(1-h_\Theta(x^{(i)}))<br>$$</p>
+<p>$$<br>\frac{\partial J(\Theta)}{\partial a^{(L)}_i} =\frac{a^{(L)}_i -y_i}{(1-a^{(L)}_i)a^{(L)}_i}<br>$$</p>
+<p>$$<br>\frac{\partial a^{(L)}_i}{\partial z^{(L)}_i} = \frac{\partial g(z^{(L)}_i)}{\partial z^{(L)}_i} =  g(z^{(L)}_i)(1- g(z^{(L)}_i))=a^{(L)}_i(1- a^{(L)}_i)<br>$$</p>
+<p>$$<br>\frac{\partial z^{(L)}_i}{\partial \Theta^{(L-1)}_{i,j}} = a^{(L-1)}_j<br>$$</p>
+<p>综上<br>$$<br>\begin{split}<br>\\ \frac{\partial}{\partial \Theta^{(L-1)}_{i,j}}J(\Theta) &amp;= \frac {\partial J(\Theta)}{\partial a^{(L)}_i}\frac{\partial a^{(L)}_i}{\partial z^{(L)}_i} \frac{\partial z^{(L)}_i}{\partial \Theta^{(L-1)}_{i,j}} \\<br>\\ &amp;=\frac{a^{(L)}_i -y_i}{(1-a^{(L)}_i)a^{(L)}_i} a^{(L)}_i(1- a^{(L)}_i)  a^{(L-1)}_j \\<br>\\ &amp;= (a^{(L)}_i - y_i) a_j^{(L-1)}<br>\end{split}<br>$$</p>
+<h6 id="hidden-layer-input-layer-to-hidden-layer"><a href="#hidden-layer-input-layer-to-hidden-layer" class="headerlink" title="hidden layer / input layer  to  hidden layer"></a>hidden layer / input layer  to  hidden layer</h6><p>因为$a^{(1)} = x$，所以可以将 input layer 与 hidden layer同样对待<br>$$<br>\frac{\partial}{\partial \Theta^{(l-1)}_{i,j}}J(\Theta) = \frac {\partial J(\Theta)}{\partial a^{(l)}_i} \frac{\partial a^{(l)}_i}{\partial z^{(l)}_i}\frac{\partial z^{(l)}_i}{\partial \Theta^{(l-1)}_{i,j}} \ (l = 2, …, L-1)<br>$$</p>
+<p>$$<br>\frac{\partial a^{(l)}_i}{\partial z^{(l)}_i} =<br>\frac{\partial g(z^{(l)}_i)}{\partial z^{(l)}_i} =<br>g(z^{(l)}_i)(1- g(z^{(l)}_i))=<br>a^{(l)}_i(1- a^{(l)}_i)<br>$$</p>
+<p>$$<br>\frac{\partial z^{(l)}_i}{\partial \Theta^{(l-1)}_{i,j}} = a^{(l-1)}_j<br>$$</p>
+<p>第一部分的偏导比较麻烦，要使用chain rule。<br>$$<br>\dfrac{\partial J(\Theta)}{\partial a_i^{(l)}}<br>= \sum_{k=1}^{s_{l+1}} \Bigg[\dfrac{\partial J(\Theta)}{\partial a_k^{(l+1)}} \dfrac{\partial a_k^{(l+1)}}{\partial z_k^{(l+1)}} \dfrac{\partial z_k^{(l+1)}}{\partial a_i^{(l)}}\Bigg]<br>$$</p>
+<p>$$<br>\frac{\partial a^{(l+1)}_k}{\partial z^{(l+1)}_k} = a^{(l+1)}_k (1 - a^{(l+1)}_k)<br>$$</p>
+<p>$$<br>\frac{\partial z^{(l+1)}_k}{\partial a^{(l)}_i} = \Theta^{(l)}_{k,i}<br>$$</p>
+<p>求得递推式为：<br>$$<br>\begin{split}<br>\\ \frac{\partial J(\Theta)}{\partial a^{(l)}_i} &amp;=<br> \sum_{k=1}^{s_{l+1}} \Bigg[\dfrac{\partial J(\Theta)}{\partial a_k^{(l+1)}} \dfrac{\partial a_k^{(l+1)}}{\partial z_k^{(l+1)}} \dfrac{\partial z_k^{(l+1)}}{\partial a_i^{(l)}}\Bigg]\\<br>\\ &amp;= \sum_{k=1}^{s_{l+1}} \Bigg[\frac{\partial J(\Theta)}{\partial a^{(k+1)}_k}<br>\frac{\partial a^{(l+1)}_k}{\partial z^{(l+1)}_k} \Theta^{(l)}_{k,i} \Bigg] \\<br>\\ &amp;= \sum_{k=1}^{s_{l+1}} \Bigg[ \frac{\partial J(\Theta)}{\partial a^{(l+1)}_k}<br>a^{(l+1)}_k (1 - a^{(l+1)}_k) \Theta^{(l)}_{k,i} \Bigg]<br>\end{split}<br>$$<br>定义第$l$层第$i$个节点的误差为：<br>$$<br>\begin{split}<br>\delta^{(l)}_i &amp;= \frac{\partial J(\Theta)}{\partial a^{(l)}_i} \frac{\partial a^{(l)}_i}{\partial z^{(l)}_i} \\<br>\\ &amp;=\frac{\partial J(\Theta)}{\partial a^{(l)}_i} a^{(l)}_i (1 - a^{(l)}_i) \\<br>\\ &amp;= \sum_{k=1}^{s_{l+1}} \Bigg[\frac{\partial J(\Theta)}{\partial a^{(k+1)}_k}<br>\frac{\partial a^{(l+1)}_k}{\partial z^{(l+1)}_k} \Theta^{(l)}_{k,i} \Bigg]  a^{(l)}_i (1 - a^{(l)}_i) \\<br>\\ &amp;= \sum_{k=1}^{s_{l+1}} \Bigg[\delta^{(l+1)}_k \Theta^{(l)}_{k,i} \Bigg] a^{(l)}_i (1 - a^{(l)}_i) \<br>\end{split}<br>$$</p>
+<p>$$<br>\begin{split}<br>\delta^{(L)}_i  &amp;=  \frac{\partial J(\Theta)}{\partial z^{(L)}_i} \\<br>\\ &amp;= \frac {\partial J(\Theta)}{\partial a^{(L)}_i} \frac{\partial a^{(L)}_i}{\partial z^{(L)}_i} \\<br>\\ &amp;=\frac{a^{(L)}_i -y_i}{(1-a^{(L)}_i)a^{(L)}_i} a^{(L)}_i(1- a^{(L)}_i)  \\<br>\\ &amp;= a^{(L)}_i - y_i<br>\end{split}<br>$$</p>
+<p>最终代价函数的偏导数为<br>$$<br>\begin{split}<br>\frac {\partial}{\partial \Theta^{(l-1)}_{i,j}} J(\Theta) &amp;= \frac {\partial J(\Theta)}{\partial a^{(l)}_i}\frac{\partial a^{(l)}_i}{\partial z^{(l)}_i} \frac{\partial z^{(l)}_i}{\partial \Theta^{(l-1)}_{i,j}} \\<br>\\&amp;= \frac {\partial J(\Theta)}{\partial z^{(l)}_i} \frac{\partial z^{(l)}_i}{\partial \Theta^{(l-1)}_{i,j}} \\<br>\\ &amp;= \delta^{(l)}_i \frac{\partial z^{(l)}_i}{\partial \Theta^{(l-1)}_{i,j}} \\<br>\\ &amp;= \delta^{(l)}_i  a^{(l-1)}_j<br>\end{split}<br>$$<br>总结</p>
+<ul>
+<li><p>输出层的误差 $\delta^{(L)}_i$<br>$$<br>\delta^{(L)}_i = a^{(L)}_i - y_i<br>$$</p>
+</li>
+<li><p>隐层误差 $\delta^{(l)}_i$<br>$$<br>\delta^{(l)}_i == \sum_{k=1}^{s_{l+1}} \Bigg[\delta^{(l+1)}_k \Theta^{(l)}_{k,i} \Bigg] a^{(l)}_i (1 - a^{(l)}_i)<br>$$</p>
+</li>
+<li><p>代价函数偏导项 $\frac {\partial}{\partial \Theta^{(l-1)}_{i,j}} J(\Theta)$<br>$$<br>\frac {\partial}{\partial \Theta^{(l-1)}_{i,j}} J(\Theta) = \delta^{(l)}_i a^{(l-1)}_j<br>$$<br>​</p>
+</li>
+</ul>
+<h4 id="Chain-Rule"><a href="#Chain-Rule" class="headerlink" title="Chain Rule"></a>Chain Rule</h4><p>$y = g(x) $    $z = h(y)$</p>
+<p>$\Delta x \rightarrow \Delta y \rightarrow \Delta z$     $\frac{dz}{dx} = \frac{dz}{dy} \frac{dy}{dx}$</p>
+<p>$x = g(s)$      $y = h(s)$      $z = k(x,y)$</p>
+<p>$\frac{dz}{ds} = \frac{\partial z}{\partial x} \frac{dx}{ds} + \frac{\partial z }{\partial y} \frac{dy}{ds}$</p>
+<p>​        </p>
+<p><img src="backpropagation.png" alt="back propagation"></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">delta_3 = h - Y;</div><div class="line">delta_2 = delta_3 * Theta2 .* a2 .*(<span class="number">1</span> - a2);</div><div class="line">delta_2 = delta_2(:,<span class="number">2</span>:<span class="keyword">end</span>);</div><div class="line"></div><div class="line">Theta1_grad = delta_2' * a1 / m;</div><div class="line">Theta2_grad = delta_3' * a2 / m</div></pre></td></tr></table></figure>
+<h4 id="Chain-Rule-1"><a href="#Chain-Rule-1" class="headerlink" title="Chain Rule"></a>Chain Rule</h4><p>$y = g(x) $    $z = h(y)$</p>
+<p>$\Delta x \rightarrow \Delta y \rightarrow \Delta z$     $\frac{dz}{dx} = \frac{dz}{dy} \frac{dy}{dx}$</p>
+<p>$x = g(s)$      $y = h(s)$      $z = k(x,y)$</p>
+<p>$\frac{dz}{ds} = \frac{\partial z}{\partial x} \frac{dx}{ds} + \frac{\partial z }{\partial y} \frac{dy}{ds}$</p>
+<p>​                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </p>
+
       
     </div>
 
@@ -466,8 +532,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/03/ML-LinearReg-LogisticReg/" rel="next" title="小记 Linear Regression 与 Logistic Regression">
-                <i class="fa fa-chevron-left"></i> 小记 Linear Regression 与 Logistic Regression
+              <a href="/2017/05/06/ML-overfitting-underfitting/" rel="next" title="小记 overfitting 与 underfitting">
+                <i class="fa fa-chevron-left"></i> 小记 overfitting 与 underfitting
               </a>
             
           </div>
@@ -475,10 +541,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/16/ML-Neural-Network/" rel="prev" title="小记 Neural Network">
-                小记 Neural Network <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -761,9 +823,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2017/05/06/ML-overfitting-underfitting/';
-          this.page.identifier = '2017/05/06/ML-overfitting-underfitting/';
-          this.page.title = '小记 overfitting 与 underfitting';
+          this.page.url = 'http://yoursite.com/2017/05/16/ML-Neural-Network/';
+          this.page.identifier = '2017/05/16/ML-Neural-Network/';
+          this.page.title = '小记 Neural Network';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://quinwu.disqus.com/embed.js';
