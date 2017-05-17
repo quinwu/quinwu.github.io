@@ -7,35 +7,113 @@ tags:
   - 小记系列
 ---
 
+### 人工神经网络
+
+在机器学习和认知科学领域，人工神经网络（artificial neural network，缩写ANN），简称神经网络（neural network，缩写NN），是一种模仿[生物神经网络](https://zh.wikipedia.org/wiki/%E7%94%9F%E7%89%A9%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C)(动物的中枢神经系统，特别是大脑)的结构和功能的数学模型或计算模型，用于对函数进行估计或近似。神经网络由大量的人工神经元联结进行计算。大多数情况下人工神经网络能在外界信息的基础上改变内部结构，是一种自适应系统现代神经网络是一种非线性统计性数据建模工具。典型的神经网络具有以下三个部分：
+
+<!--more-->
+
+* 结构 （Architecture）：结构指定了网络中的变量和它们的拓扑关系。例如，神经网络中的变量可以是神经元连接的权重（weights）和神经元的激励值（activities of the neurons）。
+* 激励函数（Activity Rule）：大部分神经网络模型具有一个短时间尺度的动力学规则，来定义神经元如何根据其他神经元的活动来改变自己的激励值。一般激励函数依赖于网络中的权重（即该网络的参数）。
+* 学习规则（Learning Rule）：学习规则指定了网络中的权重如何随着时间推进而调整。这一般被看做是一种长时间尺度的动力学规则。一般情况下，学习规则依赖于神经元的激励值。它也可能依赖于监督者提供的目标值和当前权重的值。
+
+##### 神经网络结构
+
+神经网络被建模成神经元的集合，神经元之间以无环图的形式进行连接，也就是说，一些神经元的输出是另一些神经元的输入。在网络中是不允许循环的，这样的循环会导致前项传播的无限循环。通常神经网络中神经元是分层的，而不像生物神经元一样聚合成大小不一的聚合状，最常见的层的类型是全连接层（fully-connected layer）。全连接层中的神经元跟其前后两层的神经元是完全连接的，但是在同一层神经元之间是没有连接的。下图是一个3层神经网络。（不包括输入层）。
+
+![2_4layer neural network](Neural2_4Layer.png)
+
+##### 神经网络的常用激励函数
+
+每个激活函数（或非线性函数）的输入都是一个数字，然后对其进行某种固定的数学操作。
+
+* sigmoid 
+
+  sigmoid非线性激活函数的数学公式$\sigma(x) = \frac{1}{1+e^{-x}}$，正如在logistics regression中，它输入实数并将其映射到0到1的范围内。具体的说是很大的正数变成1，很大的负数变成0。
+
+* softmax 
+
+  softmax函数又称为归一化指数函数，他将一个含任意实数的$k$维向量$z$映射到另外一个$k$维实向量$\sigma(z)$中，使得每一个元素的范围都在$(0,1)$之间，并且所有元素的和为1，$\sigma(z)_j = \frac{e^{z_j}}{\sum^K_{k=1}e^{z_k}}$ ，$j = 1,2\cdots,K$。
+
+  softmax函数实际上是有限项离散概率分布的梯度对数归一化。
+
+  ![sigmoid function](sigmoid.jpeg)
+
+* Tanh 
+
+  tanh非线性函数的图像如下图所示，它讲实数值压缩到[-1,1]之间。与sigmoid神经元不同的是，它的输出是零中心的，因此在实际的操作中，tanh非线性函数比sigmoid非线性函数更受欢迎。tanh函数是一个简单放大的sigmoid神经元，$tanh(x) = 2\sigma(2x) -1$。
+
+  ![tanh function](tanh.jpeg)
+
+* ReLU  ReLU函数的公式$f(x) = max (0,x)$，这个激活函数就是一个关于0的阈值，见下图。
+
+  ![relu function](relu.jpeg)
+
+  * 优点：相较于sigmoid跟tanh函数，ReLU对于随机梯度下降的收敛有巨大的加速作用，sigmoid跟tanh神经元含有指数运算等耗费计算资源的操作，ReLU可以简单的通过对一个矩阵进行阈值计算得到。
+  * 缺点：ReLU单元在训练的时候有可能“死掉”。当一个很大的梯度流过ReLU的神经元的时候，可能会导致梯度更新后无法被其他任何数据点再次激活。从此所以流过这个神经元的梯度将都变成0。也就是说，这个ReLU单元在训练中将不可逆转的死亡，因为这导致了数据多样化的丢失。例如，如果学习率设置得太高，可能会发现网络中40%的神经元都会死掉（在整个训练集中这些神经元都不会被激活）。通过合理设置学习率，这种情况的发生概率会降低。
+
+* Leaky ReLU 
+
+  Leaky ReLU是为了解决"ReLU死亡"问题的，ReLU中，$x<0$时，函数值为0，	而在Leaky ReLU中则是一个很小的负数梯度值，比如0.01。
+
+* Maxout
+
+  > todo
 
 
-#### logistic regression cost function
+#### 代价函数
+
+##### logistic regression cost function
 
 $$
 J(\theta) = -\frac{1}{m} \sum_{i=1}^m y^{(i)}\log(h_\theta(x^{(i)}) ) +(1-y^{(i)})\log(1-h_\theta(x^{(i)}))
 $$
 
-#### neural network
+##### neural network
 
-$$
-J(\Theta) = -\frac{1}{m}\Bigg[\sum_{i=1}^m\sum_{k=1}^Ky_k^{(i)} \log(h_\Theta(x^{(i)}))_k + (1- y_k^{(i)})\log(1-(h_\Theta(x^{(i)}))_k) \Bigg]
-$$
+神经网络模型的代价函数取决于输出层是什么，对于不同的场景需要，对应于不同的代价函数。例如，在Autoencoder网络中，输出层等于输入层，此时采用均方误差（MSE）函数作为代价函数；在分类问题中，如果输出层采用Softmax回归进行分类，则可以直接采用Softmax回归的代价函数作为整个神经网络的代价函数。如果输出层采用Logistic regression进行分类，那么输出层其实就是K个Logistic regression，整个网络的代价函数就是这K个Logistic regression模型代价函数的加和。
 
-<!--more-->
+* 输出层采用Logistic Regression
+  $$
+  J(\Theta) = -\frac{1}{m}\Bigg[\sum_{i=1}^m\sum_{k=1}^Ky_k^{(i)} \log(h_\Theta(x^{(i)}))_k + (1- y_k^{(i)})\log(1-(h_\Theta(x^{(i)}))_k) \Bigg]
+  $$
 
-#### logistic regression cost function regularization
+* 输出层采用 Softmax Regression
+  $$
+  J(\theta ) = - \Bigg[\sum^m_{i=1}\sum^K_{k=1}1(y^{(i)}=k) \frac{e^{(\theta^k)^Tx_i}}{\sum^K_{k=1}e^{(\theta^k)^Tx_i}}\Bigg]
+  $$
+
+* Autoencoder（输出层=输入层）
+
+  > todo
+
+##### logistic regression cost function regularization
 
 $$
 J(\theta) = -\frac{1}{m} \sum_{i=1}^m y^{(i)}\log(h_\theta(x^{(i)}) ) +(1-y^{(i)})\log(1-h_\theta(x^{(i)})) + \frac{\lambda}{2m} \sum_{j=1}^n \theta_j^2
 $$
 
-#### neural network regularization
+##### neural network regularization
 
-$$
-J(\Theta) = -\frac{1}{m}\Bigg[\sum_{i=1}^m\sum_{k=1}^Ky_k^{(i)} \log(h_\Theta(x^{(i)}))_k + (1- y_k^{(i)})\log(1-(h_\Theta(x^{(i)}))_k)\Bigg] + \frac{\lambda}{2m} \sum_{l=1}^{L-1}\sum_{i=1}^{s_l}\sum_{j=1}^{s_{l+1}}(\Theta_{ji}^{(l)})^2
-$$
 
-#### 反向传播 Back propagation
+
+- 输出层采用Logistic Regression
+  $$
+  J(\Theta) = -\frac{1}{m}\Bigg[\sum_{i=1}^m\sum_{k=1}^Ky_k^{(i)} \log(h_\Theta(x^{(i)}))_k + (1- y_k^{(i)})\log(1-(h_\Theta(x^{(i)}))_k)\Bigg] + \frac{\lambda}{2m} \sum_{l=1}^{L-1}\sum_{i=1}^{s_l}\sum_{j=1}^{s_{l+1}}(\Theta_{ji}^{(l)})^2
+  $$
+
+- 输出层采用 Softmax Regression
+  $$
+  J(\theta ) = - \Bigg[\sum^m_{i=1}\sum^K_{k=1}1(y^{(i)}=k) \frac{e^{(\theta^k)^Tx_i}}{\sum^K_{k=1}e^{(\theta^k)^Tx_i}}\Bigg] + \frac{\lambda}{2}\sum^K_{k=1}\sum^n_{j=1}\theta^2_{kj}
+  $$
+
+- Autoencoder（输出层=输入层）
+
+  > todo
+
+下面我们用输出层采样为Logistics Regression 为例子来说明。
+
+#### Feed forward and Back propagation 
 
 一些标记:
 
@@ -312,3 +390,16 @@ Theta2_grad = delta_3' * a2 / m
 ```
 
 ​																																																																																																																																																																																																	
+
+#### 参考文献
+
+* 机器学习 周志华著
+* Couresera Machine Learning Andrew-Ng s
+* [维基百科 softmax函数](https://zh.wikipedia.org/wiki/Softmax%E5%87%BD%E6%95%B0)
+* [维基百科 人工神经网络](https://zh.wikipedia.org/wiki/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C)
+* [CS231n课程翻译笔记](https://zhuanlan.zhihu.com/p/21462488?refer=intelligentunit)
+* [CS231n](http://cs231n.github.io/neural-networks-1/#actfun)
+* [神经网络](http://www.jianshu.com/p/c69cd43c537a)
+* [UFLDL Tutorial](http://ufldl.stanford.edu/tutorial/)
+* [Machine Learning](http://speech.ee.ntu.edu.tw/~tlkagk/courses_ML17.html)
+
