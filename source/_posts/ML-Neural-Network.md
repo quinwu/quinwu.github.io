@@ -42,6 +42,10 @@ $$
 * L 表示神经网络的总层数
 * $S_4$表示第四层神经网络，不包括偏差单元`bias unit`
 * k表示第几个输出单元
+* $\Theta^{(l)}_{i,j}$ 第$l$层到第$l+1$层的权值矩阵的第$i$行第$j$列的分量
+* $Z^{(j)}_i$ 第$j$层第$i$个神经元的输入值
+* $a^{(j)}_i$第$j$层第$i$个神经元的输出值
+* $a^{(j)} = g(Z^{(j)})$
 
 
 
@@ -93,62 +97,23 @@ end
 
 
 
-
-
 #### back propagation
 
 我们知道代价函数cost function后，下一步就是按照梯度下降法来计算$\theta$求解cost function的最优解。使用梯度下降法首先要求出梯度，即偏导项$\frac{\partial}{\partial \Theta^{(l)} _{ij}} J(\Theta)$，计算偏导项的过程我们称为back propagation。
 
 根据上面的feed forward computation 我们已经计算得到了 $a^{(1)}$ ，$a^{(2)}$， $a^{(3)}$  ，$Z^{(2)}$，$Z^{(3)}$。
 
-在back propagation中，我们定义每层的误差
-$$
-\delta^{(l)} = \frac {\partial}{ \partial z^{(l)}} J(\Theta)
-$$
-$\delta^{(l)}_j$ 表示第$l$层第$j$个节点的误差。为了求出偏导项$\frac{\partial}{\partial \Theta^{(l)} _{ij}} J(\Theta)$，我们首先要求出每一层的$\delta$（不包括第一层，第一层是输入层，不存在误差），对于输出层第三层 
-$$
-\begin{align}
-\delta_i^{(4)} & = \frac{\partial}{\partial z_i^{(4)}}J(\Theta) \\
- \\& = \frac{\partial J(\Theta)}{\partial a_i^{(4)}}\frac{\partial a_i^{(4)}}{\partial z_i^{(4)}} \\
- \\& = -\frac{\partial}{\partial a_i^{(4)}}\sum_{k=1}^K\left[y_kloga_k^{(4)}+(1-y_k)log(1-a_k^{(4)})\right]g’(z_i^{(4)})  \\ 
- \\& = -\frac{\partial}{\partial a_i^{(4)}}\left[y_iloga_i^{(4)}+(1-y_i)log(1-a_i^{(4)})\right]g(z_i^{(4)})(1-g(z_i^{(4)}))  \\
-\\ & = \left(\frac{1-y_i}{1-a_i^{(4)}}-\frac{y_i}{a_i^{(4)}}\right)a_i^{(4)}(1-a_i^{(4)}) \\ 
-\\ & = (1-y_i)a_i^{(4)} - y_i(1-a_i^{(4)}) \\ 
-\\ & = a_i^{(4)} - y_i \\ 
-\end{align}
-$$
+首先我们先看下chain rule
 
-$$
-\begin{split}
-\delta_i^{(l)} & = \frac{\partial}{\partial z_i^{(l)}}J(\Theta) \\ 
-\\ & = \sum_{j=1}^{S_j}\frac{\partial J(\Theta)}{\partial z_j^{(l+1)}}\cdot\frac{\partial z_j^{(l+1)}}{\partial a_i^{(l)}}\cdot\frac{\partial a_i^{(l)}}{\partial z_i^{(l)}} \\ \\ & = \sum_{j=1}^{S_j}\delta_j^{(l+1)}\cdot\Theta_{ij}^{(l)}\cdot g’(z_i^{(l)}) \\ 
-\\ & = g’(z_i^{(l)})\sum_{j=1}^{S_j}\delta_j^{(l+1)}\cdot\Theta_{ij}^{(l)} 
-\end{split}
-$$
+#### Chain Rule
 
+$y = g(x) $    $z = h(y)$
 
+$\Delta x \rightarrow \Delta y \rightarrow \Delta z$     $\frac{dz}{dx} = \frac{dz}{dy} \frac{dy}{dx}$
 
+$x = g(s)$      $y = h(s)$      $z = k(x,y)$
 
-
-$$
-\begin{split}
-\frac{\partial g(z)}{\partial z} & = -\left( \frac{1}{1 + e^{-z}} \right)^2\frac{\partial{}}{\partial{z}} \left(1 + e^{-z} \right) \\
-\\ & = -\left( \frac{1}{1 + e^{-z}} \right)^2e^{-z}\left(-1\right) \\ 
-\\ & = \left( \frac{1}{1 + e^{-z}} \right) \left( \frac{1}{1 + e^{-z}} \right)\left(e^{-z}\right) \\ 
-\\ & = \left( \frac{1}{1 + e^{-z}} \right) \left( \frac{e^{-z}}{1 + e^{-z}} \right) \\ 
-\\ & = \left( \frac{1}{1+e^{-z}}\right)\left( \frac{1+e^{-z}}{1+e^{-z}}-\frac{1}{1+e^{-z}}\right) \\
-\\ & = g(z) \left( 1 - g(z)\right) \\
-\\ \end{split}
-$$
-
-
-$\Theta^{(l)}_{i,j}$ 第$l$层到第$l+1$层的权值矩阵的第$i$行第$j$列的分量
-
-$Z^{(j)}_i$ 第$j$层第$i$个神经元的输入值
-
-$a^{(j)}_i$第$j$层第$i$个神经元的输出值
-
-$a^{(j)} = g(Z^{(j)})$
+$\frac{dz}{ds} = \frac{\partial z}{\partial x} \frac{dx}{ds} + \frac{\partial z }{\partial y} \frac{dy}{ds}$
 
 
 
@@ -172,6 +137,18 @@ $$
 
 $$
 \frac{\partial J(\Theta)}{\partial a^{(L)}_i} =\frac{a^{(L)}_i -y_i}{(1-a^{(L)}_i)a^{(L)}_i}
+$$
+
+由下式得
+$$
+\begin{split}
+\frac{\partial g(z)}{\partial z} & = -\left( \frac{1}{1 + e^{-z}} \right)^2\frac{\partial{}}{\partial{z}} \left(1 + e^{-z} \right) \\
+\\ & = -\left( \frac{1}{1 + e^{-z}} \right)^2e^{-z}\left(-1\right) \\ 
+\\ & = \left( \frac{1}{1 + e^{-z}} \right) \left( \frac{1}{1 + e^{-z}} \right)\left(e^{-z}\right) \\ 
+\\ & = \left( \frac{1}{1 + e^{-z}} \right) \left( \frac{e^{-z}}{1 + e^{-z}} \right) \\ 
+\\ & = \left( \frac{1}{1+e^{-z}}\right)\left( \frac{1+e^{-z}}{1+e^{-z}}-\frac{1}{1+e^{-z}}\right) \\
+\\ & = g(z) \left( 1 - g(z)\right) \\
+\\ \end{split}
 $$
 
 $$
@@ -283,23 +260,32 @@ $$
   $$
   ​
 
-#### Chain Rule
-
-$y = g(x) $    $z = h(y)$
-
-$\Delta x \rightarrow \Delta y \rightarrow \Delta z$     $\frac{dz}{dx} = \frac{dz}{dy} \frac{dy}{dx}$
-
-$x = g(s)$      $y = h(s)$      $z = k(x,y)$
-
-$\frac{dz}{ds} = \frac{\partial z}{\partial x} \frac{dx}{ds} + \frac{\partial z }{\partial y} \frac{dy}{ds}$
+让我们重新整下back propagation的过程，首先，我们定义每层的误差
+$$
+\delta^{(l)} = \frac {\partial}{ \partial z^{(l)}} J(\Theta)
+$$
+$\delta^{(l)}_j$ 表示第$l$层第$j$个节点的误差。为了求出偏导项$\frac{\partial}{\partial \Theta^{(l)} _{ij}} J(\Theta)$，我们首先要求出每一层的$\delta$（不包括第一层，第一层是输入层，不存在误差），对于输出层第三层 
 
 
+$$
+\begin{align}
+\delta_i^{(4)} & = \frac{\partial}{\partial z_i^{(4)}}J(\Theta) \\
+ \\& = \frac{\partial J(\Theta)}{\partial a_i^{(4)}}\frac{\partial a_i^{(4)}}{\partial z_i^{(4)}} \\
+ \\& = -\frac{\partial}{\partial a_i^{(4)}}\sum_{k=1}^K\left[y_kloga_k^{(4)}+(1-y_k)log(1-a_k^{(4)})\right]g’(z_i^{(4)})  \\ 
+ \\& = -\frac{\partial}{\partial a_i^{(4)}}\left[y_iloga_i^{(4)}+(1-y_i)log(1-a_i^{(4)})\right]g(z_i^{(4)})(1-g(z_i^{(4)}))  \\
+\\ & = \left(\frac{1-y_i}{1-a_i^{(4)}}-\frac{y_i}{a_i^{(4)}}\right)a_i^{(4)}(1-a_i^{(4)}) \\ 
+\\ & = (1-y_i)a_i^{(4)} - y_i(1-a_i^{(4)}) \\ 
+\\ & = a_i^{(4)} - y_i \\ 
+\end{align}
+$$
 
-
-
-
-
-​		
+$$
+\begin{split}
+\delta_i^{(l)} & = \frac{\partial}{\partial z_i^{(l)}}J(\Theta) \\ 
+\\ & = \sum_{j=1}^{S_j}\frac{\partial J(\Theta)}{\partial z_j^{(l+1)}}\cdot\frac{\partial z_j^{(l+1)}}{\partial a_i^{(l)}}\cdot\frac{\partial a_i^{(l)}}{\partial z_i^{(l)}} \\ \\ & = \sum_{j=1}^{S_j}\delta_j^{(l+1)}\cdot\Theta_{ij}^{(l)}\cdot g’(z_i^{(l)}) \\ 
+\\ & = g’(z_i^{(l)})\sum_{j=1}^{S_j}\delta_j^{(l+1)}\cdot\Theta_{ij}^{(l)} 
+\end{split}
+$$
 
 ![back propagation](backpropagation.png)
 
@@ -312,18 +298,4 @@ Theta1_grad = delta_2' * a1 / m;
 Theta2_grad = delta_3' * a2 / m
 ```
 
-
-
-#### Chain Rule
-
-$y = g(x) $    $z = h(y)$
-
-$\Delta x \rightarrow \Delta y \rightarrow \Delta z$     $\frac{dz}{dx} = \frac{dz}{dy} \frac{dy}{dx}$
-
-$x = g(s)$      $y = h(s)$      $z = k(x,y)$
-
-$\frac{dz}{ds} = \frac{\partial z}{\partial x} \frac{dx}{ds} + \frac{\partial z }{\partial y} \frac{dy}{ds}$
-
-
-
-​																																																																																																																																																																																																						
+​																																																																																																																																																																																																	
