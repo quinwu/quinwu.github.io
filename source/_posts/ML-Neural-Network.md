@@ -40,7 +40,7 @@ $$
 一些标记:
 
 * L 表示神经网络的总层数
-* $S_4$表示第四层神经网络，不包括偏差单元`bias unit`
+* $S_l$表示第$l$层神经网络unit个数，不包括偏差单元`bias unit`
 * k表示第几个输出单元
 * $\Theta^{(l)}_{i,j}$ 第$l$层到第$l+1$层的权值矩阵的第$i$行第$j$列的分量
 * $Z^{(j)}_i$ 第$j$层第$i$个神经元的输入值
@@ -260,7 +260,11 @@ $$
   $$
   ​
 
-让我们重新整下back propagation的过程，首先，我们定义每层的误差
+让我们重新整下back propagation的过程。
+
+![Neural2_4layer](Neural2_4Layer.png)
+
+首先，我们定义每层的误差
 $$
 \delta^{(l)} = \frac {\partial}{ \partial z^{(l)}} J(\Theta)
 $$
@@ -282,15 +286,15 @@ $$
 $$
 \begin{split}
 \delta_i^{(l)} & = \frac{\partial}{\partial z_i^{(l)}}J(\Theta) \\ 
-\\ & = \sum_{k=1}^{S_{l+1}}\frac{\partial J(\Theta)}{\partial z_k^{(l+1)}}\cdot\frac{\partial z_k^{(l+1)}}{\partial a_i^{(l)}}\cdot\frac{\partial a_i^{(l)}}{\partial z_i^{(l)}} \\
-\\ & = \sum_{k=1}^{S_{l+1}}\delta_k^{(l+1)}\cdot\Theta_{ki}^{(l)}\cdot g’(z_i^{(l)}) \\ 
-\\ & = g’(z_i^{(l)})\sum_{k=1}^{S_{l+1}}\delta_k^{(l+1)}\cdot\Theta_{ki}^{(l)}
+\\ & = \sum_{k=1}^{S_{l+1}}\frac{\partial J(\Theta)}{\partial z_k^{(l+1)}}\frac{\partial z_k^{(l+1)}}{\partial a_i^{(l)}}\frac{\partial a_i^{(l)}}{\partial z_i^{(l)}} \\
+\\ & = \sum_{k=1}^{S_{l+1}}\delta_k^{(l+1)}\Theta_{ki}^{(l)} g’(z_i^{(l)}) \\ 
+\\ & = g’(z_i^{(l)})\sum_{k=1}^{S_{l+1}}\delta_k^{(l+1)}\Theta_{ki}^{(l)}
 \end{split}
 $$
 
 写成向量的形式：
 $$
-\delta^{(l)} = (\Theta^{(l)})^T\delta^{(l+1)} .* g'(z^{(l)})
+\delta^{(l)} = (\Theta^{(l)})^T\delta^{(l+1)} \ldotp\ast g'(z^{(l)})
 $$
 求出所有的$\delta$后，我们可以得到
 $$
