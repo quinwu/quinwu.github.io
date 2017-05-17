@@ -35,7 +35,7 @@ $$
 J(\Theta) = -\frac{1}{m}\Bigg[\sum_{i=1}^m\sum_{k=1}^Ky_k^{(i)} \log(h_\Theta(x^{(i)}))_k + (1- y_k^{(i)})\log(1-(h_\Theta(x^{(i)}))_k)\Bigg] + \frac{\lambda}{2m} \sum_{l=1}^{L-1}\sum_{i=1}^{s_l}\sum_{j=1}^{s_{l+1}}(\Theta_{ji}^{(l)})^2
 $$
 
-#### 代价函数与反向传播 Back propagation
+#### 反向传播 Back propagation
 
 一些标记:
 
@@ -48,8 +48,7 @@ $$
 * $a^{(j)} = g(Z^{(j)})$
 
 
-
-#### Feed forward computation  $h_\theta(x^{(i)})$
+##### Feed forward computation  $h_\theta(x^{(i)})$
 
 ![Neural network model)](feedforward.png)
 
@@ -95,25 +94,21 @@ for i = 1 : m
 end
 ```
 
+##### Chain Rule
 
+$y = g(x)$    $ z = h(y)$
 
-#### back propagation
+$\Delta x \rightarrow \Delta y \rightarrow \Delta z $     $\frac{dz}{dx} = \frac{dz}{dy} \frac{dy}{dx}$
+
+$x = g(s) $     $y = h(s)$      $z = k(x,y)$
+
+$\frac{dz}{ds} = \frac{\partial z}{\partial x} \frac{dx}{ds} + \frac{\partial z }{\partial y} \frac{dy}{ds}$
+
+##### back propagation
 
 我们知道代价函数cost function后，下一步就是按照梯度下降法来计算$\theta$求解cost function的最优解。使用梯度下降法首先要求出梯度，即偏导项$\frac{\partial}{\partial \Theta^{(l)} _{ij}} J(\Theta)$，计算偏导项的过程我们称为back propagation。
 
 根据上面的feed forward computation 我们已经计算得到了 $a^{(1)}$ ，$a^{(2)}$， $a^{(3)}$  ，$Z^{(2)}$，$Z^{(3)}$。
-
-首先我们先看下chain rule
-
-#### Chain Rule
-
-$y = g(x) $    $z = h(y)$
-
-$\Delta x \rightarrow \Delta y \rightarrow \Delta z$     $\frac{dz}{dx} = \frac{dz}{dy} \frac{dy}{dx}$
-
-$x = g(s)$      $y = h(s)$      $z = k(x,y)$
-
-$\frac{dz}{ds} = \frac{\partial z}{\partial x} \frac{dx}{ds} + \frac{\partial z }{\partial y} \frac{dy}{ds}$
 
 
 
@@ -172,7 +167,7 @@ $$
 
 因为$a^{(1)} = x$，所以可以将 input layer 与 hidden layer同样对待
 $$
-\frac{\partial}{\partial \Theta^{(l-1)}_{i,j}}J(\Theta) = \frac {\partial J(\Theta)}{\partial a^{(l)}_i} \frac{\partial a^{(l)}_i}{\partial z^{(l)}_i}\frac{\partial z^{(l)}_i}{\partial \Theta^{(l-1)}_{i,j}} \ (l = 2, ..., L-1)
+\frac{\partial}{\partial \Theta^{(l-1)}_{i,j}}J(\Theta) = \frac {\partial J(\Theta)}{\partial a^{(l)}_i} \frac{\partial a^{(l)}_i}{\partial z^{(l)}_i}\frac{\partial z^{(l)}_i}{\partial \Theta^{(l-1)}_{i,j}} \ (l = 2,3, ..., L-1)
 $$
 
 $$
@@ -215,7 +210,8 @@ $$
 定义第$l$层第$i$个节点的误差为：
 $$
 \begin{split}
-\delta^{(l)}_i &= \frac{\partial J(\Theta)}{\partial a^{(l)}_i} \frac{\partial a^{(l)}_i}{\partial z^{(l)}_i} \\
+\delta^{(l)}_i &= \frac{\partial}{\partial z^{(l)}_i} J(\Theta)
+\\&= \frac{\partial J(\Theta)}{\partial a^{(l)}_i} \frac{\partial a^{(l)}_i}{\partial z^{(l)}_i} \\
 \\ &=\frac{\partial J(\Theta)}{\partial a^{(l)}_i} a^{(l)}_i (1 - a^{(l)}_i) \\
 \\ &= \sum_{k=1}^{s_{l+1}} \Bigg[\frac{\partial J(\Theta)}{\partial a^{(k+1)}_k} 
 \frac{\partial a^{(l+1)}_k}{\partial z^{(l+1)}_k} \Theta^{(l)}_{k,i} \Bigg]  a^{(l)}_i (1 - a^{(l)}_i) \\
@@ -242,7 +238,7 @@ $$
 \\ &= \delta^{(l)}_i  a^{(l-1)}_j
 \end{split}
 $$
-总结
+###### 总结
 
 * 输出层的误差 $\delta^{(L)}_i$
   $$
@@ -251,12 +247,16 @@ $$
 
 * 隐层误差 $\delta^{(l)}_i$
   $$
-  \delta^{(l)}_i == \sum_{k=1}^{s_{l+1}} \Bigg[\delta^{(l+1)}_k \Theta^{(l)}_{k,i} \Bigg] a^{(l)}_i (1 - a^{(l)}_i) 
+  \delta^{(l)}_i =\sum_{k=1}^{s_{l+1}} \Bigg[\delta^{(l+1)}_k \Theta^{(l)}_{k,i} \Bigg] a^{(l)}_i (1 - a^{(l)}_i)
   $$
 
 * 代价函数偏导项 $\frac {\partial}{\partial \Theta^{(l-1)}_{i,j}} J(\Theta)$
   $$
   \frac {\partial}{\partial \Theta^{(l-1)}_{i,j}} J(\Theta) = \delta^{(l)}_i a^{(l-1)}_j
+  $$
+  即
+  $$
+  \frac {\partial}{\partial \Theta^{(l)}_{i,j}} J(\Theta) = \delta^{(l+1)}_i a^{(l)}_j
   $$
   ​
 
@@ -264,7 +264,7 @@ $$
 $$
 \delta^{(l)} = \frac {\partial}{ \partial z^{(l)}} J(\Theta)
 $$
-$\delta^{(l)}_j$ 表示第$l$层第$j$个节点的误差。为了求出偏导项$\frac{\partial}{\partial \Theta^{(l)} _{ij}} J(\Theta)$，我们首先要求出每一层的$\delta$（不包括第一层，第一层是输入层，不存在误差），对于输出层第三层 
+$\delta^{(l)}_j$ 表示第$l$层第$j$个节点的误差。为了求出偏导项$\frac{\partial}{\partial \Theta^{(l)} _{ij}} J(\Theta)$，我们首先要求出每一层的$\delta$（不包括第一层，第一层是输入层，不存在误差），对于输出层第四层 
 
 
 $$
@@ -287,6 +287,14 @@ $$
 \end{split}
 $$
 
+写成向量的形式：
+$$
+\delta^{(l)} = (\Theta^{(l)})^T\delta^{(l+1)} .* g'(z^{(l)})
+$$
+求出所有的$\delta$后，我们可以得到
+$$
+\frac {\partial}{\partial \Theta ^{(l)}_{i,j}} J(\Theta) = a^{(l)}_i * \delta^{(l+1)}_j
+$$
 ![back propagation](backpropagation.png)
 
 ```matlab
