@@ -201,7 +201,7 @@ $$
 \begin{split}
 \\ \frac{\partial J(\Theta)}{\partial a^{(l)}_i} &= 
  \sum_{k=1}^{s_{l+1}} \Bigg[\dfrac{\partial J(\Theta)}{\partial a_k^{(l+1)}} \dfrac{\partial a_k^{(l+1)}}{\partial z_k^{(l+1)}} \dfrac{\partial z_k^{(l+1)}}{\partial a_i^{(l)}}\Bigg]\\
-\\ &= \sum_{k=1}^{s_{l+1}} \Bigg[\frac{\partial J(\Theta)}{\partial a^{(k+1)}_k} 
+\\ &= \sum_{k=1}^{s_{l+1}} \Bigg[\frac{\partial J(\Theta)}{\partial a^{(l+1)}_k} 
 \frac{\partial a^{(l+1)}_k}{\partial z^{(l+1)}_k} \Theta^{(l)}_{k,i} \Bigg] \\
 \\ &= \sum_{k=1}^{s_{l+1}} \Bigg[ \frac{\partial J(\Theta)}{\partial a^{(l+1)}_k}
 a^{(l+1)}_k (1 - a^{(l+1)}_k) \Theta^{(l)}_{k,i} \Bigg]
@@ -213,7 +213,7 @@ $$
 \delta^{(l)}_i &= \frac{\partial}{\partial z^{(l)}_i} J(\Theta)
 \\&= \frac{\partial J(\Theta)}{\partial a^{(l)}_i} \frac{\partial a^{(l)}_i}{\partial z^{(l)}_i} \\
 \\ &=\frac{\partial J(\Theta)}{\partial a^{(l)}_i} a^{(l)}_i (1 - a^{(l)}_i) \\
-\\ &= \sum_{k=1}^{s_{l+1}} \Bigg[\frac{\partial J(\Theta)}{\partial a^{(k+1)}_k} 
+\\ &= \sum_{k=1}^{s_{l+1}} \Bigg[\frac{\partial J(\Theta)}{\partial a^{(l+1)}_k} 
 \frac{\partial a^{(l+1)}_k}{\partial z^{(l+1)}_k} \Theta^{(l)}_{k,i} \Bigg]  a^{(l)}_i (1 - a^{(l)}_i) \\
 \\ &= \sum_{k=1}^{s_{l+1}} \Bigg[\delta^{(l+1)}_k \Theta^{(l)}_{k,i} \Bigg] a^{(l)}_i (1 - a^{(l)}_i) \
 \end{split}
@@ -282,8 +282,9 @@ $$
 $$
 \begin{split}
 \delta_i^{(l)} & = \frac{\partial}{\partial z_i^{(l)}}J(\Theta) \\ 
-\\ & = \sum_{j=1}^{S_j}\frac{\partial J(\Theta)}{\partial z_j^{(l+1)}}\cdot\frac{\partial z_j^{(l+1)}}{\partial a_i^{(l)}}\cdot\frac{\partial a_i^{(l)}}{\partial z_i^{(l)}} \\ \\ & = \sum_{j=1}^{S_j}\delta_j^{(l+1)}\cdot\Theta_{ij}^{(l)}\cdot g’(z_i^{(l)}) \\ 
-\\ & = g’(z_i^{(l)})\sum_{j=1}^{S_j}\delta_j^{(l+1)}\cdot\Theta_{ij}^{(l)} 
+\\ & = \sum_{k=1}^{S_{l+1}}\frac{\partial J(\Theta)}{\partial z_k^{(l+1)}}\cdot\frac{\partial z_k^{(l+1)}}{\partial a_i^{(l)}}\cdot\frac{\partial a_i^{(l)}}{\partial z_i^{(l)}} \\
+\\ & = \sum_{k=1}^{S_{l+1}}\delta_k^{(l+1)}\cdot\Theta_{ki}^{(l)}\cdot g’(z_i^{(l)}) \\ 
+\\ & = g’(z_i^{(l)})\sum_{k=1}^{S_{l+1}}\delta_k^{(l+1)}\cdot\Theta_{ki}^{(l)}
 \end{split}
 $$
 
@@ -293,7 +294,7 @@ $$
 $$
 求出所有的$\delta$后，我们可以得到
 $$
-\frac {\partial}{\partial \Theta ^{(l)}_{i,j}} J(\Theta) = a^{(l)}_i * \delta^{(l+1)}_j
+\frac {\partial}{\partial \Theta ^{(l)}_{i,j}} J(\Theta) = \delta^{(l+1)}_i  a^{(l)}_j
 $$
 ![back propagation](backpropagation.png)
 
