@@ -98,8 +98,9 @@
 <meta property="og:site_name" content="Quin Wu Blog">
 <meta property="og:description" content="logistic regression cost function$$J(\theta) = -\frac{1}{m} \sum_{i=1}^m y^{(i)}\log(h_\theta(x^{(i)}) ) +(1-y^{(i)})\log(1-h_\theta(x^{(i)}))$$ neural network$$J(\Theta) = -\frac{1}{m}\Bigg[\sum_{i=1">
 <meta property="og:image" content="http://yoursite.com/2017/05/16/ML-Neural-Network/feedforward.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/16/ML-Neural-Network/Neural2_4Layer.png">
 <meta property="og:image" content="http://yoursite.com/2017/05/16/ML-Neural-Network/backpropagation.png">
-<meta property="og:updated_time" content="2017-05-17T07:12:02.000Z">
+<meta property="og:updated_time" content="2017-05-17T07:52:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小记 Neural Network">
 <meta name="twitter:description" content="logistic regression cost function$$J(\theta) = -\frac{1}{m} \sum_{i=1}^m y^{(i)}\log(h_\theta(x^{(i)}) ) +(1-y^{(i)})\log(1-h_\theta(x^{(i)}))$$ neural network$$J(\Theta) = -\frac{1}{m}\Bigg[\sum_{i=1">
@@ -415,7 +416,7 @@
 <h4 id="反向传播-Back-propagation"><a href="#反向传播-Back-propagation" class="headerlink" title="反向传播 Back propagation"></a>反向传播 Back propagation</h4><p>一些标记:</p>
 <ul>
 <li>L 表示神经网络的总层数</li>
-<li>$S_4$表示第四层神经网络，不包括偏差单元<code>bias unit</code></li>
+<li>$S_l$表示第$l$层神经网络unit个数，不包括偏差单元<code>bias unit</code></li>
 <li>k表示第几个输出单元</li>
 <li>$\Theta^{(l)}_{i,j}$ 第$l$层到第$l+1$层的权值矩阵的第$i$行第$j$列的分量</li>
 <li>$Z^{(j)}_i$ 第$j$层第$i$个神经元的输入值</li>
@@ -458,10 +459,12 @@
 <li><p>代价函数偏导项 $\frac {\partial}{\partial \Theta^{(l-1)}_{i,j}} J(\Theta)$<br>$$<br>\frac {\partial}{\partial \Theta^{(l-1)}_{i,j}} J(\Theta) = \delta^{(l)}_i a^{(l-1)}_j<br>$$<br>即<br>$$<br>\frac {\partial}{\partial \Theta^{(l)}_{i,j}} J(\Theta) = \delta^{(l+1)}_i a^{(l)}_j<br>$$<br>​</p>
 </li>
 </ul>
-<p>让我们重新整下back propagation的过程，首先，我们定义每层的误差<br>$$<br>\delta^{(l)} = \frac {\partial}{ \partial z^{(l)}} J(\Theta)<br>$$<br>$\delta^{(l)}_j$ 表示第$l$层第$j$个节点的误差。为了求出偏导项$\frac{\partial}{\partial \Theta^{(l)} _{ij}} J(\Theta)$，我们首先要求出每一层的$\delta$（不包括第一层，第一层是输入层，不存在误差），对于输出层第四层 </p>
+<p>让我们重新整下back propagation的过程。</p>
+<p><img src="Neural2_4Layer.png" alt="Neural2_4layer"></p>
+<p>首先，我们定义每层的误差<br>$$<br>\delta^{(l)} = \frac {\partial}{ \partial z^{(l)}} J(\Theta)<br>$$<br>$\delta^{(l)}_j$ 表示第$l$层第$j$个节点的误差。为了求出偏导项$\frac{\partial}{\partial \Theta^{(l)} _{ij}} J(\Theta)$，我们首先要求出每一层的$\delta$（不包括第一层，第一层是输入层，不存在误差），对于输出层第四层 </p>
 <p>$$<br>\begin{align}<br>\delta_i^{(4)} &amp; = \frac{\partial}{\partial z_i^{(4)}}J(\Theta) \\<br> \\&amp; = \frac{\partial J(\Theta)}{\partial a_i^{(4)}}\frac{\partial a_i^{(4)}}{\partial z_i^{(4)}} \\<br> \\&amp; = -\frac{\partial}{\partial a_i^{(4)}}\sum_{k=1}^K\left[y_kloga_k^{(4)}+(1-y_k)log(1-a_k^{(4)})\right]g’(z_i^{(4)})  \\<br> \\&amp; = -\frac{\partial}{\partial a_i^{(4)}}\left[y_iloga_i^{(4)}+(1-y_i)log(1-a_i^{(4)})\right]g(z_i^{(4)})(1-g(z_i^{(4)}))  \\<br>\\ &amp; = \left(\frac{1-y_i}{1-a_i^{(4)}}-\frac{y_i}{a_i^{(4)}}\right)a_i^{(4)}(1-a_i^{(4)}) \\<br>\\ &amp; = (1-y_i)a_i^{(4)} - y_i(1-a_i^{(4)}) \\<br>\\ &amp; = a_i^{(4)} - y_i \\<br>\end{align}<br>$$</p>
-<p>$$<br>\begin{split}<br>\delta_i^{(l)} &amp; = \frac{\partial}{\partial z_i^{(l)}}J(\Theta) \\<br>\\ &amp; = \sum_{k=1}^{S_{l+1}}\frac{\partial J(\Theta)}{\partial z_k^{(l+1)}}\cdot\frac{\partial z_k^{(l+1)}}{\partial a_i^{(l)}}\cdot\frac{\partial a_i^{(l)}}{\partial z_i^{(l)}} \\<br>\\ &amp; = \sum_{k=1}^{S_{l+1}}\delta_k^{(l+1)}\cdot\Theta_{ki}^{(l)}\cdot g’(z_i^{(l)}) \\<br>\\ &amp; = g’(z_i^{(l)})\sum_{k=1}^{S_{l+1}}\delta_k^{(l+1)}\cdot\Theta_{ki}^{(l)}<br>\end{split}<br>$$</p>
-<p>写成向量的形式：<br>$$<br>\delta^{(l)} = (\Theta^{(l)})^T\delta^{(l+1)} .* g’(z^{(l)})<br>$$<br>求出所有的$\delta$后，我们可以得到<br>$$<br>\frac {\partial}{\partial \Theta ^{(l)}_{i,j}} J(\Theta) = \delta^{(l+1)}_i  a^{(l)}_j<br>$$<br><img src="backpropagation.png" alt="back propagation"></p>
+<p>$$<br>\begin{split}<br>\delta_i^{(l)} &amp; = \frac{\partial}{\partial z_i^{(l)}}J(\Theta) \\<br>\\ &amp; = \sum_{k=1}^{S_{l+1}}\frac{\partial J(\Theta)}{\partial z_k^{(l+1)}}\frac{\partial z_k^{(l+1)}}{\partial a_i^{(l)}}\frac{\partial a_i^{(l)}}{\partial z_i^{(l)}} \\<br>\\ &amp; = \sum_{k=1}^{S_{l+1}}\delta_k^{(l+1)}\Theta_{ki}^{(l)} g’(z_i^{(l)}) \\<br>\\ &amp; = g’(z_i^{(l)})\sum_{k=1}^{S_{l+1}}\delta_k^{(l+1)}\Theta_{ki}^{(l)}<br>\end{split}<br>$$</p>
+<p>写成向量的形式：<br>$$<br>\delta^{(l)} = (\Theta^{(l)})^T\delta^{(l+1)} \ldotp\ast g’(z^{(l)})<br>$$<br>求出所有的$\delta$后，我们可以得到<br>$$<br>\frac {\partial}{\partial \Theta ^{(l)}_{i,j}} J(\Theta) = \delta^{(l+1)}_i  a^{(l)}_j<br>$$<br><img src="backpropagation.png" alt="back propagation"></p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">delta_3 = h - Y;</div><div class="line">delta_2 = delta_3 * Theta2 .* a2 .*(<span class="number">1</span> - a2);</div><div class="line">delta_2 = delta_2(:,<span class="number">2</span>:<span class="keyword">end</span>);</div><div class="line"></div><div class="line">Theta1_grad = delta_2' * a1 / m;</div><div class="line">Theta2_grad = delta_3' * a2 / m</div></pre></td></tr></table></figure>
 <p>​                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </p>
 
