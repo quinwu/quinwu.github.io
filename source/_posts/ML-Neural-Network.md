@@ -31,13 +31,49 @@ tags:
 
   sigmoid非线性激活函数的数学公式$\sigma(x) = \frac{1}{1+e^{-x}}$，正如在logistics regression中，它输入实数并将其映射到0到1的范围内。具体的说是很大的正数变成1，很大的负数变成0。
 
+  ![sigmoid function](sigmoid.jpeg)
+
 * softmax 
 
   softmax函数又称为归一化指数函数，他将一个含任意实数的$k$维向量$z$映射到另外一个$k$维实向量$\sigma(z)$中，使得每一个元素的范围都在$(0,1)$之间，并且所有元素的和为1，$\sigma(z)_j = \frac{e^{z_j}}{\sum^K_{k=1}e^{z_k}}$ ，$j = 1,2\cdots,K$。
+  $$
+  \begin{align}
+  h_\theta(x) =
+  \begin{bmatrix}
+  P(y = 1 | x; \theta) \\
+  P(y = 2 | x; \theta) \\
+  \vdots \\
+  P(y = K | x; \theta)
+  \end{bmatrix}
+  =
+  \frac{1}{ \sum_{j=1}^{K}{\exp(\theta^{(j)\top} x) }}
+  \begin{bmatrix}
+  \exp(\theta^{(1)\top} x ) \\
+  \exp(\theta^{(2)\top} x ) \\
+  \vdots \\
+  \exp(\theta^{(K)\top} x ) \\
+  \end{bmatrix}
+  \end{align}
+  $$
+
+  $$
+  \theta = \left[\begin{array}{cccc}| & | & | & | \\
+  \theta^{(1)} & \theta^{(2)} & \cdots & \theta^{(K)} \\
+  | & | & | & |
+  \end{array}\right].
+  $$
 
   softmax函数实际上是有限项离散概率分布的梯度对数归一化。
 
-  ![sigmoid function](sigmoid.jpeg)
+  Softmax Regression 有一个不寻常的特点：它有一个“冗余”的参数集。假设我们在$\theta^{(k)}$中减去$\psi$时，不影响原函数的预测结果。这表明前面的 softmax 回归模型中存在冗余的参数， Softmax 模型被过度参数化了`overparameterized`。对于任意一个用于拟合数据的假设函数，可以求出多组参数值，这些参数得到的是完全相同的假设函数 $h_\theta(x)$。如下所示，
+  $$
+  \begin{split}
+  P(y^{(i)} = k | x^{(i)} ; \theta)
+  &= \frac{\exp((\theta^{(k)}-\psi)^\top x^{(i)})}{\sum_{j=1}^K \exp( (\theta^{(j)}-\psi)^\top x^{(i)})}  \\
+  &= \frac{\exp(\theta^{(k)\top} x^{(i)}) \exp(-\psi^\top x^{(i)})}{\sum_{j=1}^K \exp(\theta^{(j)\top} x^{(i)}) \exp(-\psi^\top x^{(i)})} \\
+  &= \frac{\exp(\theta^{(k)\top} x^{(i)})}{\sum_{j=1}^K \exp(\theta^{(j)\top} x^{(i)})}.
+  \end{split}
+  $$
 
 * Tanh 
 
@@ -61,6 +97,42 @@ tags:
   > todo
 
 
+###### Relationship of Logistic Rregression and Softmax Regression
+
+当k = 2 时，Softmax Regression可以写为
+$$
+\begin{align}
+h_\theta(x^{(i)}) &=
+\frac{1}{ \exp(\theta^{(1)^{\top}}x^{(i)})  + \exp( \theta^{(2)^{\top}} x ^{(i)}) }
+\begin{bmatrix}
+\exp( \theta^{(1)^{\top}} x ^{(i)}) \\
+\exp( \theta^{(2)^{\top}} x ^{(i)})
+\end{bmatrix}
+\end{align}
+$$
+我们令$\psi = \theta^{(1)}​$ 并且在两个参数向量中都减去向量$\theta^{(1)}​$，得到
+$$
+\begin{split}
+h_\theta(x^{(i)}) &=
+\frac{1}{ \exp(\vec{0}^{\top}x^{(i)})  + \exp(( {\theta^{(2)}-\theta^{(1)}})^{\top} x ^{(i)})}
+\begin{bmatrix}
+\exp( \vec{0}^{\top} x^{(i)} ) \\
+\exp( ( {\theta^{(2)}-\theta^{(1)}})^{\top} x^{(i)} )
+\end{bmatrix}\\
+\\&=
+\begin{bmatrix}
+\frac{1}{ 1 + \exp( ( {\theta^{(2)}-\theta^{(1)}})^{\top} x^{(i)} ) } \\
+\frac{\exp( ( {\theta^{(2)}-\theta^{(1)}})^{\top} x^{(i)} )}{ 1 + \exp( ( {\theta^{(2)}-\theta^{(1)}})^{\top} x ^{(i)}) }
+\end{bmatrix} \\
+\\&=
+\begin{bmatrix}
+\frac{1}{ 1  + \exp( ( {\theta^{(2)}-\theta^{(1)}})^{\top} x^{(i)} ) } \\
+1 - \frac{1}{ 1  +\exp( ( {\theta^{(2)}-\theta^{(1)}})^{\top} x^{(i)} )  } \\
+\end{bmatrix}
+\end{split}
+$$
+用$\theta^{'}​$表示$\theta^{(1)}-\theta^{(2)}​$，我们会发现Softmax Regression 预测其中的一个类别的概率为$\frac{1}{ 1  + \exp(- (\theta')^\top x^{(i)} ) }​$ ，另一个类别的概率为$1-\frac{1}{ 1  + \exp(- (\theta')^\top x^{(i)} ) }​$，这就是Logistics Regression 。
+
 #### 代价函数
 
 ##### logistic regression cost function
@@ -80,12 +152,38 @@ $$
 
 * 输出层采用 Softmax Regression
   $$
-  J(\theta ) = - \Bigg[\sum^m_{i=1}\sum^K_{k=1}1(y^{(i)}=k) \frac{e^{(\theta^k)^Tx_i}}{\sum^K_{k=1}e^{(\theta^k)^Tx_i}}\Bigg]
+  \begin{align}
+  J(\theta) = - \frac{1}{m}\left[ \sum_{i=1}^{m} \sum_{k=1}^{K}  1\left\{y^{(i)} = k\right\} \log \frac{\exp(\theta^{(k)\top} x^{(i)})}{\sum_{j=1}^K \exp(\theta^{(j)\top} x^{(i)})}\right]
+  \end{align}
+  $$
+
+  $$
+  \begin{align}
+  \nabla_{\theta^{(k)}} J(\theta) = - \frac{1}{m}\sum_{i=1}^{m}{ \left[ x^{(i)} \left( 1\{ y^{(i)} = k\}  - P(y^{(i)} = k | x^{(i)}; \theta) \right) \right]  }
+  \end{align}
+  $$
+
+  $$
+  P(y^{(i)} = k | x^{(i)} ; \theta) = \frac{\exp(\theta^{(k)\top} x^{(i)})}{\sum_{j=1}^K \exp(\theta^{(j)\top} x^{(i)}) }
   $$
 
 * Autoencoder（输出层=输入层）
 
   > todo
+
+
+
+对比Logistics Regression 跟 Softmax Regression，在Logistics Regression 中
+$$
+P(y^{(i)} = k | x^{(i)} ; \theta) = y_k^{(i)} \log(h_\Theta(x^{(i)}))_k + (1- y_k^{(i)})\log(1-(h_\Theta(x^{(i)}))_k
+$$
+在Softmax Regression中，$P(y^{(i)} = k | x^{(i)} ; \theta) = \frac{\exp(\theta^{(k)\top} x^{(i)})}{\sum_{j=1}^K \exp(\theta^{(j)\top} x^{(i)}) }$，因此Logtistic Regression 也可以写为以下的形式：
+$$
+\begin{align}
+J(\theta) &= - \left[ \sum_{i=1}^m   (1-y^{(i)}) \log (1-h_\theta(x^{(i)})) + y^{(i)} \log h_\theta(x^{(i)}) \right] \\
+&= - \left[ \sum_{i=1}^{m} \sum_{k=0}^{1} 1\left\{y^{(i)} = k\right\} \log P(y^{(i)} = k | x^{(i)} ; \theta) \right]
+\end{align}
+$$
 
 ##### logistic regression cost function regularization
 
@@ -95,8 +193,6 @@ $$
 
 ##### neural network regularization
 
-
-
 - 输出层采用Logistic Regression
   $$
   J(\Theta) = -\frac{1}{m}\Bigg[\sum_{i=1}^m\sum_{k=1}^Ky_k^{(i)} \log(h_\Theta(x^{(i)}))_k + (1- y_k^{(i)})\log(1-(h_\Theta(x^{(i)}))_k)\Bigg] + \frac{\lambda}{2m} \sum_{l=1}^{L-1}\sum_{i=1}^{s_l}\sum_{j=1}^{s_{l+1}}(\Theta_{ji}^{(l)})^2
@@ -104,7 +200,11 @@ $$
 
 - 输出层采用 Softmax Regression
   $$
-  J(\theta ) = - \Bigg[\sum^m_{i=1}\sum^K_{k=1}1(y^{(i)}=k) \frac{e^{(\theta^k)^Tx_i}}{\sum^K_{k=1}e^{(\theta^k)^Tx_i}}\Bigg] + \frac{\lambda}{2}\sum^K_{k=1}\sum^n_{j=1}\theta^2_{kj}
+  J(\theta) = -\left [ \sum_{i=1}^{m} \sum_{k=1}^{K}  1\left\{y^{(i)} = k\right\} \log \frac{\exp(\theta^{(k)\top} x^{(i)})}{\sum_{j=1}^K \exp(\theta^{(j)\top}x^{(i)})}\right]+\frac{\lambda}{2}\sum^K_{k=1}\sum^n_{j=1}\theta^2_{kj}
+  $$
+
+  $$
+  \nabla_{\theta^{(k)}} J(\theta) = - \frac{1}{m} \sum_{i=1}^{m}{ \left[ x^{(i)} \left( 1\{ y^{(i)} = k\}  - P(y^{(i)} = k | x^{(i)}; \theta) \right) \right]  } + \lambda\theta^{(k)}
   $$
 
 - Autoencoder（输出层=输入层）
@@ -400,6 +500,6 @@ Theta2_grad = delta_3' * a2 / m
 * [CS231n课程翻译笔记](https://zhuanlan.zhihu.com/p/21462488?refer=intelligentunit)
 * [CS231n](http://cs231n.github.io/neural-networks-1/#actfun)
 * [神经网络](http://www.jianshu.com/p/c69cd43c537a)
-* [UFLDL Tutorial](http://ufldl.stanford.edu/tutorial/)
+* [UFLDL Tutorial](http://ufldl.stanford.edu/tutorial/supervised/SoftmaxRegression/)
 * [Machine Learning](http://speech.ee.ntu.edu.tw/~tlkagk/courses_ML17.html)
 
