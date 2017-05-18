@@ -104,7 +104,7 @@
 <meta property="og:image" content="http://yoursite.com/2017/05/16/ML-Neural-Network/feedforward.png">
 <meta property="og:image" content="http://yoursite.com/2017/05/16/ML-Neural-Network/Neural2_4Layer.png">
 <meta property="og:image" content="http://yoursite.com/2017/05/16/ML-Neural-Network/backpropagation.png">
-<meta property="og:updated_time" content="2017-05-17T13:52:40.000Z">
+<meta property="og:updated_time" content="2017-05-18T07:19:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小记 Neural Network">
 <meta name="twitter:description" content="人工神经网络在机器学习和认知科学领域，人工神经网络（artificial neural network，缩写ANN），简称神经网络（neural network，缩写NN），是一种模仿生物神经网络(动物的中枢神经系统，特别是大脑)的结构和功能的数学模型或计算模型，用于对函数进行估计或近似。神经网络由大量的人工神经元联结进行计算。大多数情况下人工神经网络能在外界信息的基础上改变内部结构，是一种自适应">
@@ -425,11 +425,13 @@
 <ul>
 <li><p>sigmoid </p>
 <p>sigmoid非线性激活函数的数学公式$\sigma(x) = \frac{1}{1+e^{-x}}$，正如在logistics regression中，它输入实数并将其映射到0到1的范围内。具体的说是很大的正数变成1，很大的负数变成0。</p>
+<p><img src="sigmoid.jpeg" alt="sigmoid function"></p>
 </li>
 <li><p>softmax </p>
-<p>softmax函数又称为归一化指数函数，他将一个含任意实数的$k$维向量$z$映射到另外一个$k$维实向量$\sigma(z)$中，使得每一个元素的范围都在$(0,1)$之间，并且所有元素的和为1，$\sigma(z)_j = \frac{e^{z_j}}{\sum^K_{k=1}e^{z_k}}$ ，$j = 1,2\cdots,K$。</p>
+<p>softmax函数又称为归一化指数函数，他将一个含任意实数的$k$维向量$z$映射到另外一个$k$维实向量$\sigma(z)$中，使得每一个元素的范围都在$(0,1)$之间，并且所有元素的和为1，$\sigma(z)_j = \frac{e^{z_j}}{\sum^K_{k=1}e^{z_k}}$ ，$j = 1,2\cdots,K$。<br>$$<br>\begin{align}<br>h_\theta(x) =<br>\begin{bmatrix}<br>P(y = 1 | x; \theta) \\<br>P(y = 2 | x; \theta) \\<br>\vdots \\<br>P(y = K | x; \theta)<br>\end{bmatrix}<br>=<br>\frac{1}{ \sum_{j=1}^{K}{\exp(\theta^{(j)\top} x) }}<br>\begin{bmatrix}<br>\exp(\theta^{(1)\top} x ) \\<br>\exp(\theta^{(2)\top} x ) \\<br>\vdots \\<br>\exp(\theta^{(K)\top} x ) \\<br>\end{bmatrix}<br>\end{align}<br>$$</p>
+<p>$$<br>\theta = \left[\begin{array}{cccc}| &amp; | &amp; | &amp; | \\<br>\theta^{(1)} &amp; \theta^{(2)} &amp; \cdots &amp; \theta^{(K)} \\<br>| &amp; | &amp; | &amp; |<br>\end{array}\right].<br>$$</p>
 <p>softmax函数实际上是有限项离散概率分布的梯度对数归一化。</p>
-<p><img src="sigmoid.jpeg" alt="sigmoid function"></p>
+<p>Softmax Regression 有一个不寻常的特点：它有一个“冗余”的参数集。假设我们在$\theta^{(k)}$中减去$\psi$时，不影响原函数的预测结果。这表明前面的 softmax 回归模型中存在冗余的参数， Softmax 模型被过度参数化了<code>overparameterized</code>。对于任意一个用于拟合数据的假设函数，可以求出多组参数值，这些参数得到的是完全相同的假设函数 $h_\theta(x)$。如下所示，<br>$$<br>\begin{split}<br>P(y^{(i)} = k | x^{(i)} ; \theta)<br>&amp;= \frac{\exp((\theta^{(k)}-\psi)^\top x^{(i)})}{\sum_{j=1}^K \exp( (\theta^{(j)}-\psi)^\top x^{(i)})}  \\<br>&amp;= \frac{\exp(\theta^{(k)\top} x^{(i)}) \exp(-\psi^\top x^{(i)})}{\sum_{j=1}^K \exp(\theta^{(j)\top} x^{(i)}) \exp(-\psi^\top x^{(i)})} \\<br>&amp;= \frac{\exp(\theta^{(k)\top} x^{(i)})}{\sum_{j=1}^K \exp(\theta^{(j)\top} x^{(i)})}.<br>\end{split}<br>$$</p>
 </li>
 <li><p>Tanh </p>
 <p>tanh非线性函数的图像如下图所示，它讲实数值压缩到[-1,1]之间。与sigmoid神经元不同的是，它的输出是零中心的，因此在实际的操作中，tanh非线性函数比sigmoid非线性函数更受欢迎。tanh函数是一个简单放大的sigmoid神经元，$tanh(x) = 2\sigma(2x) -1$。</p>
@@ -451,12 +453,15 @@
 </blockquote>
 </li>
 </ul>
+<h6 id="Relationship-of-Logistic-Rregression-and-Softmax-Regression"><a href="#Relationship-of-Logistic-Rregression-and-Softmax-Regression" class="headerlink" title="Relationship of Logistic Rregression and Softmax Regression"></a>Relationship of Logistic Rregression and Softmax Regression</h6><p>当k = 2 时，Softmax Regression可以写为<br>$$<br>\begin{align}<br>h_\theta(x^{(i)}) &amp;=<br>\frac{1}{ \exp(\theta^{(1)^{\top}}x^{(i)})  + \exp( \theta^{(2)^{\top}} x ^{(i)}) }<br>\begin{bmatrix}<br>\exp( \theta^{(1)^{\top}} x ^{(i)}) \\<br>\exp( \theta^{(2)^{\top}} x ^{(i)})<br>\end{bmatrix}<br>\end{align}<br>$$<br>我们令$\psi = \theta^{(1)}​$ 并且在两个参数向量中都减去向量$\theta^{(1)}​$，得到<br>$$<br>\begin{split}<br>h_\theta(x^{(i)}) &amp;=<br>\frac{1}{ \exp(\vec{0}^{\top}x^{(i)})  + \exp(( {\theta^{(2)}-\theta^{(1)}})^{\top} x ^{(i)})}<br>\begin{bmatrix}<br>\exp( \vec{0}^{\top} x^{(i)} ) \\<br>\exp( ( {\theta^{(2)}-\theta^{(1)}})^{\top} x^{(i)} )<br>\end{bmatrix}\\<br>\\&amp;=<br>\begin{bmatrix}<br>\frac{1}{ 1 + \exp( ( {\theta^{(2)}-\theta^{(1)}})^{\top} x^{(i)} ) } \\<br>\frac{\exp( ( {\theta^{(2)}-\theta^{(1)}})^{\top} x^{(i)} )}{ 1 + \exp( ( {\theta^{(2)}-\theta^{(1)}})^{\top} x ^{(i)}) }<br>\end{bmatrix} \\<br>\\&amp;=<br>\begin{bmatrix}<br>\frac{1}{ 1  + \exp( ( {\theta^{(2)}-\theta^{(1)}})^{\top} x^{(i)} ) } \\<br>1 - \frac{1}{ 1  +\exp( ( {\theta^{(2)}-\theta^{(1)}})^{\top} x^{(i)} )  } \\<br>\end{bmatrix}<br>\end{split}<br>$$<br>用$\theta^{‘}​$表示$\theta^{(1)}-\theta^{(2)}​$，我们会发现Softmax Regression 预测其中的一个类别的概率为$\frac{1}{ 1  + \exp(- (\theta’)^\top x^{(i)} ) }​$ ，另一个类别的概率为$1-\frac{1}{ 1  + \exp(- (\theta’)^\top x^{(i)} ) }​$，这就是Logistics Regression 。</p>
 <h4 id="代价函数"><a href="#代价函数" class="headerlink" title="代价函数"></a>代价函数</h4><h5 id="logistic-regression-cost-function"><a href="#logistic-regression-cost-function" class="headerlink" title="logistic regression cost function"></a>logistic regression cost function</h5><p>$$<br>J(\theta) = -\frac{1}{m} \sum_{i=1}^m y^{(i)}\log(h_\theta(x^{(i)}) ) +(1-y^{(i)})\log(1-h_\theta(x^{(i)}))<br>$$</p>
 <h5 id="neural-network"><a href="#neural-network" class="headerlink" title="neural network"></a>neural network</h5><p>神经网络模型的代价函数取决于输出层是什么，对于不同的场景需要，对应于不同的代价函数。例如，在Autoencoder网络中，输出层等于输入层，此时采用均方误差（MSE）函数作为代价函数；在分类问题中，如果输出层采用Softmax回归进行分类，则可以直接采用Softmax回归的代价函数作为整个神经网络的代价函数。如果输出层采用Logistic regression进行分类，那么输出层其实就是K个Logistic regression，整个网络的代价函数就是这K个Logistic regression模型代价函数的加和。</p>
 <ul>
 <li><p>输出层采用Logistic Regression<br>$$<br>J(\Theta) = -\frac{1}{m}\Bigg[\sum_{i=1}^m\sum_{k=1}^Ky_k^{(i)} \log(h_\Theta(x^{(i)}))_k + (1- y_k^{(i)})\log(1-(h_\Theta(x^{(i)}))_k) \Bigg]<br>$$</p>
 </li>
-<li><p>输出层采用 Softmax Regression<br>$$<br>J(\theta ) = - \Bigg[\sum^m_{i=1}\sum^K_{k=1}1(y^{(i)}=k) \frac{e^{(\theta^k)^Tx_i}}{\sum^K_{k=1}e^{(\theta^k)^Tx_i}}\Bigg]<br>$$</p>
+<li><p>输出层采用 Softmax Regression<br>$$<br>\begin{align}<br>J(\theta) = - \frac{1}{m}\left[ \sum_{i=1}^{m} \sum_{k=1}^{K}  1\left\{y^{(i)} = k\right\} \log \frac{\exp(\theta^{(k)\top} x^{(i)})}{\sum_{j=1}^K \exp(\theta^{(j)\top} x^{(i)})}\right]<br>\end{align}<br>$$</p>
+<p>$$<br>\begin{align}<br>\nabla_{\theta^{(k)}} J(\theta) = - \frac{1}{m}\sum_{i=1}^{m}{ \left[ x^{(i)} \left( 1\{ y^{(i)} = k\}  - P(y^{(i)} = k | x^{(i)}; \theta) \right) \right]  }<br>\end{align}<br>$$</p>
+<p>$$<br>P(y^{(i)} = k | x^{(i)} ; \theta) = \frac{\exp(\theta^{(k)\top} x^{(i)})}{\sum_{j=1}^K \exp(\theta^{(j)\top} x^{(i)}) }<br>$$</p>
 </li>
 <li><p>Autoencoder（输出层=输入层）</p>
 <blockquote>
@@ -464,11 +469,13 @@
 </blockquote>
 </li>
 </ul>
+<p>对比Logistics Regression 跟 Softmax Regression，在Logistics Regression 中<br>$$<br>P(y^{(i)} = k | x^{(i)} ; \theta) = y_k^{(i)} \log(h_\Theta(x^{(i)}))_k + (1- y_k^{(i)})\log(1-(h_\Theta(x^{(i)}))_k<br>$$<br>在Softmax Regression中，$P(y^{(i)} = k | x^{(i)} ; \theta) = \frac{\exp(\theta^{(k)\top} x^{(i)})}{\sum_{j=1}^K \exp(\theta^{(j)\top} x^{(i)}) }$，因此Logtistic Regression 也可以写为以下的形式：<br>$$<br>\begin{align}<br>J(\theta) &amp;= - \left[ \sum_{i=1}^m   (1-y^{(i)}) \log (1-h_\theta(x^{(i)})) + y^{(i)} \log h_\theta(x^{(i)}) \right] \\<br>&amp;= - \left[ \sum_{i=1}^{m} \sum_{k=0}^{1} 1\left\{y^{(i)} = k\right\} \log P(y^{(i)} = k | x^{(i)} ; \theta) \right]<br>\end{align}<br>$$</p>
 <h5 id="logistic-regression-cost-function-regularization"><a href="#logistic-regression-cost-function-regularization" class="headerlink" title="logistic regression cost function regularization"></a>logistic regression cost function regularization</h5><p>$$<br>J(\theta) = -\frac{1}{m} \sum_{i=1}^m y^{(i)}\log(h_\theta(x^{(i)}) ) +(1-y^{(i)})\log(1-h_\theta(x^{(i)})) + \frac{\lambda}{2m} \sum_{j=1}^n \theta_j^2<br>$$</p>
 <h5 id="neural-network-regularization"><a href="#neural-network-regularization" class="headerlink" title="neural network regularization"></a>neural network regularization</h5><ul>
 <li><p>输出层采用Logistic Regression<br>$$<br>J(\Theta) = -\frac{1}{m}\Bigg[\sum_{i=1}^m\sum_{k=1}^Ky_k^{(i)} \log(h_\Theta(x^{(i)}))_k + (1- y_k^{(i)})\log(1-(h_\Theta(x^{(i)}))_k)\Bigg] + \frac{\lambda}{2m} \sum_{l=1}^{L-1}\sum_{i=1}^{s_l}\sum_{j=1}^{s_{l+1}}(\Theta_{ji}^{(l)})^2<br>$$</p>
 </li>
-<li><p>输出层采用 Softmax Regression<br>$$<br>J(\theta ) = - \Bigg[\sum^m_{i=1}\sum^K_{k=1}1(y^{(i)}=k) \frac{e^{(\theta^k)^Tx_i}}{\sum^K_{k=1}e^{(\theta^k)^Tx_i}}\Bigg] + \frac{\lambda}{2}\sum^K_{k=1}\sum^n_{j=1}\theta^2_{kj}<br>$$</p>
+<li><p>输出层采用 Softmax Regression<br>$$<br>J(\theta) = -\left [ \sum_{i=1}^{m} \sum_{k=1}^{K}  1\left\{y^{(i)} = k\right\} \log \frac{\exp(\theta^{(k)\top} x^{(i)})}{\sum_{j=1}^K \exp(\theta^{(j)\top}x^{(i)})}\right]+\frac{\lambda}{2}\sum^K_{k=1}\sum^n_{j=1}\theta^2_{kj}<br>$$</p>
+<p>$$<br>\nabla_{\theta^{(k)}} J(\theta) = - \frac{1}{m} \sum_{i=1}^{m}{ \left[ x^{(i)} \left( 1\{ y^{(i)} = k\}  - P(y^{(i)} = k | x^{(i)}; \theta) \right) \right]  } + \lambda\theta^{(k)}<br>$$</p>
 </li>
 <li><p>Autoencoder（输出层=输入层）</p>
 <blockquote>
@@ -539,7 +546,7 @@
 <li><a href="https://zhuanlan.zhihu.com/p/21462488?refer=intelligentunit" target="_blank" rel="external">CS231n课程翻译笔记</a></li>
 <li><a href="http://cs231n.github.io/neural-networks-1/#actfun" target="_blank" rel="external">CS231n</a></li>
 <li><a href="http://www.jianshu.com/p/c69cd43c537a" target="_blank" rel="external">神经网络</a></li>
-<li><a href="http://ufldl.stanford.edu/tutorial/" target="_blank" rel="external">UFLDL Tutorial</a></li>
+<li><a href="http://ufldl.stanford.edu/tutorial/supervised/SoftmaxRegression/" target="_blank" rel="external">UFLDL Tutorial</a></li>
 <li><a href="http://speech.ee.ntu.edu.tw/~tlkagk/courses_ML17.html" target="_blank" rel="external">Machine Learning</a></li>
 </ul>
 
