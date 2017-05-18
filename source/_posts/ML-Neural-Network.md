@@ -35,7 +35,15 @@ tags:
 
 * softmax 
 
-  softmax函数又称为归一化指数函数，他将一个含任意实数的$k$维向量$z$映射到另外一个$k$维实向量$\sigma(z)$中，使得每一个元素的范围都在$(0,1)$之间，并且所有元素的和为1，$\sigma(z)_j = \frac{e^{z_j}}{\sum^K_{k=1}e^{z_k}}$ ，$j = 1,2\cdots,K$。
+  softmax函数又称为归一化指数函数，他将一个含任意实数的$k$维向量$z$映射到另外一个$k$维实向量$\sigma(z)$中，使得每一个元素的范围都在$(0,1)$之间，并且所有元素的和为1。
+  $$
+  \begin{split}
+  \sigma(z)_j =&  \frac {\exp (z_j)}{\sum^K_{k=1}exp(z_k)} \\
+  \\j =& 1,2\cdots,K
+
+  \end{split}
+  $$
+  ​
   $$
   \begin{align}
   h_\theta(x) =
@@ -118,7 +126,7 @@ h_\theta(x^{(i)}) &=
 \begin{bmatrix}
 \exp( \vec{0}^{\top} x^{(i)} ) \\
 \exp( ( {\theta^{(2)}-\theta^{(1)}})^{\top} x^{(i)} )
-\end{bmatrix}\\
+\end{bmatrix}\\	
 \\&=
 \begin{bmatrix}
 \frac{1}{ 1 + \exp( ( {\theta^{(2)}-\theta^{(1)}})^{\top} x^{(i)} ) } \\
