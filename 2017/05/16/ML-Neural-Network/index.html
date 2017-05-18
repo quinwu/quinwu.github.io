@@ -104,7 +104,7 @@
 <meta property="og:image" content="http://yoursite.com/2017/05/16/ML-Neural-Network/feedforward.png">
 <meta property="og:image" content="http://yoursite.com/2017/05/16/ML-Neural-Network/Neural2_4Layer.png">
 <meta property="og:image" content="http://yoursite.com/2017/05/16/ML-Neural-Network/backpropagation.png">
-<meta property="og:updated_time" content="2017-05-18T09:58:53.000Z">
+<meta property="og:updated_time" content="2017-05-18T10:00:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小记 Neural Network">
 <meta name="twitter:description" content="人工神经网络在机器学习和认知科学领域，人工神经网络（artificial neural network，缩写ANN），简称神经网络（neural network，缩写NN），是一种模仿生物神经网络(动物的中枢神经系统，特别是大脑)的结构和功能的数学模型或计算模型，用于对函数进行估计或近似。神经网络由大量的人工神经元联结进行计算。大多数情况下人工神经网络能在外界信息的基础上改变内部结构，是一种自适应">
@@ -428,7 +428,7 @@
 <p><img src="sigmoid.jpeg" alt="sigmoid function"></p>
 </li>
 <li><p>softmax </p>
-<p>softmax函数又称为归一化指数函数，他将一个含任意实数的$k$维向量$z$映射到另外一个$k$维实向量$\sigma(z)$中，使得每一个元素的范围都在$(0,1)$之间，并且所有元素的和为1。<br>$$<br>\begin{split}<br>\sigma(z)_j =&amp;  \frac {\exp (z_j)}{\sum^K_{k=1}exp(z_k)} \\<br>\\ j =&amp; 1,2\cdots,K<br>\end{split}​<br>$$<br>$$<br>\begin{align}<br>h_\theta(x) =<br>\begin{bmatrix}<br>P(y = 1 | x; \theta) \\<br>P(y = 2 | x; \theta) \\<br>\vdots \\<br>P(y = K | x; \theta)<br>\end{bmatrix}<br>=<br>\frac{1}{ \sum_{j=1}^{K}{\exp(\theta^{(j)\top} x) }}<br>\begin{bmatrix}<br>\exp(\theta^{(1)\top} x ) \\<br>\exp(\theta^{(2)\top} x ) \\<br>\vdots \\<br>\exp(\theta^{(K)\top} x ) \\<br>\end{bmatrix}<br>\end{align}<br>$$</p>
+<p>softmax函数又称为归一化指数函数，他将一个含任意实数的$k$维向量$z$映射到另外一个$k$维实向量$\sigma(z)$中，使得每一个元素的范围都在$(0,1)$之间，并且所有元素的和为1。<br>$$<br>\begin{align}<br>\sigma(z)_j =&amp;  \frac {\exp (z_j)}{\sum^K_{k=1}exp(z_k)} \\<br>\\ j =&amp; 1,2\cdots,K<br>\end{align}<br>$$<br>$$<br>\begin{align}<br>h_\theta(x) =<br>\begin{bmatrix}<br>P(y = 1 | x; \theta) \\<br>P(y = 2 | x; \theta) \\<br>\vdots \\<br>P(y = K | x; \theta)<br>\end{bmatrix}<br>=<br>\frac{1}{ \sum_{j=1}^{K}{\exp(\theta^{(j)\top} x) }}<br>\begin{bmatrix}<br>\exp(\theta^{(1)\top} x ) \\<br>\exp(\theta^{(2)\top} x ) \\<br>\vdots \\<br>\exp(\theta^{(K)\top} x ) \\<br>\end{bmatrix}<br>\end{align}<br>$$</p>
 <p>$$<br>\theta = \left[\begin{array}{cccc}| &amp; | &amp; | &amp; | \\<br>\theta^{(1)} &amp; \theta^{(2)} &amp; \cdots &amp; \theta^{(K)} \\<br>| &amp; | &amp; | &amp; |<br>\end{array}\right].<br>$$</p>
 <p>softmax函数实际上是有限项离散概率分布的梯度对数归一化。</p>
 <p>Softmax Regression 有一个不寻常的特点：它有一个“冗余”的参数集。假设我们在$\theta^{(k)}$中减去$\psi$时，不影响原函数的预测结果。这表明前面的 softmax 回归模型中存在冗余的参数， Softmax 模型被过度参数化了<code>overparameterized</code>。对于任意一个用于拟合数据的假设函数，可以求出多组参数值，这些参数得到的是完全相同的假设函数 $h_\theta(x)$。如下所示，<br>$$<br>\begin{split}<br>P(y^{(i)} = k | x^{(i)} ; \theta)<br>&amp;= \frac{\exp((\theta^{(k)}-\psi)^\top x^{(i)})}{\sum_{j=1}^K \exp( (\theta^{(j)}-\psi)^\top x^{(i)})}  \\<br>&amp;= \frac{\exp(\theta^{(k)\top} x^{(i)}) \exp(-\psi^\top x^{(i)})}{\sum_{j=1}^K \exp(\theta^{(j)\top} x^{(i)}) \exp(-\psi^\top x^{(i)})} \\<br>&amp;= \frac{\exp(\theta^{(k)\top} x^{(i)})}{\sum_{j=1}^K \exp(\theta^{(j)\top} x^{(i)})}.<br>\end{split}<br>$$</p>
