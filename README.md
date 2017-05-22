@@ -1,4 +1,15 @@
-# 部署信息
+## 为什么会有这个项目
+
+这个项目是自己用github pages 搭建的一个静态[blog](quinwu.org)。master分支为为blog的页面部署的相关js，html文件，hexo分支为本地的一些源文件，记录下本地的一些配置信息跟博文的*.md源文件，保证在其他的电脑上可以无差别的部署。
+
+这个博客的部署要感谢
+
+- [hexo](https://hexo.io/) 一个快速，简单 ，文档的静态博客框架。
+- [next](http://theme-next.iissnan.com/) 简单，精巧的Hexo 主题
+
+
+
+## 部署信息
 
 ```shell
 #hexo Markdown file
