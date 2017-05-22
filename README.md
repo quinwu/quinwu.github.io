@@ -13,8 +13,8 @@
 
 感谢
 
-- [hexo](https://hexo.io/) 一个快速，简单 ，文档的静态博客框架
-- [next](http://theme-next.iissnan.com/)  简单，精巧的Hexo 主题
+- [Hexo](https://hexo.io/) 一个快速，简单 ，文档的静态博客框架
+- [Next](http://theme-next.iissnan.com/)  简单，精巧的Hexo 主题
 
 
 
