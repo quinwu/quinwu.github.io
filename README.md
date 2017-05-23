@@ -1,12 +1,12 @@
 ## 为什么会有这个项目
 
-这个项目是自己用github pages 搭建的一个静态[blog](quinwu.org)。
+这个项目是自己用github pages 搭建的一个静态[blog](http://quinwu.org)。
 
 这个项目共有两个分支：
 
 - master 
-  - master分支部署的Hexo 生成的相关js，html文件。github pages 将master分支上的静态页面在[quinwu.github.io](quinwu.org)上显示出来，同时将该域名绑定到自己的独立域名[quinwu.org](quinwu.org)上。
-  - 由于[一些不可描述的原因](https://en.wikipedia.org/wiki/Great_Firewall)，[某些地区](https://en.wikipedia.org/wiki/China)的同学（包括我）访问[quinwu.github.io](quinwu.org)的速度会比较慢，因此同样使用了[coding.net](https://coding.net/)的pages服务，部署了相同的镜像版本在[quinwu.coding.me](quinwu.coding.me)上，该域名同样绑定到了[quinwu.org](quinwu.org)上。
+  - master分支部署的Hexo 生成的相关js，html文件。github pages 将master分支上的静态页面在[quinwu.github.io](quinwu.github.io)上显示出来，同时将该域名绑定到自己的独立域名[quinwu.org](http://quinwu.org)上。
+  - 由于[一些不可描述的原因](https://en.wikipedia.org/wiki/Great_Firewall)，[某些地区](https://en.wikipedia.org/wiki/China)的同学（包括我）访问[quinwu.github.io](http://quinwu.github.io)的速度会比较慢，因此同样使用了[coding.net](https://coding.net/)的pages服务，部署了相同的镜像版本在[quinwu.coding.me](quinwu.coding.me)上，该域名同样绑定到了[quinwu.org](http://quinwu.org)上。
   - [某些地区](https://en.wikipedia.org/wiki/China)的同学访问时，会被定向到[quinwu.coding.me](quinwu.coding.me)源，其他地区的同学访问会被定向到[quinwu.github.io](quinwu.github.io)源。
 - hexo
   - hexo分支为本地的一些源文件，记录下本地的一些配置信息跟博文的*.md源文件，保证在其他的电脑上可以无差别的部署。
