@@ -99,7 +99,7 @@
 <meta property="og:description" content="Logistic Regression 对数几率回归接下来介绍下广义线性回归，也很简单，我们不再只用线性函数来模拟数据，而是在外层添加了一个单调可微函数$g(z)$，即$f(x_i) = g(wx_i+b) $ ，如果 $ g=ln(x) $，则这个广义线性回归就变成了对数线性回归，其本质就是给原来线性变换加上了一个非线性变换，使得模拟的函数有非线性的属性。但本质上的参数还是线性的，主体是内部线性">
 <meta property="og:image" content="http://yoursite.com/2017/05/05/ML-Logistic-Regression/sigmoid.png">
 <meta property="og:image" content="http://yoursite.com/2017/05/05/ML-Logistic-Regression/sigmoid2.png">
-<meta property="og:updated_time" content="2017-07-03T15:54:44.000Z">
+<meta property="og:updated_time" content="2017-07-03T16:06:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小记 Logistic Regression">
 <meta name="twitter:description" content="Logistic Regression 对数几率回归接下来介绍下广义线性回归，也很简单，我们不再只用线性函数来模拟数据，而是在外层添加了一个单调可微函数$g(z)$，即$f(x_i) = g(wx_i+b) $ ，如果 $ g=ln(x) $，则这个广义线性回归就变成了对数线性回归，其本质就是给原来线性变换加上了一个非线性变换，使得模拟的函数有非线性的属性。但本质上的参数还是线性的，主体是内部线性">
@@ -434,13 +434,9 @@
 <p>$$<br>p(Y = K| x) = \frac{1}{1+\sum_{k=1}^{K-1}e^{\theta_{k}^{T}x}}<br>$$</p>
 <h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
 <li>机器学习 周志华著</li>
-</ul>
-<ul>
 <li>统计学习方法 李航著</li>
 <li>Couresera Machine Learning Andrew-Ng </li>
 <li><a href="http://vividfree.github.io/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/2015/12/13/understanding-logistic-regression-using-odds" target="_blank" rel="external">understanding-logistic-regression-using-odds</a></li>
-</ul>
-<ul>
 <li><a href="http://daniellaah.github.io/2016/Machine-Learning-Andrew-Ng-My-Notes-Week-1-Linear-Regression-with-One-Variable.html" target="_blank" rel="external">Machine-Learning-Andrew-Ng-My-Notes</a></li>
 <li><a href="http://beader.me/2014/05/03/logistic-regression/" target="_blank" rel="external">logistic-regression</a></li>
 <li><a href="http://nooverfit.com/wp/8-%E7%BB%88%E4%BA%8E%E6%90%9E%E6%B8%85%E6%A5%9A%E4%BB%80%E4%B9%88%E6%98%AF%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92-%E5%AF%B9%E6%95%B0%E5%87%A0%E7%8E%87%E5%9B%9E%E5%BD%92-logistic-regression/" target="_blank" rel="external">终于搞清楚什么是逻辑回归-对数几率回归</a></li>
