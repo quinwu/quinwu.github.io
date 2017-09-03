@@ -499,7 +499,7 @@ Theta2_grad = delta_3' * a2 / m
 #### 参考文献
 
 * 机器学习 周志华著
-* Couresera Machine Learning Andrew-Ng s
+* Couresera Machine Learning Andrew-Ng
 * [维基百科 softmax函数](https://zh.wikipedia.org/wiki/Softmax%E5%87%BD%E6%95%B0)
 * [维基百科 人工神经网络](https://zh.wikipedia.org/wiki/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C)
 * [CS231n课程翻译笔记](https://zhuanlan.zhihu.com/p/21462488?refer=intelligentunit)
