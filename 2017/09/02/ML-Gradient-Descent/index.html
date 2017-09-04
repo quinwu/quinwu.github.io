@@ -97,7 +97,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/09/02/ML-Gradient-Descent/index.html">
 <meta property="og:site_name" content="Quin Wu Blog">
 <meta property="og:description" content="Gradient Descent（梯度下降法）是一个一阶最优化算法，又被称为最速下降法。通过Gradient Descent算法对函数上当前点对应梯度的反方向的指定步长进行迭代搜索，我们可以很快的找到一个Local Minimum（局部极小值）。如果是对当前点对应梯度的正方向进行迭代搜索，我们可以求得一个Local Maximum（局部最大值）。">
-<meta property="og:updated_time" content="2017-09-03T15:27:14.000Z">
+<meta property="og:updated_time" content="2017-09-04T04:25:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小记 Gradient Descent">
 <meta name="twitter:description" content="Gradient Descent（梯度下降法）是一个一阶最优化算法，又被称为最速下降法。通过Gradient Descent算法对函数上当前点对应梯度的反方向的指定步长进行迭代搜索，我们可以很快的找到一个Local Minimum（局部极小值）。如果是对当前点对应梯度的正方向进行迭代搜索，我们可以求得一个Local Maximum（局部最大值）。">
@@ -406,7 +406,7 @@
       
         <p>Gradient Descent（梯度下降法）是一个一阶最优化算法，又被称为最速下降法。通过Gradient Descent算法对函数上当前点对应梯度的反方向的指定步长进行迭代搜索，我们可以很快的找到一个Local Minimum（局部极小值）。如果是对当前点对应梯度的正方向进行迭代搜索，我们可以求得一个Local Maximum（局部最大值）。</p>
 <a id="more"></a>
-<p>在应用到机器学习算法的时候，我们通常采用Gradient Descent来对所采用的算法进行训练，是的loss函数的目标值达到最优。</p>
+<p>在应用到机器学习算法的时候，我们通常采用Gradient Descent来对所采用的算法进行训练，使得loss函数的目标值达到最优。</p>
 <p>以前面提到过的Linear Regression为例，假设函数为<br>$$<br>h_\theta(x) = \theta^Tx = \sum_{j=0}^n\theta_j x_j<br>$$<br>对应的损失函数loss为<br>$$<br>J(\theta) = \frac{1}{2m}\sum_{i=1}^m(h_\theta(x^{(i)}) - y^{(i)})^2<br>$$</p>
 <p>其中，$n$为训练样本的特征数量；$m$为训练样本数。</p>
 <h3 id="Batch-Gradient-Descent"><a href="#Batch-Gradient-Descent" class="headerlink" title="Batch Gradient Descent"></a>Batch Gradient Descent</h3><p>Batch Gradient Descent（批量梯度下降法，BGD）是 Gradient Descent（梯度下降法）的最基本形式，算法主要布置是：在更新每个参数的时候，都要使用所有的样本来进行更新。</p>
