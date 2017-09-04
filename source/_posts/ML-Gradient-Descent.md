@@ -12,7 +12,7 @@ Gradient Descent（梯度下降法）是一个一阶最优化算法，又被称�
 
 <!--more-->
 
-在应用到机器学习算法的时候，我们通常采用Gradient Descent来对所采用的算法进行训练，是的loss函数的目标值达到最优。
+在应用到机器学习算法的时候，我们通常采用Gradient Descent来对所采用的算法进行训练，使得loss函数的目标值达到最优。
 
 以前面提到过的Linear Regression为例，假设函数为
 $$
