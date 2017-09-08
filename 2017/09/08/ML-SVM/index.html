@@ -97,7 +97,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/09/08/ML-SVM/index.html">
 <meta property="og:site_name" content="Quin Wu 的演讲台">
 <meta property="og:description" content="支持向量机（support vector machines）SVM是一种二类分类模型。它的基本模型是定义在特征空间上的间隔最大的线性分类器，间隔最大使它有别于感知机，支持向量机还包括核技巧（kernal trick）这使它成为实质上的非线性分类器。">
-<meta property="og:updated_time" content="2017-09-08T09:19:23.000Z">
+<meta property="og:updated_time" content="2017-09-08T11:48:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小记 SVM">
 <meta name="twitter:description" content="支持向量机（support vector machines）SVM是一种二类分类模型。它的基本模型是定义在特征空间上的间隔最大的线性分类器，间隔最大使它有别于感知机，支持向量机还包括核技巧（kernal trick）这使它成为实质上的非线性分类器。">
@@ -347,6 +347,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -422,54 +444,27 @@
 <p>求解上式涉及到$\phi(x_i)^T\phi(x_j)$的计算，这是样本$x_i$与$x_j$映射到特征空间之后的内积，特征空间的维数很高，直接求解上式的难度很大，为了避开这个障碍，我们可以设想这样的一个函数<br>$$<br>\kappa(x_i,x_j) = \langle\phi(x_i),\phi(x_j)\rangle = \phi(x_i)^T\phi(x_j)<br>$$<br>使得$x_i$与$x_j$在特征空间的内积等于它们在原始空间上通过函数$\kappa(\cdot,\cdot)$来计算，这里的函数$\kappa(\cdot,\cdot)$就是核函数（kernel function）。将核函数带入最大分隔超平面模型后，<br>$$<br>\max_{\alpha} \sum^{m}_{i=1}\alpha_i - \frac{1}{2}\sum^m_{i=1}\sum^m_{j=1}\alpha_i \alpha_j y_i y_j \kappa(x_i,x_j)<br>$$</p>
 <p>$$<br>s.t. \quad \sum^m_{i=1} \alpha_i y_i = 0，\quad \alpha_i \ge0,\quad i =1,2,\cdots,m<br>$$</p>
 <p>求解后，可以得到<br>$$<br>\begin{align}<br>f(x) &amp;= w^T\phi(x) + b \\<br>\\&amp;= \sum_{i=1}^m\alpha_iy_i\phi(x_i)^T\phi(x) +b \\<br>\\ &amp; = \sum_{i=1}^m \alpha_i y_i \kappa(x,x_i) + b<br>\end{align}<br>$$</p>
-<h5 id="几种常见的核函数"><a href="#几种常见的核函数" class="headerlink" title="几种常见的核函数"></a>几种常见的核函数</h5><table>
-<thead>
-<tr>
-<th>名称</th>
-<th>表达式</th>
-<th>参数</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>线性核</td>
-<td>$$\kappa(x_i,x_j)= x^T_ix_j$$</td>
-<td></td>
-</tr>
-<tr>
-<td>多项式核</td>
-<td>$\kappa(x_i,x_j) = (x^T_ix_j)^d$</td>
-<td>$d\ge1$为多项式的次数</td>
-</tr>
-<tr>
-<td>高斯核</td>
-<td>$$\kappa(x_i,x_j) = \exp(-\frac{</td>
-<td></td>
-<td>x_i-x_j</td>
-<td></td>
-<td>^2}{2 \sigma^2})$$</td>
-<td>$\sigma&gt;0$为高斯核的带宽</td>
-</tr>
-<tr>
-<td>拉普拉斯核</td>
-<td>$$\kappa(x_i,x_j) = \exp(-\frac{</td>
-<td></td>
-<td>x_i-x_j</td>
-<td></td>
-<td>}{ \sigma})$$</td>
-<td>$\sigma&gt;0$</td>
-</tr>
-<tr>
-<td>Sigmoid核</td>
-<td>$$\kappa(x_i,x_j) = \tanh(\beta x_i^Tx_j+\theta)$$</td>
-<td>$\tanh$为双曲正切函数，$\beta &gt;0 ,\theta &lt;0$</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>上表来自周志华老师的《机器学习》一书</p>
+<h5 id="几种常见的核函数"><a href="#几种常见的核函数" class="headerlink" title="几种常见的核函数"></a>几种常见的核函数</h5><blockquote>
+<p>线性核</p>
 </blockquote>
-<p>常见核函数的组合也是核函数</p>
+<p>$$<br>\kappa(x_i,x_j) = x_i^Tx_j<br>$$</p>
+<blockquote>
+<p>多项式核</p>
+</blockquote>
+<p>$$<br>\kappa(x_i,x_j) =(x_i^T x_j)^d<br>$$</p>
+<blockquote>
+<p>高斯核</p>
+</blockquote>
+<p>$$<br>\kappa(x_i,x_j) = \exp (-\frac{||x_i-x_j||^2}{2\sigma^2})<br>$$</p>
+<blockquote>
+<p>拉普拉斯核</p>
+</blockquote>
+<p>$$<br>\kappa(x_i,x_j) = \exp (-\frac{||x_i-x_j||}{\sigma})<br>$$</p>
+<blockquote>
+<p>Sigmoid核</p>
+</blockquote>
+<p>$$<br>\kappa(x_i,x_j) = \tanh(\beta x_i^T x_j + \theta)<br>$$</p>
+<p>#####常见核函数的组合也是核函数</p>
 <blockquote>
 <p>todo</p>
 </blockquote>
