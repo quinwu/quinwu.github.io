@@ -1,7 +1,7 @@
 ---
 title: 小记 Neural Network
 date: 2017-5-16 20:34:50
-categories: 技术向
+categories: 笔记
 tags:
   - Machine Learning
   - 小记系列

@@ -1,7 +1,7 @@
 ---
 title: 小记 Logistic Regression
 date: 2017-5-5 20:55:50
-categories: 技术向
+categories: 笔记
 tags:
   - Machine Learning
   - 小记系列
