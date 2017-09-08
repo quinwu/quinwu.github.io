@@ -1,11 +1,12 @@
 ---
 title: 小记 SVM
-date: 2017-09-08 16:43:02
-categorise: 笔记
 tags:
   - Machine Learning
   - 小记系列
+categorise: 笔记
+date: 2017-09-08 16:43:02
 ---
+
 
 支持向量机（support vector machines）SVM是一种二类分类模型。它的基本模型是定义在特征空间上的间隔最大的线性分类器，间隔最大使它有别于感知机，支持向量机还包括核技巧（kernal trick）这使它成为实质上的非线性分类器。<!--more-->
 
