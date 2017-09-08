@@ -3,7 +3,7 @@ title: 小记 SVM
 tags:
   - Machine Learning
   - 小记系列
-categorise: 笔记
+categories: 笔记
 date: 2017-09-08 16:43:02
 ---
 
@@ -15,6 +15,8 @@ date: 2017-09-08 16:43:02
 分类超平面对应于方程$w \cdot x + b = 0 $
 
 当训练数据集线性可分的时候，存在无穷个分离超平面将两类数据正确分开。线性可分支持向量机利用间隔最大化求最优分离超平面，这时，解是唯一的。
+
+
 
 #####函数间隔
 
@@ -29,6 +31,8 @@ date: 2017-09-08 16:43:02
 > \hat{\gamma} = \min_{i=1,\cdots,N} \hat{\gamma_i}
 > $$
 >
+
+
 
 #####几何间隔
 
@@ -57,6 +61,8 @@ $$
 \gamma = \frac{\hat{\gamma}}{\| w\|}
 $$
 
+
+
 #####最大间隔分离超平面
 
 $$
@@ -66,6 +72,8 @@ $$
 $$
 s.t. \quad y_i \lgroup \frac{w}{\| w \|} \cdot x_i + \frac{b}{\| w \|} \rgroup \ge \gamma ,\quad i = 1,2,\cdots,N
 $$
+
+
 
 #####对偶问题
 
@@ -98,6 +106,8 @@ $$
 $$
 0=\sum^N_{i=1}\alpha_iy_i
 $$
+
+
 
 #####SMO算法
 
@@ -155,17 +165,37 @@ $$
 
 ##### 几种常见的核函数
 
-| 名称       | 表达式                                      | 参数                                   |
-| -------- | ---------------------------------------- | ------------------------------------ |
-| 线性核      | $$\kappa(x_i,x_j)= x^T_ix_j$$            |                                      |
-| 多项式核     | $\kappa(x_i,x_j) = (x^T_ix_j)^d$         | $d\ge1$为多项式的次数                       |
-| 高斯核      | $$\kappa(x_i,x_j) = \exp(-\frac{||x_i-x_j||^2}{2 \sigma^2})$$ | $\sigma>0$为高斯核的带宽                    |
-| 拉普拉斯核    | $$\kappa(x_i,x_j) = \exp(-\frac{||x_i-x_j||}{ \sigma})$$ | $\sigma>0$                           |
-| Sigmoid核 | $$\kappa(x_i,x_j) = \tanh(\beta x_i^Tx_j+\theta)$$ | $\tanh$为双曲正切函数，$\beta >0 ,\theta <0$ |
+> 线性核
 
-> 上表来自周志华老师的《机器学习》一书
+$$
+\kappa(x_i,x_j) = x_i^Tx_j
+$$
 
-常见核函数的组合也是核函数
+> 多项式核
+
+$$
+\kappa(x_i,x_j) =(x_i^T x_j)^d
+$$
+
+> 高斯核
+
+$$
+\kappa(x_i,x_j) = \exp (-\frac{||x_i-x_j||^2}{2\sigma^2})
+$$
+
+> 拉普拉斯核
+
+$$
+\kappa(x_i,x_j) = \exp (-\frac{||x_i-x_j||}{\sigma})
+$$
+
+> Sigmoid核
+
+$$
+\kappa(x_i,x_j) = \tanh(\beta x_i^T x_j + \theta)				
+$$
+
+#####常见核函数的组合也是核函数
 
 > todo
 
