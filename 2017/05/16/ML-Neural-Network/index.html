@@ -104,7 +104,7 @@
 <meta property="og:image" content="http://yoursite.com/2017/05/16/ML-Neural-Network/feedforward.png">
 <meta property="og:image" content="http://yoursite.com/2017/05/16/ML-Neural-Network/Neural2_4Layer.png">
 <meta property="og:image" content="http://yoursite.com/2017/05/16/ML-Neural-Network/backpropagation.png">
-<meta property="og:updated_time" content="2017-09-08T09:16:28.000Z">
+<meta property="og:updated_time" content="2017-09-09T13:10:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小记 Neural Network">
 <meta name="twitter:description" content="人工神经网络在机器学习和认知科学领域，人工神经网络（artificial neural network，缩写ANN），简称神经网络（neural network，缩写NN），是一种模仿生物神经网络(动物的中枢神经系统，特别是大脑)的结构和功能的数学模型或计算模型，用于对函数进行估计或近似。">
@@ -539,12 +539,12 @@
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">delta_3 = h - Y;</div><div class="line">delta_2 = delta_3 * Theta2 .* a2 .*(<span class="number">1</span> - a2);</div><div class="line">delta_2 = delta_2(:,<span class="number">2</span>:<span class="keyword">end</span>);</div><div class="line"></div><div class="line">Theta1_grad = delta_2' * a1 / m;</div><div class="line">Theta2_grad = delta_3' * a2 / m</div></pre></td></tr></table></figure>
 <p>​                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </p>
 <h4 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h4><ul>
-<li>机器学习 周志华著</li>
-<li>Couresera Machine Learning Andrew-Ng</li>
+<li><a href="https://www.amazon.cn/%E5%9B%BE%E4%B9%A6/dp/B01ARKEV1G/ref=sr_1_1?ie=UTF8&amp;qid=1504962294&amp;sr=8-1&amp;keywords=%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0" target="_blank" rel="external">《机器学习》周志华老师著</a></li>
+<li><a href="https://www.amazon.cn/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95-%E6%9D%8E%E8%88%AA/dp/B007TSFMTA/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1504962309&amp;sr=1-1&amp;keywords=%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95" target="_blank" rel="external">《统计学习方法》李航老师著</a></li>
 <li><a href="https://zh.wikipedia.org/wiki/Softmax%E5%87%BD%E6%95%B0" target="_blank" rel="external">维基百科 softmax函数</a></li>
 <li><a href="https://zh.wikipedia.org/wiki/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C" target="_blank" rel="external">维基百科 人工神经网络</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/21462488?refer=intelligentunit" target="_blank" rel="external">CS231n课程翻译笔记</a></li>
-<li><a href="http://cs231n.github.io/neural-networks-1/#actfun" target="_blank" rel="external">CS231n</a></li>
+<li><a href="http://cs231n.github.io/neural-networks-1/#actfun" target="_blank" rel="external">CS231n Convolution Neual Networks for Visual Recognition</a></li>
 <li><a href="http://www.jianshu.com/p/c69cd43c537a" target="_blank" rel="external">神经网络</a></li>
 <li><a href="http://ufldl.stanford.edu/tutorial/supervised/SoftmaxRegression/" target="_blank" rel="external">UFLDL Tutorial</a></li>
 <li><a href="http://speech.ee.ntu.edu.tw/~tlkagk/courses_ML17.html" target="_blank" rel="external">Machine Learning</a></li>
