@@ -38,7 +38,7 @@ date: 2017-09-08 16:43:02
 >
 >对于给定的训练数据集$T$和超平面$(w,b)$，定义超平面$(w,b)$关于样本点$(x_i,y_i)$的几何间隔
 >$$
->{\gamma_i} = y_i \lgroup \frac{w}{\| w \|} \cdot x_i + \frac{b}{\| w \|} \rgroup
+>{\gamma_i} = y_i \lgroup \frac{w}{|| w ||} \cdot x_i + \frac{b}{|| w ||} \rgroup
 >$$
 >其中$\|w\|$为$w$的$L2$范数
 >
@@ -50,11 +50,11 @@ date: 2017-09-08 16:43:02
 
 因此函数间隔$\hat{\gamma}$跟几何间隔$\gamma$的关系为
 $$
-\gamma_i = \frac{\hat{\gamma_i}}{\| w \|}
+\gamma_i = \frac{\hat{\gamma_i}}{|| w ||}
 $$
 
 $$
-\gamma = \frac{\hat{\gamma}}{\| w\|}
+\gamma = \frac{\hat{\gamma}}{|| w ||}
 $$
 
 ##### 最大间隔分离超平面（硬间隔最大化）
@@ -65,7 +65,7 @@ $$
 $$
 
 $$
-s.t. \quad y_i \lgroup \frac{w}{\| w \|} \cdot x_i + \frac{b}{\| w \|} \rgroup \ge \gamma ,\quad i = 1,2,\cdots,N
+s.t. \quad y_i \lgroup \frac{w}{|| w ||} \cdot x_i + \frac{b}{|| w ||} \rgroup \ge \gamma ,\quad i = 1,2,\cdots,N
 $$
 
 将函数间隔$\hat{\gamma}$跟几何间隔$\gamma$的关系带入上述最优化问题，可以将上述问题转化为
@@ -93,7 +93,7 @@ $$
 引入拉格朗日乘子$\alpha_i$建立线性可分支持向量机的拉格朗日函数，
 
 $$
-L(w,b,\alpha) = \frac{1}{2}\|w\|^2 + \sum^N_{i=1}\alpha_i(1-y_i(w\cdot x_i+b))
+L(w,b,\alpha) = \frac{1}{2}|| w ||^2 + \sum^N_{i=1}\alpha_i(1-y_i(w\cdot x_i+b))
 $$
 其中$\alpha=(\alpha_1;\alpha_2;\cdots;N)$
 
