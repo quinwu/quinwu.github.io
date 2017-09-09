@@ -498,13 +498,14 @@ Theta2_grad = delta_3' * a2 / m
 
 #### 参考文献
 
-* 机器学习 周志华著
-* Couresera Machine Learning Andrew-Ng
+* [《机器学习》周志华老师著](https://www.amazon.cn/%E5%9B%BE%E4%B9%A6/dp/B01ARKEV1G/ref=sr_1_1?ie=UTF8&qid=1504962294&sr=8-1&keywords=%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0)
+* [《统计学习方法》李航老师著](https://www.amazon.cn/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95-%E6%9D%8E%E8%88%AA/dp/B007TSFMTA/ref=sr_1_1?s=books&ie=UTF8&qid=1504962309&sr=1-1&keywords=%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95)
 * [维基百科 softmax函数](https://zh.wikipedia.org/wiki/Softmax%E5%87%BD%E6%95%B0)
 * [维基百科 人工神经网络](https://zh.wikipedia.org/wiki/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C)
 * [CS231n课程翻译笔记](https://zhuanlan.zhihu.com/p/21462488?refer=intelligentunit)
-* [CS231n](http://cs231n.github.io/neural-networks-1/#actfun)
+* [CS231n Convolution Neual Networks for Visual Recognition](http://cs231n.github.io/neural-networks-1/#actfun)
 * [神经网络](http://www.jianshu.com/p/c69cd43c537a)
 * [UFLDL Tutorial](http://ufldl.stanford.edu/tutorial/supervised/SoftmaxRegression/)
 * [Machine Learning](http://speech.ee.ntu.edu.tw/~tlkagk/courses_ML17.html)
+
 

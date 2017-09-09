@@ -198,8 +198,8 @@ theta = pinv(X'*x)*x'*y;
 
 ### 参考文献
 
-* 机器学习 周志华著
-* 统计学习方法 李航著
+* [《机器学习》周志华老师著](https://www.amazon.cn/%E5%9B%BE%E4%B9%A6/dp/B01ARKEV1G/ref=sr_1_1?ie=UTF8&qid=1504962294&sr=8-1&keywords=%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0)
+* [《统计学习方法》李航老师著](https://www.amazon.cn/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95-%E6%9D%8E%E8%88%AA/dp/B007TSFMTA/ref=sr_1_1?s=books&ie=UTF8&qid=1504962309&sr=1-1&keywords=%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95)
 * Couresera Machine Learning Andrew-Ng 
 * [Machine-Learning-Andrew-Ng-My-Notes](http://daniellaah.github.io/2016/Machine-Learning-Andrew-Ng-My-Notes-Week-1-Linear-Regression-with-One-Variable.html)
 
