@@ -63,7 +63,7 @@
   <entry>
     <title><![CDATA[小记 Machine Learning 系列 目录]]></title>
     <url>%2F2017%2F05%2F01%2FML-directory%2F</url>
-    <content type="text"><![CDATA[小记 Machine Learning 系列 目录 小记 Linear Regression 小记 Logistic Regression 小记 Neural Network 小记 Gradient Descent 小记 SVM]]></content>
+    <content type="text"><![CDATA[小记 Machine Learning 系列 目录 小记 Linear Regression 小记 Logistic Regression 小记 Neural Network 小记 Gradient Descent 小记 SVM 一点小吐槽，这个系列还是越写越变成了读书笔记？本来是希望写写自己的心得，到后面发现自己写的东西都是对书上的东西的理解，既然是这样的话，就争取把笔记做好。 自己在读的资料主要是下面的一些 《机器学习》周志华老师著 《统计学习方法》李航老师著 CS231n Convolution Neual Networks for Visual Recognition UFLDL Tutorial Couresera Machine Learning Andrew-Ng 之后的计划会继续读一下 《Pattern Recognition and Machine Learning》M. Jordan J. Kleinberg B. Scho ̈lkopf 著 《Deep Learning》Ian Goodfellow Yoshua Bengio Aaron Courville 著 两本大作，可以回头来对自己所写有一个更好的补充。：）]]></content>
       <categories>
         <category>笔记</category>
       </categories>
