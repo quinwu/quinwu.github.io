@@ -34,4 +34,4 @@ comments: false
 - 《Pattern Recognition and Machine Learning》M. Jordan J. Kleinberg B. Scho ̈lkopf 著
 - 《Deep Learning》Ian Goodfellow  Yoshua Bengio  Aaron Courville 著
 
-两本大作，希望可以回头来对自己所写有一个更好的补充。：）
+两本大作，希望可以回头来对这个系列的所写有一个更好的补充。：）
