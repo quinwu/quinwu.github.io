@@ -101,7 +101,7 @@
 <meta property="og:image" content="http://yoursite.com/2017/09/08/ML-SVM/SoftMargin.png">
 <meta property="og:image" content="http://yoursite.com/2017/09/08/ML-SVM/loss.png">
 <meta property="og:image" content="http://yoursite.com/2017/09/08/ML-SVM/KernelTrick.png">
-<meta property="og:updated_time" content="2017-09-09T13:09:33.000Z">
+<meta property="og:updated_time" content="2017-09-09T13:13:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小记 SVM">
 <meta name="twitter:description" content="支持向量机（support vector machines）SVM是一种二类分类模型。它的基本模型是定义在特征空间上的间隔最大的线性分类器，间隔最大使它有别于感知机，支持向量机还包括核技巧（kernal trick）这使它成为实质上的非线性分类器。">
@@ -419,20 +419,20 @@
 <h5 id="几何间隔"><a href="#几何间隔" class="headerlink" title="几何间隔"></a>几何间隔</h5><p>函数间隔可以表示分类的正确性与确信度，但是如果在选择超平面的时候成比例的改变$w$，$b$，超平面并没有发生改变，函数间隔却发生了变化。这个时候，就需要我们对超平面的法向量$w$加以约束，使得间隔是确定的，这是的函数间隔就变成了几何间隔（geometric margin）</p>
 <blockquote>
 <p>其中$||w||$为$w$的$L2$范数</p>
-<p>对于给定的训练数据集$T$和超平面$(w,b)$，定义超平面$(w,b)$关于样本点$(x_i,y_i)$的几何间隔<br>$$<br>{\gamma_i} = y_i \lgroup \frac{w}{| w |} \cdot x_i + \frac{b}{| w |} \rgroup<br>$$<br>其中$|w|$为$w$的$L2$范数</p>
+<p>对于给定的训练数据集$T$和超平面$(w,b)$，定义超平面$(w,b)$关于样本点$(x_i,y_i)$的几何间隔<br>$$<br>{\gamma_i} = y_i \lgroup \frac{w}{|| w ||} \cdot x_i + \frac{b}{|| w ||} \rgroup<br>$$<br>其中$|w|$为$w$的$L2$范数</p>
 <p>定义超平面$(w,b)$关于训练集$T$的函数间隔为超平面$(w,b)$关于$T$中所有样本点$(x_i,y_i)$的几何间隔之最小值，<br>$$<br>\gamma = \min_{i=1,\cdots,N}\gamma_i<br>$$</p>
 </blockquote>
-<p>因此函数间隔$\hat{\gamma}$跟几何间隔$\gamma$的关系为<br>$$<br>\gamma_i = \frac{\hat{\gamma_i}}{| w |}<br>$$</p>
-<p>$$<br>\gamma = \frac{\hat{\gamma}}{| w|}<br>$$</p>
+<p>因此函数间隔$\hat{\gamma}$跟几何间隔$\gamma$的关系为<br>$$<br>\gamma_i = \frac{\hat{\gamma_i}}{|| w ||}<br>$$</p>
+<p>$$<br>\gamma = \frac{\hat{\gamma}}{|| w ||}<br>$$</p>
 <h5 id="最大间隔分离超平面（硬间隔最大化）"><a href="#最大间隔分离超平面（硬间隔最大化）" class="headerlink" title="最大间隔分离超平面（硬间隔最大化）"></a>最大间隔分离超平面（硬间隔最大化）</h5><p>求解一个几何间隔的最大分离超平面，可以表示为下面的最优化问题：<br>$$<br>\max_{w,b} \quad \gamma<br>$$</p>
-<p>$$<br>s.t. \quad y_i \lgroup \frac{w}{| w |} \cdot x_i + \frac{b}{| w |} \rgroup \ge \gamma ,\quad i = 1,2,\cdots,N<br>$$</p>
+<p>$$<br>s.t. \quad y_i \lgroup \frac{w}{|| w ||} \cdot x_i + \frac{b}{|| w ||} \rgroup \ge \gamma ,\quad i = 1,2,\cdots,N<br>$$</p>
 <p>将函数间隔$\hat{\gamma}$跟几何间隔$\gamma$的关系带入上述最优化问题，可以将上述问题转化为<br>$$<br>\max_{w,b} \frac{\hat{\gamma}}{||w||}<br>$$</p>
 <p>$$<br>s.t. \quad y_i(w \cdot x_i + b) \ge \hat{\gamma},\quad i=1,2,\cdots,N<br>$$</p>
 <p>函数间隔 $\hat{\gamma}$的取值不会影响到上述最优化问题的求解，因此我们取$\hat{\gamma} = 1$，同时注意，最大化$\frac{1}{||w||}$和最小化$\frac{1}{2}||w||^2$是等价的，于是可以继续将上式改写为<br>$$<br>\min_{w,b} \frac{1}{2} ||w||^2<br>$$</p>
 <p>$$<br>s.t. \quad y_i(w \cdot x_i + b ) \ge 1 ,\quad i=1,2,\cdots,N<br>$$</p>
 <h5 id="对偶问题"><a href="#对偶问题" class="headerlink" title="对偶问题"></a>对偶问题</h5><p>上述的最优化问题为线性可分支持向量机的原始最优化问题，直接求解不是很容易，我们利用拉格朗日对偶性，通过求解对偶问题来间接求得原始问题的最优解，同时可以很自认的引入核函数（Kernel Function），进而引出后续的非线性分类问题。</p>
 <p>引入拉格朗日乘子$\alpha_i$建立线性可分支持向量机的拉格朗日函数，</p>
-<p>$$<br>L(w,b,\alpha) = \frac{1}{2}|w|^2 + \sum^N_{i=1}\alpha_i(1-y_i(w\cdot x_i+b))<br>$$<br>其中$\alpha=(\alpha_1;\alpha_2;\cdots;N)$</p>
+<p>$$<br>L(w,b,\alpha) = \frac{1}{2}|| w ||^2 + \sum^N_{i=1}\alpha_i(1-y_i(w\cdot x_i+b))<br>$$<br>其中$\alpha=(\alpha_1;\alpha_2;\cdots;N)$</p>
 <p>将拉格朗日函数分别对$w$，$b$求偏导<br>$$<br>\nabla_wL(w,b,\alpha) = w - \sum_{i=1}^N \alpha_i x_i y_i = 0<br>$$</p>
 <p>$$<br>\nabla_b L(w,b,\alpha) = \sum^N_{i=1} \alpha_i y_i = 0<br>$$</p>
 <p>得<br>$$<br>w = \sum_{i=1}^N\alpha_iy_ix_i<br>$$</p>
