@@ -101,7 +101,7 @@
 <meta property="og:image" content="http://yoursite.com/2017/09/08/ML-SVM/SoftMargin.png">
 <meta property="og:image" content="http://yoursite.com/2017/09/08/ML-SVM/loss.png">
 <meta property="og:image" content="http://yoursite.com/2017/09/08/ML-SVM/KernelTrick.png">
-<meta property="og:updated_time" content="2017-09-09T12:55:00.000Z">
+<meta property="og:updated_time" content="2017-09-09T12:59:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小记 SVM">
 <meta name="twitter:description" content="支持向量机（support vector machines）SVM是一种二类分类模型。它的基本模型是定义在特征空间上的间隔最大的线性分类器，间隔最大使它有别于感知机，支持向量机还包括核技巧（kernal trick）这使它成为实质上的非线性分类器。">
@@ -437,10 +437,8 @@
 <p>$$<br>\nabla_b L(w,b,\alpha) = \sum^N_{i=1} \alpha_i y_i = 0<br>$$</p>
 <p>得<br>$$<br>w = \sum_{i=1}^N\alpha_iy_ix_i<br>$$</p>
 <p>$$<br>0=\sum^N_{i=1}\alpha_iy_i<br>$$</p>
-<p>带入拉格朗日函数得<br>$$<br>\begin{align}</p>
-<p>L(w,b,\alpha) &amp; = \frac{1}{2} \sum_{i=1}^N \sum_{j =1 }^N \alpha_i \alpha_j y_i y_j x_i x_j  + \sum_{i=1}^N \alpha_i (1 - y_i(x_i \sum_{j=1} ^ N \alpha_j y_j x_j+ b )) \\</p>
-<p>\\ &amp; = -\frac{1}{2} \sum^N_{i=1} \sum^N_{j=1} \alpha_i \alpha_j y_i y_j x_i x_j + \sum_{i=1}^N \alpha_i</p>
-<p>\end{align}<br>$$</p>
+<p>带入拉格朗日函数得</p>
+<p>$$<br>\begin{align}<br>L(w,b,\alpha) &amp; = \frac{1}{2} \sum_{i=1}^N \sum_{j =1 }^N \alpha_i \alpha_j y_i y_j x_i x_j  + \sum_{i=1}^N \alpha_i (1 - y_i(x_i \sum_{j=1} ^ N \alpha_j y_j x_j+ b )) \\<br>\\ &amp; = -\frac{1}{2} \sum^N_{i=1} \sum^N_{j=1} \alpha_i \alpha_j y_i y_j x_i x_j + \sum_{i=1}^N \alpha_i<br>\end{align}<br>$$</p>
 <p>$$<br>s.t. \quad \sum^N_{i=1} \alpha_i y_i = 0,\quad \alpha_i \ge 0,\quad i=1,2,\cdots,N<br>$$</p>
 <h5 id="SMO算法"><a href="#SMO算法" class="headerlink" title="SMO算法"></a>SMO算法</h5><p>SMO表示序列最小优化（Sequential Minimal Optimization）。SMO算法是将大优化问题分解为许多小优化问题来求解。SMO算法的目标是求出一系列$\alpha$跟$b$，一旦求出了$\alpha$，就很容易计算出权重向量$w$。</p>
 <h5 id="支持向量"><a href="#支持向量" class="headerlink" title="支持向量"></a>支持向量</h5><p>在线性可分的情况下，训练数据集中的样本点中与分离超平面距离最近的样本点构成了支持向量（support vector）。支持向量之间的距离成为间隔（margin）。间隔的大小取决于分离超平面的法向量$w$</p>
