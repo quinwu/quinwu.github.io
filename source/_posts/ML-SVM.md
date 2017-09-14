@@ -8,13 +8,13 @@ date: 2017-09-08 16:43:02
 ---
 
 
-支持向量机（support vector machines）SVM是一种二类分类模型。它的基本模型是定义在特征空间上的间隔最大的线性分类器，间隔最大使它有别于感知机，支持向量机还包括核技巧（kernal trick）这使它成为实质上的非线性分类器。<!--more-->
+支持向量机（support vector machines）SVM是一种二类分类模型。它的基本模型是定义在特征空间上的间隔最大的线性分类器，间隔最大使它有别于感知机，支持向量机还包括核技巧（kernal trick）这使它成为实质上的非线性分类器。支持向量机的学习的策略就是间隔最大化。<!--more--> 支持向量机的学习算法是求解凸二次规划的最优化算法。
 
 ### 线性可分支持向量机
 
-分类超平面对应于方程$w \cdot x + b = 0 $
+分隔超平面对应于方程$w \cdot x + b = 0 $
 
-当训练数据集线性可分的时候，存在无穷个分离超平面将两类数据正确分开。线性可分支持向量机利用间隔最大化求最优分离超平面，这时，解是唯一的。
+当训练数据集线性可分的时候，存在无穷个分离超平面将两类数据正确分开。线性可分支持向量机利用间隔最大化求最优分离超平面，这时，解是唯一的。存在性唯一性在这里不做证明，有兴趣的可以参考李航老师的《统计学习方法》。
 
 ##### 函数间隔
 
@@ -239,6 +239,8 @@ $$
 
 在上面的线性支持向量机的讨论中，假设训练样本的数据集都是线性可分的，存在一个划分超平面可以将数据集给正确分类。 对于非线性的问题往往不好求解，我们还是希望能够转化为线性分类问题来求解，通过将样本从原始空间映射到一个更高的特征空间上，使得训练样本在高维的特征空间上线性可分。
 
+因此用线性分类法求解非线性分类问题的分为两步，首先使用一个变换将原输入空间的数据映射到特征空间，然后在特征空间上用线性分类学习方法从训练数据中学习分类模型。核技巧就属于这样的方法。
+
 ![kernel trick](KernelTrick.png)
 
 >上图来自周志华老师《机器学习》一书中的 图6.3 异或问题与非线性映射
@@ -331,8 +333,109 @@ $$
 
 
 
+
+### SVM 以Hinge Loss 为例
+
+##### Hinge Loss Function
+
+$$
+L_i = \sum_{j\ne y_i} [\max (0,x_iw_j - x_iw_{y_i} + \Delta)]
+$$
+
+- $i$  iterates over all N examples .
+- $j$ iterates over all C classes .
+- $L_i$ is loss for classifiying a single example $x_i$ (row vector) .
+- $w_j$ is the weights (column vector) for computing the score of class $j$ .
+- $y_i$ is the index of the correct class of $x_i$ .
+- $\Delta$ is a margin parameter
+
+
+$$
+\nabla_{w} L_i 
+  =
+  \begin{bmatrix}
+    \frac{dL_i}{dw_1} & \frac{dL_i}{dw_2} & \cdots & \frac{dL_i}{dw_C} 
+  \end{bmatrix}
+  = 
+  \begin{bmatrix}
+    \frac{dL_i}{dw_{11}} & \frac{dL_i}{dw_{21}} & \cdots & \frac{dL_i}{dw_{y_i1}} & \cdots & \frac{dL_i}{dw_{C1}} \\
+    \vdots & \ddots \\
+    \frac{dL_i}{dw_{1D}} & \frac{dL_i}{dw_{2D}} & \cdots & \frac{dL_i}{dw_{y_iD}} & \cdots & \frac{dL_i}{dw_{CD}} 
+  \end{bmatrix}
+$$
+
+$$
+\begin{align*}
+L_i = &\max(0, x_{i1}w_{11} + x_{i2}w_{12} \ldots + x_{iD}w_{1D} - x_{i1}w_{y_i1} - x_{i2}w_{y_i2} \ldots - x_{iD}w_{y_iD} + \Delta) + \\
+ &\max(0, x_{i1}w_{21} + x_{i2}w_{22} \ldots + x_{iD}w_{2D} - x_{i1}w_{y_i1} - x_{i2}w_{y_i2} \ldots - x_{iD}w_{y_iD} + \Delta) + \\
+&\quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \vdots \\
+&\max(0, x_{i1}w_{C1} + x_{i2}w_{C2} \ldots + x_{iD}w_{CD} - x_{i1}w_{y_i1} - x_{i2}w_{y_i2} \ldots - x_{iD}w_{y_iD} + \Delta)
+\end{align*} 
+$$
+For a general case , if $(x_iw_1 - x_iw_{y_i} + \Delta )\gt 0$
+$$
+\begin{equation}
+\frac{dL_i}{dw_{11}} = x_{i1}
+\end{equation}
+$$
+using an indicator function:
+$$
+\begin{equation}
+\frac{dL_i}{dw_{11}} = \mathbb{1}(x_iw_1 - x_iw_{y_i} + \Delta > 0) x_{i1}
+\end{equation}
+$$
+同样的
+$$
+\begin{equation}
+\frac{dL_i}{dw_{12}} = \mathbb{1}(x_iw_1 - x_iw_{y_i} + \Delta > 0) x_{i2} \\
+\frac{dL_i}{dw_{13}} = \mathbb{1}(x_iw_1 - x_iw_{y_i} + \Delta > 0) x_{i3} \\
+\vdots \\
+\frac{dL_i}{dw_{1D}} = \mathbb{1}(x_iw_1 - x_iw_{y_i} + \Delta > 0) x_{iD}
+\end{equation}
+$$
+因此
+$$
+\begin{align*}
+\frac{dL_i}{dw_{j}} &= \mathbb{1}(x_iw_j - x_iw_{y_i} + \Delta > 0)
+  \begin{bmatrix}
+  x_{i1} \\
+  x_{i2} \\
+  \vdots \\
+  x_{iD}
+  \end{bmatrix}
+\\
+&= \mathbb{1}(x_iw_j - x_iw_{y_i} + \Delta > 0) x_i 
+\end{align*}
+$$
+对于 $j = y_i$的特殊情况
+$$
+\begin{equation}
+\frac{dL_i}{dw_{y_{i1}}} = -(\ldots) x_{i1}
+\end{equation}
+$$
+The coefficent of $x_{i1}$ is the number of classes that meet the desire margin. Mathematically speaking, $\sum _{j\ne y_i}  \mathbb{1} (x_iw_j - x_iw_{y_i} + \Delta \gt 0)$
+
+因此
+$$
+\begin{align*}
+\frac{dL_i}{dw_{y_i}} &= - \sum_{j\neq y_i} \mathbb{1}(x_iw_j - x_iw_{y_i} + \Delta > 0)
+  \begin{bmatrix}
+  x_{i1} \\
+  x_{i2} \\
+  \vdots \\
+  x_{iD}
+  \end{bmatrix}
+\\
+&= - \sum_{j\neq y_i} \mathbb{1}(x_iw_j - x_iw_{y_i} + \Delta > 0) x_i 
+\end{align*}
+$$
+
+
 ### 参考文献
 
 - [《机器学习》周志华老师著](https://www.amazon.cn/%E5%9B%BE%E4%B9%A6/dp/B01ARKEV1G/ref=sr_1_1?ie=UTF8&qid=1504962294&sr=8-1&keywords=%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0)
 - [《统计学习方法》李航老师著](https://www.amazon.cn/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95-%E6%9D%8E%E8%88%AA/dp/B007TSFMTA/ref=sr_1_1?s=books&ie=UTF8&qid=1504962309&sr=1-1&keywords=%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95)
 - [CS231n Convolution Neual Networks for Visual Recognition](http://cs231n.github.io/linear-classify/)
+- [SVM Hinge Loss Gradient Compute](https://mlxai.github.io/2017/01/06/vectorized-implementation-of-svm-loss-and-gradient-update.html)
+
+
