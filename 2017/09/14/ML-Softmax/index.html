@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Machine Learning,小记系列," />
 
 
 
@@ -90,13 +90,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="http://yoursite.com/about/index.html">
+<meta name="description" content="在数学，尤其是概率论和相关领域中，Softmax函数，或称归一化指数函数，是逻辑函数的一种推广。它能将一个含任意实数的$K$维的向量$z$『压缩』到另外一个$K$维实向量$\sigma(z)$中，使得每一个元素的范围都在(0,1)之间，并且所有的元素和为$1$。">
+<meta name="keywords" content="Machine Learning,小记系列">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小记 Softmax">
+<meta property="og:url" content="http://yoursite.com/2017/09/14/ML-Softmax/index.html">
 <meta property="og:site_name" content="Quin Wu 的演讲台">
-<meta property="og:updated_time" content="2017-05-06T03:01:54.000Z">
+<meta property="og:description" content="在数学，尤其是概率论和相关领域中，Softmax函数，或称归一化指数函数，是逻辑函数的一种推广。它能将一个含任意实数的$K$维的向量$z$『压缩』到另外一个$K$维实向量$\sigma(z)$中，使得每一个元素的范围都在(0,1)之间，并且所有的元素和为$1$。">
+<meta property="og:updated_time" content="2017-09-14T12:51:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="about">
+<meta name="twitter:title" content="小记 Softmax">
+<meta name="twitter:description" content="在数学，尤其是概率论和相关领域中，Softmax函数，或称归一化指数函数，是逻辑函数的一种推广。它能将一个含任意实数的$K$维的向量$z$『压缩』到另外一个$K$维实向量$\sigma(z)$中，使得每一个元素的范围都在(0,1)之间，并且所有的元素和为$1$。">
 
 
 
@@ -124,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/about/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/09/14/ML-Softmax/"/>
 
 
 
 
 
-  <title>about | Quin Wu 的演讲台</title>
+  <title>小记 Softmax | Quin Wu 的演讲台</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -155,7 +159,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -294,18 +298,216 @@
             
 
   <div id="posts" class="posts-expand">
-  <header class="post-header">
+    
 
-	<h1 class="post-title" itemprop="name headline">about</h1>
+  
 
+  
+  
+  
 
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/14/ML-Softmax/">
 
-</header>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Quin Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/my_avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Quin Wu 的演讲台">
+    </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">小记 Softmax</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-14T20:40:15+08:00">
+                2017-09-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/09/14/ML-Softmax/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/09/14/ML-Softmax/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
     
+
+    <div class="post-body" itemprop="articleBody">
+
       
-    
+      
+
+      
+        <p>在数学，尤其是概率论和相关领域中，Softmax函数，或称归一化指数函数，是逻辑函数的一种推广。它能将一个含任意实数的$K$维的向量$z$『压缩』到另外一个$K$维实向量$\sigma(z)$中，使得每一个元素的范围都在(0,1)之间，并且所有的元素和为$1$。<a id="more"></a></p>
+<h3 id="Softmax损失函数的由来"><a href="#Softmax损失函数的由来" class="headerlink" title="Softmax损失函数的由来"></a>Softmax损失函数的由来</h3><p>Softmax 概率函数可以表示为：</p>
+<p>$$<br>P(y|x;\theta) = \prod ^k_{j=1} \left(\frac{e^{\theta^T_j x}}{\sum^k_{l=1} e^{\theta^T_lx}} \right) ^{\mathbb1 \left\{y=j\right\}}<br>$$</p>
+<p>似然函数表示为：<br>$$<br>L(\theta) = \prod^m_{i=1} \prod^k_{j=1} \left(  \frac{e^{\theta^T_j x}}{\sum^k_{l=1} e^{\theta^T_l x}} \right)^{\mathbb1 \left\{y=j\right\}}<br>$$<br>$\log$似然为<br>$$<br>l(\theta) = \log L(\theta) = \sum^m_{i=1}\sum^k_{j=1} \mathbb1\left\{y=j\right\} \log \frac{e^{\theta^T_j x}}{\sum^k_{l=1} e^{\theta^T_l x}}<br>$$<br>我们要最大化似然函数，即求 $\max l(\theta)$。也就是下面的$\min J(\theta)$</p>
+<p>$$<br>\begin{align}<br>J(\theta) = - \frac{1}{m} \left[ \sum_{i=1}^{m} \sum_{k=1}^{K} \mathbb 1 \left\{y^{(i)} = k\right\} \log \frac{\exp(\theta^{(k)\top} x^{(i)})}{\sum_{j=1}^K \exp(\theta^{(j)\top} x^{(i)})}\right]<br>\end{align}<br>$$</p>
+<h3 id="Softmax-Gradient"><a href="#Softmax-Gradient" class="headerlink" title="Softmax Gradient"></a>Softmax Gradient</h3><p>对$J(\theta)$求梯度，得<br>$$<br>\begin{align}<br>\frac{\partial J(\theta)}{\partial \theta_j}  &amp;= -\frac{1}{m} \frac{\partial}{\partial \theta_j} \left[  \sum_{i=1}^{m}\sum_{j=1}^{k} \mathbb1 \left\{  y^{(i) }=j\right\} \log \frac{e^{\theta^T_j x^{(i)}}}{\sum^k_{l=1}e^{\theta^T_lx^{(i)}} }    \right] \\<br>\\ &amp;= -\frac{1}{m} \frac{\partial}{\partial \theta_j} \left[  \sum_{i=1}^{m}\sum_{j=1}^{k} \mathbb1 \left\{  y^{(i) }=j\right\}( \theta^T_jx^{(i)} - \log \sum^k_{l=1}e^{\theta^T_lx^{(i)} })    \right] \\<br>\\ &amp;= -\frac{1}{m} \left[  \sum^m_{i=1} \mathbb1\left \{ y^{(i)} =j\right\}(x^{(i)} - \sum^{k}_{j=1} \frac{e^{\theta^T_j x^{(i)}}\cdot x^{(i)}}{\sum^k_{l=1} e^{\theta^T_lx^{(i)}}} ) \right] \\<br>\\ &amp;= -\frac{1}{m} \left[  \sum^m_{i=1} x^{(i)} \mathbb1\left \{ y^{(i)} =j\right\}(1 - \sum^{k}_{j=1} \frac{e^{\theta^T_j x^{(i)}}}{\sum^k_{l=1} e^{\theta^T_lx^{(i)}}} ) \right] \\<br>\\ &amp;= -\frac{1}{m} \left[  \sum^m_{i=1} x^{(i)}( \mathbb1\left \{ y^{(i)} =j\right\} -\sum^k_{j=1}\mathbb1\left \{ y^{(i)} =j\right\}  \frac{e^{\theta^T_j x^{(i)}}}{\sum^k_{l=1} e^{\theta^T_lx^{(i)}}} ) \right] \\<br>\\ &amp;= -\frac{1}{m} \left[  \sum^m_{i=1} x^{(i)}( \mathbb1\left \{ y^{(i)} =j\right\} -  \frac{e^{\theta^T_j x^{(i)}}}{\sum^k_{l=1} e^{\theta^T_lx^{(i)}}} ) \right] \\<br>\\ &amp;= -\frac{1}{m} \left[  \sum^m_{i=1} x^{(i)}( \mathbb1\left \{ y^{(i)} =j\right\} -  p(y^{(i)} = j | x^{(i)};\theta)\right] \\<br>\end{align}<br>$$</p>
+<p>使用交叉熵作为我们的损失函数<br>$$<br>L = -\sum_j y_j\log p_j<br>$$<br>或者<br>$$<br>L = -\sum_jy_i \ln p_i<br>$$</p>
+<p>$$<br>p_k = \frac{e^{f_k}}{\sum_j e^{f_j}}<br>$$</p>
+<p>$$<br>L_i = -\log(\frac{e^{f_{y_i}}}{\sum_je^{f_i}})<br>$$</p>
+<p>$$<br>L_i = -\log(p_{y_i})<br>$$</p>
+<p>$$<br>\frac{\partial L_i }{ \partial f_k } = p_k - \mathbb{1}(y_i = k)<br>$$</p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
+<li><a href="http://blog.csdn.net/u012328159/article/details/72155874" target="_blank" rel="external">Softmax 回归</a></li>
+<li><a href="http://ufldl.stanford.edu/tutorial/supervised/SoftmaxRegression/" target="_blank" rel="external">UFLDL</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>您愿意请我喝瓶可乐吗?</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Quin Wu WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="Quin Wu Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+          
+            <a href="/tags/小记系列/" rel="tag"># 小记系列</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/08/ML-SVM/" rel="next" title="小记 SVM">
+                <i class="fa fa-chevron-left"></i> 小记 SVM
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -314,6 +516,17 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -538,6 +751,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
 
   
 
@@ -555,6 +772,18 @@
       <script id="dsq-count-scr" src="https://quinwu.disqus.com/count.js" async></script>
     
 
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/09/14/ML-Softmax/';
+          this.page.identifier = '2017/09/14/ML-Softmax/';
+          this.page.title = '小记 Softmax';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://quinwu.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
     
 
   

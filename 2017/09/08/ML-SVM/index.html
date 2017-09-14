@@ -90,21 +90,21 @@
 
 
 
-<meta name="description" content="支持向量机（support vector machines）SVM是一种二类分类模型。它的基本模型是定义在特征空间上的间隔最大的线性分类器，间隔最大使它有别于感知机，支持向量机还包括核技巧（kernal trick）这使它成为实质上的非线性分类器。">
+<meta name="description" content="支持向量机（support vector machines）SVM是一种二类分类模型。它的基本模型是定义在特征空间上的间隔最大的线性分类器，间隔最大使它有别于感知机，支持向量机还包括核技巧（kernal trick）这使它成为实质上的非线性分类器。支持向量机的学习的策略就是间隔最大化。">
 <meta name="keywords" content="Machine Learning,小记系列">
 <meta property="og:type" content="article">
 <meta property="og:title" content="小记 SVM">
 <meta property="og:url" content="http://yoursite.com/2017/09/08/ML-SVM/index.html">
 <meta property="og:site_name" content="Quin Wu 的演讲台">
-<meta property="og:description" content="支持向量机（support vector machines）SVM是一种二类分类模型。它的基本模型是定义在特征空间上的间隔最大的线性分类器，间隔最大使它有别于感知机，支持向量机还包括核技巧（kernal trick）这使它成为实质上的非线性分类器。">
+<meta property="og:description" content="支持向量机（support vector machines）SVM是一种二类分类模型。它的基本模型是定义在特征空间上的间隔最大的线性分类器，间隔最大使它有别于感知机，支持向量机还包括核技巧（kernal trick）这使它成为实质上的非线性分类器。支持向量机的学习的策略就是间隔最大化。">
 <meta property="og:image" content="http://yoursite.com/2017/09/08/ML-SVM/SupportVector.png">
 <meta property="og:image" content="http://yoursite.com/2017/09/08/ML-SVM/SoftMargin.png">
 <meta property="og:image" content="http://yoursite.com/2017/09/08/ML-SVM/loss.png">
 <meta property="og:image" content="http://yoursite.com/2017/09/08/ML-SVM/KernelTrick.png">
-<meta property="og:updated_time" content="2017-09-09T13:13:58.000Z">
+<meta property="og:updated_time" content="2017-09-12T12:24:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小记 SVM">
-<meta name="twitter:description" content="支持向量机（support vector machines）SVM是一种二类分类模型。它的基本模型是定义在特征空间上的间隔最大的线性分类器，间隔最大使它有别于感知机，支持向量机还包括核技巧（kernal trick）这使它成为实质上的非线性分类器。">
+<meta name="twitter:description" content="支持向量机（support vector machines）SVM是一种二类分类模型。它的基本模型是定义在特征空间上的间隔最大的线性分类器，间隔最大使它有别于感知机，支持向量机还包括核技巧（kernal trick）这使它成为实质上的非线性分类器。支持向量机的学习的策略就是间隔最大化。">
 <meta name="twitter:image" content="http://yoursite.com/2017/09/08/ML-SVM/SupportVector.png">
 
 
@@ -409,9 +409,9 @@
       
 
       
-        <p>支持向量机（support vector machines）SVM是一种二类分类模型。它的基本模型是定义在特征空间上的间隔最大的线性分类器，间隔最大使它有别于感知机，支持向量机还包括核技巧（kernal trick）这使它成为实质上的非线性分类器。<a id="more"></a></p>
-<h3 id="线性可分支持向量机"><a href="#线性可分支持向量机" class="headerlink" title="线性可分支持向量机"></a>线性可分支持向量机</h3><p>分类超平面对应于方程$w \cdot x + b = 0 $</p>
-<p>当训练数据集线性可分的时候，存在无穷个分离超平面将两类数据正确分开。线性可分支持向量机利用间隔最大化求最优分离超平面，这时，解是唯一的。</p>
+        <p>支持向量机（support vector machines）SVM是一种二类分类模型。它的基本模型是定义在特征空间上的间隔最大的线性分类器，间隔最大使它有别于感知机，支持向量机还包括核技巧（kernal trick）这使它成为实质上的非线性分类器。支持向量机的学习的策略就是间隔最大化。<a id="more"></a> 支持向量机的学习算法是求解凸二次规划的最优化算法。</p>
+<h3 id="线性可分支持向量机"><a href="#线性可分支持向量机" class="headerlink" title="线性可分支持向量机"></a>线性可分支持向量机</h3><p>分隔超平面对应于方程$w \cdot x + b = 0 $</p>
+<p>当训练数据集线性可分的时候，存在无穷个分离超平面将两类数据正确分开。线性可分支持向量机利用间隔最大化求最优分离超平面，这时，解是唯一的。存在性唯一性在这里不做证明，有兴趣的可以参考李航老师的《统计学习方法》。</p>
 <h5 id="函数间隔"><a href="#函数间隔" class="headerlink" title="函数间隔"></a>函数间隔</h5><p>一般的，一个点距离分类超平面远近可以表示分类分类预测的确信程度。在分类超平面$w \cdot x + b = 0 $确定的情况下，$|w \cdot x + b|$ 能够相对的表示点$x$距离分类超平面的远近。$w \cdot x + b $的符号与标记$y$的符号是否一致能够表示分类是否预测正确。因此可以用 $y(w \cdot x + b)$来表示分类的正确性及确信度，这就是函数间隔（function margin）</p>
 <blockquote>
 <p>对于给定的训练数据集$T$和超平面$(w,b)$，定义超平面$(w,b)$关于样本点$(x_i,y_i)$的函数间隔为<br>$$<br>\hat{\gamma_i} = y_i(w \cdot x_i + b)<br>$$<br>定义超平面$(w,b)$关于训练集$T$的函数间隔为超平面$(w,b)$关于$T$中所有样本点$(x_i,y_i)$的函数间隔之最小值，<br>$$<br>\hat{\gamma} = \min_{i=1,\cdots,N} \hat{\gamma_i}<br>$$</p>
@@ -477,6 +477,7 @@
 <p>上图来自周志华老师《机器学习》一书中的 图6.5 三种常见的替代损失函数：hinge损失，指数损失，对率损失。</p>
 </blockquote>
 <h3 id="非线性支持向量机"><a href="#非线性支持向量机" class="headerlink" title="非线性支持向量机"></a>非线性支持向量机</h3><h5 id="核函数"><a href="#核函数" class="headerlink" title="核函数"></a>核函数</h5><p>在上面的线性支持向量机的讨论中，假设训练样本的数据集都是线性可分的，存在一个划分超平面可以将数据集给正确分类。 对于非线性的问题往往不好求解，我们还是希望能够转化为线性分类问题来求解，通过将样本从原始空间映射到一个更高的特征空间上，使得训练样本在高维的特征空间上线性可分。</p>
+<p>因此用线性分类法求解非线性分类问题的分为两步，首先使用一个变换将原输入空间的数据映射到特征空间，然后在特征空间上用线性分类学习方法从训练数据中学习分类模型。核技巧就属于这样的方法。</p>
 <p><img src="KernelTrick.png" alt="kernel trick"></p>
 <blockquote>
 <p>上图来自周志华老师《机器学习》一书中的 图6.3 异或问题与非线性映射</p>
@@ -514,10 +515,23 @@
 <li>若$\kappa_1$和$\kappa_2$为核函数，则核函数的直积$\kappa_1\otimes \kappa_2(x,z) = \kappa_1(x,z)\kappa_2(x,z)$也是核函数。</li>
 <li>若$\kappa_1$为核函数，对于任意函数$g(x)$，$\kappa(x,z) = g(x)\kappa_1(x,z)g(z)$也是核函数。</li>
 </ul>
+<h3 id="SVM-以Hinge-Loss-为例"><a href="#SVM-以Hinge-Loss-为例" class="headerlink" title="SVM 以Hinge Loss 为例"></a>SVM 以Hinge Loss 为例</h3><h5 id="Hinge-Loss-Function"><a href="#Hinge-Loss-Function" class="headerlink" title="Hinge Loss Function"></a>Hinge Loss Function</h5><p>$$<br>L_i = \sum_{j\ne y_i} [\max (0,x_iw_j - x_iw_{y_i} + \Delta)]<br>$$</p>
+<ul>
+<li>$i$  iterates over all N examples .</li>
+<li>$j$ iterates over all C classes .</li>
+<li>$L_i$ is loss for classifiying a single example $x_i$ (row vector) .</li>
+<li>$w_j$ is the weights (column vector) for computing the score of class $j$ .</li>
+<li>$y_i$ is the index of the correct class of $x_i$ .</li>
+<li>$\Delta$ is a margin parameter</li>
+</ul>
+<p>$$<br>\nabla_{w} L_i<br>  =<br>  \begin{bmatrix}<br>    \frac{dL_i}{dw_1} &amp; \frac{dL_i}{dw_2} &amp; \cdots &amp; \frac{dL_i}{dw_C}<br>  \end{bmatrix}<br>  =<br>  \begin{bmatrix}<br>    \frac{dL_i}{dw_{11}} &amp; \frac{dL_i}{dw_{21}} &amp; \cdots &amp; \frac{dL_i}{dw_{y_i1}} &amp; \cdots &amp; \frac{dL_i}{dw_{C1}} \\<br>    \vdots &amp; \ddots \\<br>    \frac{dL_i}{dw_{1D}} &amp; \frac{dL_i}{dw_{2D}} &amp; \cdots &amp; \frac{dL_i}{dw_{y_iD}} &amp; \cdots &amp; \frac{dL_i}{dw_{CD}}<br>  \end{bmatrix}<br>$$</p>
+<p>$$<br>\begin{align_}<br>L_i = &amp;\max(0, x_{i1}w_{11} + x_{i2}w_{12} \ldots + x_{iD}w_{1D} - x_{i1}w_{y_i1} - x_{i2}w_{y_i2} \ldots - x_{iD}w_{y_iD} + \Delta) + \\<br> &amp;\max(0, x_{i1}w_{21} + x_{i2}w_{22} \ldots + x_{iD}w_{2D} - x_{i1}w_{y_i1} - x_{i2}w_{y_i2} \ldots - x_{iD}w_{y_iD} + \Delta) + \\<br>&amp;\quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \vdots \\<br>&amp;\max(0, x_{i1}w_{C1} + x_{i2}w_{C2} \ldots + x_{iD}w_{CD} - x_{i1}w_{y_i1} - x_{i2}w_{y_i2} \ldots - x_{iD}w_{y_iD} + \Delta)<br>\end{align_}<br>$$<br>For a general case , if $(x_iw_1 - x_iw_{y_i} + \Delta )\gt 0$<br>$$<br>\begin{equation}<br>\frac{dL_i}{dw_{11}} = x_{i1}<br>\end{equation}<br>$$<br>using an indicator function:<br>$$<br>\begin{equation}<br>\frac{dL_i}{dw_{11}} = \mathbb{1}(x_iw_1 - x_iw_{y_i} + \Delta &gt; 0) x_{i1}<br>\end{equation}<br>$$<br>同样的<br>$$<br>\begin{equation}<br>\frac{dL_i}{dw_{12}} = \mathbb{1}(x_iw_1 - x_iw_{y_i} + \Delta &gt; 0) x_{i2} \\<br>\frac{dL_i}{dw_{13}} = \mathbb{1}(x_iw_1 - x_iw_{y_i} + \Delta &gt; 0) x_{i3} \\<br>\vdots \\<br>\frac{dL_i}{dw_{1D}} = \mathbb{1}(x_iw_1 - x_iw_{y_i} + \Delta &gt; 0) x_{iD}<br>\end{equation}<br>$$<br>因此<br>$$<br>\begin{align_}<br>\frac{dL_i}{dw_{j}} &amp;= \mathbb{1}(x_iw_j - x_iw_{y_i} + \Delta &gt; 0)<br>  \begin{bmatrix}<br>  x_{i1} \\<br>  x_{i2} \\<br>  \vdots \\<br>  x_{iD}<br>  \end{bmatrix}<br>\\<br>&amp;= \mathbb{1}(x_iw_j - x_iw_{y_i} + \Delta &gt; 0) x_i<br>\end{align_}<br>$$<br>对于 $j = y_i$的特殊情况<br>$$<br>\begin{equation}<br>\frac{dL_i}{dw_{y_{i1}}} = -(\ldots) x_{i1}<br>\end{equation}<br>$$<br>The coefficent of $x_{i1}$ is the number of classes that meet the desire margin. Mathematically speaking, $\sum _{j\ne y_i}  \mathbb{1} (x_iw_j - x_iw_{y_i} + \Delta \gt 0)$</p>
+<p>因此<br>$$<br>\begin{align_}<br>\frac{dL_i}{dw_{y_i}} &amp;= - \sum_{j\neq y_i} \mathbb{1}(x_iw_j - x_iw_{y_i} + \Delta &gt; 0)<br>  \begin{bmatrix}<br>  x_{i1} \\<br>  x_{i2} \\<br>  \vdots \\<br>  x_{iD}<br>  \end{bmatrix}<br>\\<br>&amp;= - \sum_{j\neq y_i} \mathbb{1}(x_iw_j - x_iw_{y_i} + \Delta &gt; 0) x_i<br>\end{align_}<br>$$</p>
 <h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
 <li><a href="https://www.amazon.cn/%E5%9B%BE%E4%B9%A6/dp/B01ARKEV1G/ref=sr_1_1?ie=UTF8&amp;qid=1504962294&amp;sr=8-1&amp;keywords=%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0" target="_blank" rel="external">《机器学习》周志华老师著</a></li>
 <li><a href="https://www.amazon.cn/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95-%E6%9D%8E%E8%88%AA/dp/B007TSFMTA/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1504962309&amp;sr=1-1&amp;keywords=%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95" target="_blank" rel="external">《统计学习方法》李航老师著</a></li>
 <li><a href="http://cs231n.github.io/linear-classify/" target="_blank" rel="external">CS231n Convolution Neual Networks for Visual Recognition</a></li>
+<li><a href="https://mlxai.github.io/2017/01/06/vectorized-implementation-of-svm-loss-and-gradient-update.html" target="_blank" rel="external">SVM Hinge Loss Gradient Compute</a></li>
 </ul>
 
       
@@ -594,6 +608,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2017/09/14/ML-Softmax/" rel="prev" title="小记 Softmax">
+                小记 Softmax <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -662,7 +680,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
