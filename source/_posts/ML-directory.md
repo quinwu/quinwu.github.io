@@ -15,6 +15,7 @@ comments: false
 * [小记 Neural Network](http://quinwu.org/2017/05/16/ML-Neural-Network/)
 * [小记 Gradient Descent](http://quinwu.org/2017/09/02/ML-Gradient-Descent/)
 * [小记 SVM](http://quinwu.org/2017/09/08/ML-SVM/)
+* [小记 Softmax](http://quinwu.org/2017/09/14/ML-Softmax/)
 
 
 
