@@ -90,17 +90,17 @@
 
 
 
-<meta name="description" content="熵（entropy）在信息论与概率统计中，熵是表示随机变量不确定性的度量。设$X$是一个取有限个值的离散随机变量，其概率分布为：$$P(X=x_i) = p_i,\quad i=1,2,\cdots,n$$则随机变量的$X$的熵定义为：$$H(X) = -\sum^n_{i=1}p_ilog(p_i)$$熵越大，随机变量的不确定性也就越大。 若$X$是连续型的随机变量，其熵定义为：$$H(X)">
+<meta name="description" content="熵（entropy）在信息论与概率统计中，熵是表示随机变量不确定性的度量。设$X$是一个取有限个值的离散随机变量，其概率分布为：">
 <meta name="keywords" content="小记系列,Mathematics">
 <meta property="og:type" content="article">
 <meta property="og:title" content="小记 Entropy">
 <meta property="og:url" content="http://yoursite.com/2017/10/30/entropy/index.html">
 <meta property="og:site_name" content="Quin Wu 的演讲台">
-<meta property="og:description" content="熵（entropy）在信息论与概率统计中，熵是表示随机变量不确定性的度量。设$X$是一个取有限个值的离散随机变量，其概率分布为：$$P(X=x_i) = p_i,\quad i=1,2,\cdots,n$$则随机变量的$X$的熵定义为：$$H(X) = -\sum^n_{i=1}p_ilog(p_i)$$熵越大，随机变量的不确定性也就越大。 若$X$是连续型的随机变量，其熵定义为：$$H(X)">
-<meta property="og:updated_time" content="2017-10-30T13:56:19.696Z">
+<meta property="og:description" content="熵（entropy）在信息论与概率统计中，熵是表示随机变量不确定性的度量。设$X$是一个取有限个值的离散随机变量，其概率分布为：">
+<meta property="og:updated_time" content="2017-10-30T14:00:19.406Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小记 Entropy">
-<meta name="twitter:description" content="熵（entropy）在信息论与概率统计中，熵是表示随机变量不确定性的度量。设$X$是一个取有限个值的离散随机变量，其概率分布为：$$P(X=x_i) = p_i,\quad i=1,2,\cdots,n$$则随机变量的$X$的熵定义为：$$H(X) = -\sum^n_{i=1}p_ilog(p_i)$$熵越大，随机变量的不确定性也就越大。 若$X$是连续型的随机变量，其熵定义为：$$H(X)">
+<meta name="twitter:description" content="熵（entropy）在信息论与概率统计中，熵是表示随机变量不确定性的度量。设$X$是一个取有限个值的离散随机变量，其概率分布为：">
 
 
 
@@ -404,8 +404,9 @@
       
 
       
-        <a id="more"></a> 
-<h4 id="熵（entropy）"><a href="#熵（entropy）" class="headerlink" title="熵（entropy）"></a>熵（entropy）</h4><p>在信息论与概率统计中，熵是表示随机变量不确定性的度量。设$X$是一个取有限个值的离散随机变量，其概率分布为：<br>$$<br>P(X=x_i) = p_i,\quad i=1,2,\cdots,n<br>$$<br>则随机变量的$X$的熵定义为：<br>$$<br>H(X) = -\sum^n_{i=1}p_ilog(p_i)<br>$$<br>熵越大，随机变量的不确定性也就越大。</p>
+        <h4 id="熵（entropy）"><a href="#熵（entropy）" class="headerlink" title="熵（entropy）"></a>熵（entropy）</h4><p>在信息论与概率统计中，熵是表示随机变量不确定性的度量。设$X$是一个取有限个值的离散随机变量，其概率分布为：</p>
+<a id="more"></a> 
+<p>$$<br>P(X=x_i) = p_i,\quad i=1,2,\cdots,n<br>$$<br>则随机变量的$X$的熵定义为：<br>$$<br>H(X) = -\sum^n_{i=1}p_ilog(p_i)<br>$$<br>熵越大，随机变量的不确定性也就越大。</p>
 <p>若$X$是连续型的随机变量，其熵定义为：<br>$$<br>H(X) = -\int_{x \in X} p(x)\log(p(x))<br>$$</p>
 <h4 id="相对熵（relative-entropy）"><a href="#相对熵（relative-entropy）" class="headerlink" title="相对熵（relative entropy）"></a>相对熵（relative entropy）</h4><p>相对熵又称KL散度（Kullback-Leibler divergence），KL距离，是两个随机分布间的距离的度量。记为$D_{KL}=(p||q)$，他度量当真实分布为$p$时，假设分布$q$的无效性。<br>$$<br>\begin{align}<br>D_{KL} (p||q) &amp;= E_p[{\log\frac{p(x)}{q(x)}}] \\<br>\\ &amp;= \sum_{x \in X} p(x) \log (\frac{p(x)}{q(x)}) \\<br>\\ &amp;= \sum_{x \in X} [p(x)\log(p(x)) - p(x)\log(q(x))] \\<br>\\ &amp;= -H(p) - \sum_{x \in X} p(x)\log(q(x)) \\<br>\\ &amp;= -H(p) + E_p[-\log(q(x))] \\<br>\\ &amp;= H_p(q) - H(p)<br>\end{align}<br>$$</p>
 <h4 id="交叉熵（cross-entropy）"><a href="#交叉熵（cross-entropy）" class="headerlink" title="交叉熵（cross entropy）"></a>交叉熵（cross entropy）</h4><p>假设有两个分布$p$，$q$，则在它们给定的样本集上的交叉熵定义为:<br>$$<br>\begin{align}<br>CEH(p,q) &amp;= E_p[-\log(q)] \\<br>\\ &amp;= -\sum_{x \in X}p(x)\log(q(x)) \\<br>\\ &amp;= H_p(q) \\<br>\\ &amp; = H(p) + D_{KL}(p||q)<br>\end{align}<br>$$</p>
