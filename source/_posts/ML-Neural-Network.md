@@ -172,6 +172,7 @@ $$
 
 
 
+
 对比Logistics Regression 跟 Softmax Regression，在Logistics Regression 中
 $$
 P(y^{(i)} = k | x^{(i)} ; \theta) = y_k^{(i)} \log(h_\Theta(x^{(i)}))_k + (1- y_k^{(i)})\log(1-(h_\Theta(x^{(i)}))_k
@@ -184,15 +185,15 @@ J(\theta) &= - \left[ \sum_{i=1}^m   (1-y^{(i)}) \log (1-h_\theta(x^{(i)})) + y^
 \end{align}
 $$
 
-#### Loss Function Regularization
+### Loss Function Regularization
 
-##### logistic regression loss function regularization
+#### logistic regression loss function regularization
 
 $$
 J(\theta) = -\frac{1}{m} \sum_{i=1}^m y^{(i)}\log(h_\theta(x^{(i)}) ) +(1-y^{(i)})\log(1-h_\theta(x^{(i)})) + \frac{\lambda}{2m} \sum_{j=1}^n \theta_j^2
 $$
 
-##### neural network loss function regularization
+#### neural network loss function regularization
 
 - 输出层采用Logistic Regression
   $$
@@ -207,6 +208,7 @@ $$
   $$
   \nabla_{\theta^{(k)}} J(\theta) = - \frac{1}{m} \sum_{i=1}^{m}{ \left[ x^{(i)} \left(  \mathbb1\{ y^{(i)} = k\}  - P(y^{(i)} = k | x^{(i)}; \theta) \right) \right]  } + \lambda\theta^{(k)}
   $$
+
 
 
 
@@ -225,7 +227,7 @@ $$
 * $a^{(j)} = g(Z^{(j)})$
 
 
-#### Feed forward computation  $h_\theta(x^{(i)})$
+#### Feed forward 
 
 ![Neural network model)](feedforward.png)
 
