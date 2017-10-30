@@ -1,13 +1,17 @@
 ---
-title: entropy
+title: 小记 Entropy
+date: 2017-10-30 21:51:59
 tags:
+  - Mathematics
+  - 小记系列
+categories: 笔记
 ---
-
-
 
 #### 熵（entropy）
 
 在信息论与概率统计中，熵是表示随机变量不确定性的度量。设$X$是一个取有限个值的离散随机变量，其概率分布为：
+
+<!--more--> 
 $$
 P(X=x_i) = p_i,\quad i=1,2,\cdots,n
 $$
