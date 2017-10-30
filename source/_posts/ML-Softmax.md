@@ -83,4 +83,4 @@ $$
 ### 参考文献
 
 - [Softmax 回归](http://blog.csdn.net/u012328159/article/details/72155874)
-- [UFLDL](http://ufldl.stanford.edu/tutorial/supervised/SoftmaxRegression/)
+- [ufldl](http://ufldl.stanford.edu/tutorial/supervised/SoftmaxRegression/)

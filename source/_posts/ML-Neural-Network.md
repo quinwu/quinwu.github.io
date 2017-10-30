@@ -7,7 +7,7 @@ tags:
   - 小记系列
 ---
 
-#### 人工神经网络
+### 神经网络
 
 在机器学习和认知科学领域，人工神经网络（artificial neural network，缩写ANN），简称神经网络（neural network，缩写NN），是一种模仿[生物神经网络](https://zh.wikipedia.org/wiki/%E7%94%9F%E7%89%A9%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C)(动物的中枢神经系统，特别是大脑)的结构和功能的数学模型或计算模型，用于对函数进行估计或近似。<!--more-->神经网络由大量的人工神经元联结进行计算。大多数情况下人工神经网络能在外界信息的基础上改变内部结构，是一种自适应系统现代神经网络是一种非线性统计性数据建模工具。典型的神经网络具有以下三个部分：
 
@@ -15,13 +15,13 @@ tags:
 * 激励函数（Activity Rule）：大部分神经网络模型具有一个短时间尺度的动力学规则，来定义神经元如何根据其他神经元的活动来改变自己的激励值。一般激励函数依赖于网络中的权重（即该网络的参数）。
 * 学习规则（Learning Rule）：学习规则指定了网络中的权重如何随着时间推进而调整。这一般被看做是一种长时间尺度的动力学规则。一般情况下，学习规则依赖于神经元的激励值。它也可能依赖于监督者提供的目标值和当前权重的值。
 
-##### 神经网络结构
+### 神经网络结构
 
 神经网络被建模成神经元的集合，神经元之间以无环图的形式进行连接，也就是说，一些神经元的输出是另一些神经元的输入。在网络中是不允许循环的，这样的循环会导致前项传播的无限循环。通常神经网络中神经元是分层的，而不像生物神经元一样聚合成大小不一的聚合状，最常见的层的类型是全连接层（fully-connected layer）。全连接层中的神经元跟其前后两层的神经元是完全连接的，但是在同一层神经元之间是没有连接的。下图是一个3层神经网络。（不包括输入层）。
 
 ![2_4layer neural network](Neural2_4Layer.png)
 
-##### 神经网络的常用激励函数
+#### 神经网络的常用激励函数
 
 每个激活函数（或非线性函数）的输入都是一个数字，然后对其进行某种固定的数学操作。
 
@@ -97,12 +97,8 @@ tags:
 
   Leaky ReLU是为了解决"ReLU死亡"问题的，ReLU中，$x<0$时，函数值为0，	而在Leaky ReLU中则是一个很小的负数梯度值，比如0.01。
 
-* Maxout
 
-  > todo
-
-
-###### Relationship of Logistic Rregression and Softmax Regression
+#### Relationship of Logistic Rregression and Softmax Regression
 
 当k = 2 时，Softmax Regression可以写为
 $$
@@ -138,17 +134,17 @@ h_\theta(x^{(i)}) &=
 $$
 用$\theta^{'}​$表示$\theta^{(1)}-\theta^{(2)}​$，我们会发现Softmax Regression 预测其中的一个类别的概率为$\frac{1}{ 1  + \exp(- (\theta')^\top x^{(i)} ) }​$ ，另一个类别的概率为$1-\frac{1}{ 1  + \exp(- (\theta')^\top x^{(i)} ) }​$，这就是Logistics Regression 。
 
-#### 代价函数
+### Loss Function
 
-##### logistic regression cost function
+#### logistic regression loss function
 
 $$
 J(\theta) = -\frac{1}{m} \sum_{i=1}^m y^{(i)}\log(h_\theta(x^{(i)}) ) +(1-y^{(i)})\log(1-h_\theta(x^{(i)}))
 $$
 
-##### neural network
+#### neural network loss function
 
-神经网络模型的代价函数取决于输出层是什么，对于不同的场景需要，对应于不同的代价函数。例如，在Autoencoder网络中，输出层等于输入层，此时采用均方误差（MSE）函数作为代价函数；在分类问题中，如果输出层采用Softmax回归进行分类，则可以直接采用Softmax回归的代价函数作为整个神经网络的代价函数。如果输出层采用Logistic regression进行分类，那么输出层其实就是K个Logistic regression，整个网络的代价函数就是这K个Logistic regression模型代价函数的加和。
+神经网络模型的代价函数取决于输出层是什么，对于不同的场景需要，对应于不同的代价函数。例如，在Autoencoder网络中，输出层等于输入层，此时采用均方误差（MSE）函数作为loss函数；在分类问题中，如果输出层采用Softmax回归进行分类，则可以直接采用Softmax回归的loss函数作为整个神经网络的代价函数。如果输出层采用Logistic regression进行分类，那么输出层其实就是K个Logistic regression，整个网络的代价函数就是这K个Logistic regression模型代价函数的加和。
 
 * 输出层采用Logistic Regression
   $$
@@ -158,13 +154,13 @@ $$
 * 输出层采用 Softmax Regression
   $$
   \begin{align}
-  J(\theta) = - \frac{1}{m}\left[ \sum_{i=1}^{m} \sum_{k=1}^{K}  1\left\{y^{(i)} = k\right\} \log \frac{\exp(\theta^{(k)\top} x^{(i)})}{\sum_{j=1}^K \exp(\theta^{(j)\top} x^{(i)})}\right]
+  J(\theta) = - \frac{1}{m}\left[ \sum_{i=1}^{m} \sum_{k=1}^{K}   \mathbb 1 \left\{y^{(i)} = k\right\} \log \frac{\exp(\theta^{(k)\top} x^{(i)})}{\sum_{j=1}^K \exp(\theta^{(j)\top} x^{(i)})}\right]
   \end{align}
   $$
 
   $$
   \begin{align}
-  \nabla_{\theta^{(k)}} J(\theta) = - \frac{1}{m}\sum_{i=1}^{m}{ \left[ x^{(i)} \left( 1\{ y^{(i)} = k\}  - P(y^{(i)} = k | x^{(i)}; \theta) \right) \right]  }
+  \nabla_{\theta^{(k)}} J(\theta) = - \frac{1}{m}\sum_{i=1}^{m}{ \left[ x^{(i)} \left(  \mathbb 1\{ y^{(i)} = k\}  - P(y^{(i)} = k | x^{(i)}; \theta) \right) \right]  }
   \end{align}
   $$
 
@@ -172,9 +168,7 @@ $$
   P(y^{(i)} = k | x^{(i)} ; \theta) = \frac{\exp(\theta^{(k)\top} x^{(i)})}{\sum_{j=1}^K \exp(\theta^{(j)\top} x^{(i)}) }
   $$
 
-* Autoencoder（输出层=输入层）
 
-  > todo
 
 
 
@@ -186,17 +180,19 @@ $$
 $$
 \begin{align}
 J(\theta) &= - \left[ \sum_{i=1}^m   (1-y^{(i)}) \log (1-h_\theta(x^{(i)})) + y^{(i)} \log h_\theta(x^{(i)}) \right] \\
-&= - \left[ \sum_{i=1}^{m} \sum_{k=0}^{1} 1\left\{y^{(i)} = k\right\} \log P(y^{(i)} = k | x^{(i)} ; \theta) \right]
+&= - \left[ \sum_{i=1}^{m} \sum_{k=0}^{1}  \mathbb 1\left\{y^{(i)} = k\right\} \log P(y^{(i)} = k | x^{(i)} ; \theta) \right]
 \end{align}
 $$
 
-##### logistic regression cost function regularization
+#### Loss Function Regularization
+
+##### logistic regression loss function regularization
 
 $$
 J(\theta) = -\frac{1}{m} \sum_{i=1}^m y^{(i)}\log(h_\theta(x^{(i)}) ) +(1-y^{(i)})\log(1-h_\theta(x^{(i)})) + \frac{\lambda}{2m} \sum_{j=1}^n \theta_j^2
 $$
 
-##### neural network regularization
+##### neural network loss function regularization
 
 - 输出层采用Logistic Regression
   $$
@@ -205,20 +201,18 @@ $$
 
 - 输出层采用 Softmax Regression
   $$
-  J(\theta) = -\left [ \sum_{i=1}^{m} \sum_{k=1}^{K}  1\left\{y^{(i)} = k\right\} \log \frac{\exp(\theta^{(k)\top} x^{(i)})}{\sum_{j=1}^K \exp(\theta^{(j)\top}x^{(i)})}\right]+\frac{\lambda}{2}\sum^K_{k=1}\sum^n_{j=1}\theta^2_{kj}
+  J(\theta) = -\left [ \sum_{i=1}^{m} \sum_{k=1}^{K}   \mathbb 1\left\{y^{(i)} = k\right\} \log \frac{\exp(\theta^{(k)\top} x^{(i)})}{\sum_{j=1}^K \exp(\theta^{(j)\top}x^{(i)})}\right]+\frac{\lambda}{2}\sum^K_{k=1}\sum^n_{j=1}\theta^2_{kj}
   $$
 
   $$
-  \nabla_{\theta^{(k)}} J(\theta) = - \frac{1}{m} \sum_{i=1}^{m}{ \left[ x^{(i)} \left( 1\{ y^{(i)} = k\}  - P(y^{(i)} = k | x^{(i)}; \theta) \right) \right]  } + \lambda\theta^{(k)}
+  \nabla_{\theta^{(k)}} J(\theta) = - \frac{1}{m} \sum_{i=1}^{m}{ \left[ x^{(i)} \left(  \mathbb1\{ y^{(i)} = k\}  - P(y^{(i)} = k | x^{(i)}; \theta) \right) \right]  } + \lambda\theta^{(k)}
   $$
 
-- Autoencoder（输出层=输入层）
 
-  > todo
 
-下面我们用输出层采样为Logistics Regression 为例子来说明。
+### Feed forward and Back propagation
 
-#### Feed forward and Back propagation 
+下面我们用输出层采样为Logistics Regression 为例子来说明
 
 一些标记:
 
@@ -231,11 +225,13 @@ $$
 * $a^{(j)} = g(Z^{(j)})$
 
 
-##### Feed forward computation  $h_\theta(x^{(i)})$
+#### Feed forward computation  $h_\theta(x^{(i)})$
 
 ![Neural network model)](feedforward.png)
 
 ```matlab
+% matlab code
+
 % computation h(x)
 % input layerx
 a1 = [ones(m,1) X];
@@ -255,6 +251,8 @@ J(\Theta) = -\frac{1}{m}\Bigg[\sum_{i=1}^m\sum_{k=1}^Ky_k^{(i)} \log(h_\Theta(x^
 $$
 
 ```matlab
+% matlab code
+
 %case 1
 J = 0;
 Y = zeros(m,num_labels);
@@ -263,7 +261,6 @@ for i = 1 : m
 end
 J = -1/m * (Y * log(h)' + (1 - Y) * log(1 - h)');
 J = trace(J);
-
 
 %case 2
 J = 0;
@@ -277,25 +274,25 @@ for i = 1 : m
 end
 ```
 
-##### Chain Rule
+#### Chain Rule
 
-$y = g(x)$    $ z = h(y)$
+$y = g(x)\quad z = h(y)$
 
-$\Delta x \rightarrow \Delta y \rightarrow \Delta z $     $\frac{dz}{dx} = \frac{dz}{dy} \frac{dy}{dx}$
+$\Delta x \rightarrow \Delta y \rightarrow \Delta z   \quad   \frac{dz}{dx} = \frac{dz}{dy} \frac{dy}{dx}$
 
-$x = g(s) $     $y = h(s)$      $z = k(x,y)$
+$x = g(s) \quad y = h(s) \quad z = k(x,y)$
+
+$\Delta s \rightarrow \Delta x \rightarrow \Delta z  \quad  \Delta s \rightarrow \Delta y \rightarrow \Delta z$
 
 $\frac{dz}{ds} = \frac{\partial z}{\partial x} \frac{dx}{ds} + \frac{\partial z }{\partial y} \frac{dy}{ds}$
 
-##### back propagation
+#### Back Propagation
 
-我们知道代价函数cost function后，下一步就是按照梯度下降法来计算$\theta$求解cost function的最优解。使用梯度下降法首先要求出梯度，即偏导项$\frac{\partial}{\partial \Theta^{(l)} _{ij}} J(\Theta)$，计算偏导项的过程我们称为back propagation。
+我们知道代价函数loss function后，下一步就是按照梯度下降法来计算$\theta$求解loss function的最优解。使用梯度下降法首先要求出梯度，即偏导项$\frac{\partial}{\partial \Theta^{(l)} _{ij}} J(\Theta)$，计算偏导项的过程我们称为back propagation。
 
 根据上面的feed forward computation 我们已经计算得到了 $a^{(1)}$ ，$a^{(2)}$， $a^{(3)}$  ，$Z^{(2)}$，$Z^{(3)}$。
 
-
-
-###### hidden layer to output layer
+##### hidden layer to output layer
 
 $$
 h_\Theta(x) = a^{(L)} = g(z^{(L)})
@@ -310,7 +307,7 @@ $$
 $$
 
 $$
-cost(\Theta) =- y^{(i)}\log(h_\Theta(x^{(i)}) ) -(1-y^{(i)})\log(1-h_\Theta(x^{(i)}))
+loss(\Theta) =- y^{(i)}\log(h_\Theta(x^{(i)}) ) -(1-y^{(i)})\log(1-h_\Theta(x^{(i)}))
 $$
 
 $$
@@ -346,7 +343,7 @@ $$
 \end{split}
 $$
 
-###### hidden layer / input layer  to  hidden layer
+##### hidden layer / input layer  to  hidden layer
 
 因为$a^{(1)} = x$，所以可以将 input layer 与 hidden layer同样对待
 $$
@@ -421,7 +418,7 @@ $$
 \\ &= \delta^{(l)}_i  a^{(l-1)}_j
 \end{split}
 $$
-###### 总结
+##### 总结
 
 * 输出层的误差 $\delta^{(L)}_i$
   $$
@@ -486,6 +483,7 @@ $$
 ![back propagation](backpropagation.png)
 
 ```matlab
+% matlab code
 delta_3 = h - Y;
 delta_2 = delta_3 * Theta2 .* a2 .*(1 - a2);
 delta_2 = delta_2(:,2:end);
@@ -496,7 +494,7 @@ Theta2_grad = delta_3' * a2 / m
 
 ​																																																																																																																																																																																																	
 
-#### 参考文献
+### 参考文献
 
 * [《机器学习》周志华老师著](https://www.amazon.cn/%E5%9B%BE%E4%B9%A6/dp/B01ARKEV1G/ref=sr_1_1?ie=UTF8&qid=1504962294&sr=8-1&keywords=%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0)
 * [《统计学习方法》李航老师著](https://www.amazon.cn/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95-%E6%9D%8E%E8%88%AA/dp/B007TSFMTA/ref=sr_1_1?s=books&ie=UTF8&qid=1504962309&sr=1-1&keywords=%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95)

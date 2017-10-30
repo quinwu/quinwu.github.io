@@ -55,3 +55,28 @@ $$
 
 ##### Output Layer
 
+
+
+
+
+### 参考文献
+
+http://www.jefkine.com/general/2016/09/05/backpropagation-in-convolutional-neural-networks/
+
+http://ufldl.stanford.edu/tutorial/supervised/ConvolutionalNeuralNetwork/
+
+https://grzegorzgwardys.wordpress.com/2016/04/22/8/
+
+https://www.zybuluo.com/hanbingtao/note/485480
+
+http://www.cnblogs.com/pinard/p/6494810.html
+
+http://www.jianshu.com/p/9c4396653324
+
+https://github.com/manutdzou/manutdzou.github.io/blob/master/_posts/%E7%A7%91%E7%A0%94/2016-05-17-Why%20computing%20the%20gradients%20CNN%2C%20the%20weights%20need%20to%20be%20rotated.md
+
+http://colah.github.io/posts/2014-07-Understanding-Convolutions/
+
+http://mengqi92.github.io/2015/10/06/convolution/
+
+http://neuralnetworksanddeeplearning.com/chap4.html
