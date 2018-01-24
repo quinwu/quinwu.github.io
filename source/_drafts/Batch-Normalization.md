@@ -17,6 +17,4 @@ https://kevinzakka.github.io/2016/09/14/batch_normalization/
 
 http://cthorey.github.io./backpropagation/
 
-
-
 http://wh1te.me/index.php/2016/08/22/batch-normalization-introduction/
