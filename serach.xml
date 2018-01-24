@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Python中下划线的用法]]></title>
+    <url>%2F2018%2F01%2F24%2Fpython-underline%2F</url>
+    <content type="text"><![CDATA[Python中的下划线Python 中的 _ 的不同用法绝大部分都是一种惯例约定。 单个下划线（ _ ）解释器中_ 符号代表交互解释器中的最后一次执行语句的结果。 作为名称使用_ 用做被抛弃的名称。表示在后续的代码中，这个变量不会被使用到。 单下划线前缀（ _XX ）单下划线做前缀的名称约定了这个名称是『私有』的，但是这样的实例变量是可以在外部访问到的，但是按照 Python 的约定，看到单下划线前缀这样的变量时，可以理解为『 虽然我可以在外部被访问，但是请把我当做一个内部变量（ private ）来使用，不要随意访问 』 单下划线前缀的通常被用于模块中，在一个模块中以单下划线开头的变量和函数被默认视为内部函数，使用 from a_module import * 导入时，任何以单下划线开头的名称都不会被导入。如果使用 import a_module 这样导入模块时，仍然可以使用 a_module._var 这样的方式来访问到对象。 双下划线前缀的名称 （ __XX ）通常用在类中，如果想要使得类的内部属性不被外部随意访问到，可以把属性名字加上双下划线前缀，在 Python 中的实例变量如果以双下划线作为前缀，则表示改变量表示一个私有变量 （ private ），只有在内部可以访问，外部是无法访问的。 双下划线前缀命名的形式并不是一种惯例：对解释器而言，Python 会改写这些名称，以免与子类中定义的这些名称发生冲突。任何 __method 这种形式的标识符，都会被 Python 解释器在文本上替换为 _classname__method，classname 是所属类的名字。 也就是说，双下划线开头的实力变量并不是一定不能从外部进行访问的，仍然可以通过 _classname__method 形式访问到类中的内部变量 __method ，但是通常不建议这么做。 前后缀都为双下划线的名称（ __XX__ ）表示 Python 中的特殊方法名，这也只是一种惯例，表示 Python 系统的名称不会跟用户的自定义名称发生冲突。通常我们可以自己重写这些方法，比如在类里面经常会重写 __init__() 方法。 特殊变量是可以直接访问的，不是 private 变量。 参考 segmentfault Python 的类的下划线命名有什么不同?]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[小记 Entropy]]></title>
     <url>%2F2017%2F10%2F30%2Fentropy%2F</url>
     <content type="text"><![CDATA[熵（entropy）在信息论与概率统计中，熵是表示随机变量不确定性的度量。设$X$是一个取有限个值的离散随机变量，其概率分布为： $$P(X=x_i) = p_i,\quad i=1,2,\cdots,n$$则随机变量的$X$的熵定义为：$$H(X) = -\sum^n_{i=1}p_ilog(p_i)$$熵越大，随机变量的不确定性也就越大。 若$X$是连续型的随机变量，其熵定义为：$$H(X) = -\int_{x \in X} p(x)\log(p(x))$$ 相对熵（relative entropy）相对熵又称KL散度（Kullback-Leibler divergence），KL距离，是两个随机分布间的距离的度量。记为$D_{KL}=(p||q)$，他度量当真实分布为$p$时，假设分布$q$的无效性。$$\begin{align}D_{KL} (p||q) &amp;= E_p[{\log\frac{p(x)}{q(x)}}] \\\\ &amp;= \sum_{x \in X} p(x) \log (\frac{p(x)}{q(x)}) \\\\ &amp;= \sum_{x \in X} [p(x)\log(p(x)) - p(x)\log(q(x))] \\\\ &amp;= -H(p) - \sum_{x \in X} p(x)\log(q(x)) \\\\ &amp;= -H(p) + E_p[-\log(q(x))] \\\\ &amp;= H_p(q) - H(p)\end{align}$$ 交叉熵（cross entropy）假设有两个分布$p$，$q$，则在它们给定的样本集上的交叉熵定义为:$$\begin{align}CEH(p,q) &amp;= E_p[-\log(q)] \\\\ &amp;= -\sum_{x \in X}p(x)\log(q(x)) \\\\ &amp;= H_p(q) \\\\ &amp; = H(p) + D_{KL}(p||q)\end{align}$$]]></content>
