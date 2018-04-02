@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="caffe2,搞机指南," />
 
 
 
@@ -90,12 +90,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Quin Wu 的演讲台">
-<meta property="og:url" content="http://yoursite.com/archives/2018/01/index.html">
+<meta name="description" content="最近在GPU服务器上安装 caffe2 遇到了一些问题，这里把踩坑的过程跟解决的方法记录下来。">
+<meta name="keywords" content="caffe2,搞机指南">
+<meta property="og:type" content="article">
+<meta property="og:title" content="conda下安装caffe2踩坑">
+<meta property="og:url" content="http://yoursite.com/2018/04/02/conda-caffe2/index.html">
 <meta property="og:site_name" content="Quin Wu 的演讲台">
+<meta property="og:description" content="最近在GPU服务器上安装 caffe2 遇到了一些问题，这里把踩坑的过程跟解决的方法记录下来。">
+<meta property="og:updated_time" content="2018-04-02T13:53:22.557Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Quin Wu 的演讲台">
+<meta name="twitter:title" content="conda下安装caffe2踩坑">
+<meta name="twitter:description" content="最近在GPU服务器上安装 caffe2 遇到了一些问题，这里把踩坑的过程跟解决的方法记录下来。">
 
 
 
@@ -123,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2018/01/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/02/conda-caffe2/"/>
 
 
 
 
 
-  <title>Archive | Quin Wu 的演讲台</title>
+  <title>conda下安装caffe2踩坑 | Quin Wu 的演讲台</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -154,7 +159,7 @@
     
   
 
-  <div class="container sidebar-position-left  page-archive  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -292,66 +297,281 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      Um..! 10 posts in total. Keep on posting.
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/02/conda-caffe2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Quin Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/my_avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Quin Wu 的演讲台">
     </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">conda下安装caffe2踩坑</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-02T21:45:16+08:00">
+                2018-04-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/踩坑/" itemprop="url" rel="index">
+                    <span itemprop="name">踩坑</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/02/conda-caffe2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/04/02/conda-caffe2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
 
       
       
-      
 
+      
+        <p>最近在GPU服务器上安装 <code>caffe2</code> 遇到了一些问题，这里把踩坑的过程跟解决的方法记录下来。</p>
+<a id="more"></a> 
+<h4 id="System-Information"><a href="#System-Information" class="headerlink" title="System Information"></a>System Information</h4><ul>
+<li><p>Operating System: Ubuntu 14.04.4</p>
+<blockquote>
+<p>kwu@Ubuntu:~$ cat /proc/version<br>Linux version 4.4.0-31-generic (buildd@lgw01-43) (gcc version 4.8.4 (Ubuntu 4.8.4-2ubuntu1~14.04.3) ) #50~14.04.1-Ubuntu SMP Wed Jul 13 01:07:32 UTC 2016</p>
+</blockquote>
+</li>
+<li><p>cuda version: 8.0.61</p>
+<blockquote>
+<p>kwu@Ubuntu:~$ cat /usr/local/cuda/version.txt<br>CUDA Version 8.0.61</p>
+</blockquote>
+</li>
+<li><p>cudnn versino: 7.1.1</p>
+<blockquote>
+<p>kwu@Ubuntu:~$ cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2</p>
+<p>define CUDNN_MAJOR 7</p>
+<p>define CUDNN_MINOR 1</p>
+<p>define CUDNN_PATCHLEVEL 1</p>
+<p>–</p>
+<p>define CUDNN_VERSION    (CUDNN_MAJOR _ 1000 + CUDNN_MINOR _ 100 + CUDNN_PATCHLEVEL)</p>
+<p>include “driver_types.h”</p>
+</blockquote>
+</li>
+<li><p>gcc version: 4.8.4</p>
+<blockquote>
+<p>kwu@Ubuntu:~$ gcc –version<br>gcc (Ubuntu 4.8.4-2ubuntu1~14.04.4) 4.8.4<br>Copyright (C) 2013 Free Software Foundation, Inc.</p>
+</blockquote>
+</li>
+</ul>
+<p>此外还需要安装 <a href="https://developer.nvidia.com/nccl" target="_blank" rel="external">nccl2</a> ，选择合适的版本。我选择的是 <code>nccl-repo-ubuntu1404-2.1.15-ga-cuda8.0_1-1_amd64.deb</code></p>
+<h3 id="踩坑之旅"><a href="#踩坑之旅" class="headerlink" title="踩坑之旅"></a>踩坑之旅</h3><p>看到上面的系统信息，很自然的在 <a href="https://caffe2.ai/docs/getting-started.html?platform=ubuntu&amp;configuration=compile" target="_blank" rel="external">caffe.ai</a> 上选择</p>
+<blockquote>
+<p>conda install -c caffe2 caffe2-cuda8.0-cudnn7-gcc4.8</p>
+</blockquote>
+<p>下面是 <code>caffe2</code> 的文档说明的关于 <code>gcc</code> 版本不同的命令格式：</p>
+<blockquote>
+<p>If your gcc version is older than 5 (less than 5) (you can run <code>gcc --version</code> to find out), then append ‘-gcc4.8’ to the package name. For example, run <code>conda install -c caffe2 caffe2-gcc4.8</code> or <code>conda install -c caffe2 caffe2-cuda9.0-cudnn7-gcc4.8</code> instead of the commands below.</p>
+</blockquote>
+<p>由于国内 <code>anaconda</code> 默认源访问速度的原因，我这里的 <code>anaconda</code> 选择的是 <a href="https://mirror.tuna.tsinghua.edu.cn/help/anaconda/" target="_blank" rel="external">tuna.tsinghua.edu.cn</a> 的安装源。</p>
+<p>出现的问题：</p>
+<blockquote>
+<p>from caffe2.python import core<br>WARNING:root:This caffe2 python run does not have GPU support. Will run in CPU only mode.<br>WARNING:root:Debug message: /home/kwu/anaconda3/lib/python3.6/site-packages/caffe2/python/../../../../libcaffe2_protos.so: undefined symbol:_ZNK6google8protobuf7Message11GetTypeNameEv<br>CRITICAL:root:Cannot load caffe2.python. Error: /home/kwu/anaconda3/lib/python3.6/site-packages/caffe2/python/caffe2_pybind11_state.cpython-36m-x86_64-linux-gnu.so: undefined symbol: _ZN6google8protobuf8internal26fixed_address_empty_stringE</p>
+</blockquote>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>首先是 <code>gcc</code> 版本的原因</p>
+<blockquote>
+<p>kwu@Ubuntu-P100:~$ python<br>Python 3.6.4 |Anaconda, Inc.| (default, Jan 16 2018, 18:10:19)<br>[GCC 7.2.0] on linux<br>Type “help”, “copyright”, “credits” or “license” for more information.</p>
+<p>> > ></p>
+</blockquote>
+<p>这里看到，<code>Anaconda libraries have been built with gcc 5+</code></p>
+<p>所以我们选择的 <code>conda</code> 命令应该是</p>
+<blockquote>
+<p>conda install -c caffe2 caffe2-cuda8.0-cudnn7</p>
+</blockquote>
+<p>随后发现，问题依旧存在。</p>
+<p>查看 <code>caffe2</code> 在  <code>github</code> 上的 <code>issues</code> 发现<code>@pjh5</code>  已经解答过这个问题了。<a href="https://github.com/caffe2/caffe2/issues/1980" target="_blank" rel="external">#1980</a></p>
+<p>我们需要把 <code>tuna.tsinghua.edu.cn</code> 的源给换成 <code>default</code> 源。</p>
+<p>原因在这里：</p>
+<blockquote>
+<p> so the error before is that some packages are compiled using gcc &lt; 5 in Tsinghua channel</p>
+</blockquote>
+<p>当然了，<code>default</code> 存在的问题就是访问速度过慢，有的 <code>conda</code> 包下载不下来，这个时候就需要记下所需的 <code>conda</code> 包的版本号，去 <code>Anaconda</code> 的官网手动下载，再使用<code>conda install --use-local packages</code> 安装即可。</p>
+<p>比如我这里是</p>
+<ul>
+<li><code>ffmpeg-3.4-h7264315_0.tar.bz2</code></li>
+<li><code>mkl-2018.0.2-1.tar.bz2</code></li>
+<li><code>libprotobuf-3.4.1-h5b8497f_0.tar.bz2</code></li>
+<li><code>opencv-3.3.1-py36h6cbbc71_1.tar.bz2</code></li>
+</ul>
+<p>四个第三方包下载不下来。</p>
+<p>本地安装</p>
+<ul>
+<li><code>conda install --use-local ffmpeg-3.4-h7264315_0.tar.bz2</code></li>
+<li><code>conda install --use-local mkl-2018.0.2-1.tar.bz2</code></li>
+<li><code>conda install --use-local libprotobuf-3.4.1-h5b8497f_0.tar.bz2</code></li>
+<li><code>conda install --use-local opencv-3.3.1-py36h6cbbc71_1.tar.bz2</code></li>
+</ul>
+<p>就可以正常使用 <code>caffe2</code> 了。</p>
+
+      
+    </div>
+
+    <div>
       
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2018">2018</h2>
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>你愿意请我喝瓶可乐吗?</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Quin Wu WeChat Pay"/>
+          <p>微信打赏</p>
         </div>
       
       
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="Quin Wu Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
 
       
+    </div>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
+    <div>
+      
         
-            <a class="post-title-link" href="/2018/01/24/python-underline/" itemprop="url">
-              
-                <span itemprop="name">Python中下划线的用法</span>
-              
-            </a>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/caffe2/" rel="tag"># caffe2</a>
+          
+            <a href="/tags/搞机指南/" rel="tag"># 搞机指南</a>
+          
+        </div>
+      
+
+      
         
-      </h2>
+      
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-24T17:20:30+08:00"
-              content="2018-01-24" >
-          01-24
-        </time>
-      </div>
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/24/python-underline/" rel="next" title="Python中下划线的用法">
+                <i class="fa fa-chevron-left"></i> Python中下划线的用法
+              </a>
+            
+          </div>
 
-    </header>
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
 
-    
-
-  </section>
-
-  
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -359,6 +579,17 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -583,11 +814,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
 
 
   
@@ -606,6 +835,18 @@
       <script id="dsq-count-scr" src="https://quinwu.disqus.com/count.js" async></script>
     
 
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/04/02/conda-caffe2/';
+          this.page.identifier = '2018/04/02/conda-caffe2/';
+          this.page.title = 'conda下安装caffe2踩坑';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://quinwu.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
     
 
   
