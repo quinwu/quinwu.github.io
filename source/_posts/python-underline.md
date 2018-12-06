@@ -30,6 +30,12 @@ Python 中的 `_` 的不同用法绝大部分都是一种惯例约定。
 
 单下划线做前缀的名称约定了这个名称是『私有』的，但是这样的实例变量是可以在外部访问到的，但是按照 Python 的约定，看到单下划线前缀这样的变量时，可以理解为『 虽然我可以在外部被访问，但是请把我当做一个内部变量（ `private` ）来使用，不要随意访问 』
 
+Python 程序员约定使用一个下划线前缀编写『受保护』的属性，如 `self._x`。
+
+Python 解释器不会对使用单个下划线的属性名做特殊处理，不过这是很多 Python 程序员严格遵守的约定，他们不会在类外访问这种属性。
+
+> Attributes with a single _ prefix are called "protected" in some corners of the Python documentation. The pracitce of "protecting" attributes by convention with the form `self._x` is widespread, but calling that a "protected" attribute is not so common. Some even call that a "private" attribute.
+
 单下划线前缀的通常被用于模块中，在一个模块中以单下划线开头的变量和函数被默认视为内部函数，使用 `from a_module import *` 导入时，任何以单下划线开头的名称都不会被导入。如果使用 `import a_module` 这样导入模块时，仍然可以使用 `a_module._var` 这样的方式来访问到对象。
 
 

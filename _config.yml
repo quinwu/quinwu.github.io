@@ -71,7 +71,7 @@ deploy:
  type: git
  repository:
 	github: git@github.com:quinwu/quinwu.github.io.git
-	coding: git@git.coding.net:quinwu/quinwu.coding.me.git
+#	coding: git@git.coding.net:quinwu/quinwu.coding.me.git
 branch: master
 
 
