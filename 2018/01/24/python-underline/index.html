@@ -97,7 +97,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/01/24/python-underline/index.html">
 <meta property="og:site_name" content="Quin Wu 的演讲台">
 <meta property="og:description" content="Python中的下划线Python 中的 _ 的不同用法绝大部分都是一种惯例约定。">
-<meta property="og:updated_time" content="2018-01-24T09:28:18.919Z">
+<meta property="og:updated_time" content="2018-12-06T06:23:38.964Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python中下划线的用法">
 <meta name="twitter:description" content="Python中的下划线Python 中的 _ 的不同用法绝大部分都是一种惯例约定。">
@@ -409,6 +409,11 @@
 <h3 id="单个下划线（-）"><a href="#单个下划线（-）" class="headerlink" title="单个下划线（ _ ）"></a>单个下划线（ <code>_</code> ）</h3><h5 id="解释器中"><a href="#解释器中" class="headerlink" title="解释器中"></a>解释器中</h5><p><code>_</code> 符号代表交互解释器中的最后一次执行语句的结果。</p>
 <h5 id="作为名称使用"><a href="#作为名称使用" class="headerlink" title="作为名称使用"></a>作为名称使用</h5><p><code>_</code> 用做被抛弃的名称。表示在后续的代码中，这个变量不会被使用到。</p>
 <h3 id="单下划线前缀（-XX-）"><a href="#单下划线前缀（-XX-）" class="headerlink" title="单下划线前缀（ _XX ）"></a>单下划线前缀（ <code>_XX</code> ）</h3><p>单下划线做前缀的名称约定了这个名称是『私有』的，但是这样的实例变量是可以在外部访问到的，但是按照 Python 的约定，看到单下划线前缀这样的变量时，可以理解为『 虽然我可以在外部被访问，但是请把我当做一个内部变量（ <code>private</code> ）来使用，不要随意访问 』</p>
+<p>Python 程序员约定使用一个下划线前缀编写『受保护』的属性，如 <code>self._x</code>。</p>
+<p>Python 解释器不会对使用单个下划线的属性名做特殊处理，不过这是很多 Python 程序员严格遵守的约定，他们不会在类外访问这种属性。</p>
+<blockquote>
+<p>Attributes with a single _ prefix are called “protected” in some corners of the Python documentation. The pracitce of “protecting” attributes by convention with the form <code>self._x</code> is widespread, but calling that a “protected” attribute is not so common. Some even call that a “private” attribute.</p>
+</blockquote>
 <p>单下划线前缀的通常被用于模块中，在一个模块中以单下划线开头的变量和函数被默认视为内部函数，使用 <code>from a_module import *</code> 导入时，任何以单下划线开头的名称都不会被导入。如果使用 <code>import a_module</code> 这样导入模块时，仍然可以使用 <code>a_module._var</code> 这样的方式来访问到对象。</p>
 <h3 id="双下划线前缀的名称-（-XX-）"><a href="#双下划线前缀的名称-（-XX-）" class="headerlink" title="双下划线前缀的名称 （ __XX ）"></a>双下划线前缀的名称 （ <code>__XX</code> ）</h3><p>通常用在类中，如果想要使得类的内部属性不被外部随意访问到，可以把属性名字加上双下划线前缀，在 Python 中的实例变量如果以双下划线作为前缀，则表示改变量表示一个私有变量 （ <code>private</code> ），只有在内部可以访问，外部是无法访问的。</p>
 <p>双下划线前缀命名的形式并不是一种惯例：对解释器而言，Python 会改写这些名称，以免与子类中定义的这些名称发生冲突。任何 <code>__method</code> 这种形式的标识符，都会被 Python 解释器在文本上替换为 <code>_classname__method</code>，<code>classname</code> 是所属类的名字。</p>
@@ -564,7 +569,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

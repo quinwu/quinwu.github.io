@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Python," />
 
 
 
@@ -90,12 +90,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Quin Wu 的演讲台">
-<meta property="og:url" content="http://yoursite.com/archives/2017/10/index.html">
+<meta name="description" content="Saving Space with the __slots__ Class AttributeBy default, Python stores instance attributes in a per-instance dict named __dict__.">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python __slots__">
+<meta property="og:url" content="http://yoursite.com/2018/12/06/python-slot/index.html">
 <meta property="og:site_name" content="Quin Wu 的演讲台">
+<meta property="og:description" content="Saving Space with the __slots__ Class AttributeBy default, Python stores instance attributes in a per-instance dict named __dict__.">
+<meta property="og:updated_time" content="2018-12-06T08:46:04.200Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Quin Wu 的演讲台">
+<meta name="twitter:title" content="Python __slots__">
+<meta name="twitter:description" content="Saving Space with the __slots__ Class AttributeBy default, Python stores instance attributes in a per-instance dict named __dict__.">
 
 
 
@@ -123,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2017/10/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/12/06/python-slot/"/>
 
 
 
 
 
-  <title>Archive | Quin Wu 的演讲台</title>
+  <title>Python __slots__ | Quin Wu 的演讲台</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -154,7 +159,7 @@
     
   
 
-  <div class="container sidebar-position-left  page-archive  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -292,66 +297,220 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      Um..! 11 posts in total. Keep on posting.
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/06/python-slot/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Quin Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/my_avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Quin Wu 的演讲台">
     </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python __slots__</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-06T16:43:31+08:00">
+                2018-12-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/06/python-slot/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/12/06/python-slot/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
 
       
       
-      
 
+      
+        <h3 id="Saving-Space-with-the-slots-Class-Attribute"><a href="#Saving-Space-with-the-slots-Class-Attribute" class="headerlink" title="Saving Space with the __slots__ Class Attribute"></a>Saving Space with the <code>__slots__</code> Class Attribute</h3><p>By default, Python stores instance attributes in a per-instance <code>dict</code> named <code>__dict__</code>.</p>
+<a id="more"></a> 
+<p>为了使用底层的散列表提升访问速度，字典会消耗大量内存。如果处理上百万个属性不多的实例，通过<code>__slots__</code>类属性，能节省大量的内存，方法是让解释器在元组中存储实例属性，而不是用字典。</p>
+<blockquote>
+<p>If you are dealing with millions of instances with few attributes, the <code>__slots__</code> class attribute can save a lot of memory, by letting the interpreter store the instance attributes in a <code>tuple</code> instead of a <code>dict</code>.</p>
+</blockquote>
+<p>To define <code>__slots__</code> , you create a class with that name and assign it an iterable of <code>str</code> with identifiers for the instance attributes. I like to use a <code>tuple</code>for that, because it conveys the message that the <code>__slots__</code> definition cannot change.</p>
+<blockquote>
+<p>By define <code>__slots__</code> in the class, you are telling the interpreter : “These are all the instance attribute in this class.” Python then stores them in a tuple-like structure in each instance, avoiding the memory overhead of the per-instance <code>__dict__</code>. This can make a huge differnce in memory usage if you have millions of instances active at the same time.</p>
+</blockquote>
+<p>在类中定义<code>__slots__</code> 属性后，实例不能再有<code>__slots__</code>中所列名称之外的其他属性。 不要使用 <code>__slots__</code> 属性禁止类的用户新增实例属性。<code>__slots__</code> 是用于优化的，不是为了约束程序员。</p>
+<h3 id="The-Problems-with-slots"><a href="#The-Problems-with-slots" class="headerlink" title="The Problems with __slots__"></a>The Problems with <code>__slots__</code></h3><ul>
+<li><p>每个子类都要定义 <code>__slots__</code> 属性，因为解释器会忽略继承的 <code>__slots__</code> 属性</p>
+</li>
+<li><p>实例只能拥有 <code>__slots__</code> 中列出的属性，除非把 <code>__dict__</code> 加入<code>__slots__</code> 中，这样做就失去了节省内存的功效</p>
+</li>
+<li><p>如果不把 <code>__weakref__</code> 加入 <code>__slots__</code> ，实例就不能作为弱引用的目标。</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
       
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2017">2017</h2>
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>你愿意请我喝瓶可乐吗?</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Quin Wu WeChat Pay"/>
+          <p>微信打赏</p>
         </div>
       
       
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="Quin Wu Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
 
       
+    </div>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
+    <div>
+      
         
-            <a class="post-title-link" href="/2017/10/30/entropy/" itemprop="url">
-              
-                <span itemprop="name">小记 Entropy</span>
-              
-            </a>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
         
-      </h2>
+      
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-10-30T21:51:59+08:00"
-              content="2017-10-30" >
-          10-30
-        </time>
-      </div>
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/02/conda-caffe2/" rel="next" title="conda下安装caffe2踩坑">
+                <i class="fa fa-chevron-left"></i> conda下安装caffe2踩坑
+              </a>
+            
+          </div>
 
-    </header>
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
 
-    
-
-  </section>
-
-  
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -359,6 +518,17 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -583,11 +753,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
 
 
   
@@ -606,6 +774,18 @@
       <script id="dsq-count-scr" src="https://quinwu.disqus.com/count.js" async></script>
     
 
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/12/06/python-slot/';
+          this.page.identifier = '2018/12/06/python-slot/';
+          this.page.title = 'Python __slots__';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://quinwu.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
     
 
   
