@@ -9,13 +9,13 @@ tags:
 comments: false
 ---
 
-* [小记 Machine Learning 系列 目录](http://quinwu.org/2017/05/01/ML-directory/)<!--more-->
-* [小记 Linear Regression ](http://quinwu.org/2017/05/03/ML-Linear-Regression/)
-* [小记 Logistic Regression](http://quinwu.org/2017/05/05/ML-Logistic-Regression/)
-* [小记 Neural Network](http://quinwu.org/2017/05/16/ML-Neural-Network/)
-* [小记 Gradient Descent](http://quinwu.org/2017/09/02/ML-Gradient-Descent/)
-* [小记 SVM](http://quinwu.org/2017/09/08/ML-SVM/)
-* [小记 Softmax](http://quinwu.org/2017/09/14/ML-Softmax/)
+* [小记 Machine Learning 系列 目录](https://quinwu.github.io/2017/05/01/ML-directory/)<!--more-->
+* [小记 Linear Regression ](https://quinwu.github.io/2017/05/03/ML-Linear-Regression/)
+* [小记 Logistic Regression](https://quinwu.github.io/2017/05/05/ML-Logistic-Regression/)
+* [小记 Neural Network](https://quinwu.github.io/2017/05/16/ML-Neural-Network/)
+* [小记 Gradient Descent](https://quinwu.github.io/2017/09/02/ML-Gradient-Descent/)
+* [小记 SVM](https://quinwu.github.io/2017/09/08/ML-SVM/)
+* [小记 Softmax](https://quinwu.github.io/2017/09/14/ML-Softmax/)
 
 
 
